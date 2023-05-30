@@ -86,9 +86,14 @@ export default {
 }
 
 .logo {
-    width: 130px;
+    width: 140px;
     height: 50px;
     margin-left: 20px;
+}
+
+.navbar-nav{
+    display: flex;
+    justify-content: center;
 }
 
 .nav-link {
