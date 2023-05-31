@@ -1,18 +1,22 @@
 <template>
+    <div class="seccion-cuenta">
+        <ul class="mb-2 mb-lg-0" style="list-style: none">
+            <li class="d-flex">
+                <i class="bi bi-person-circle"></i>
+                <a class="nav-link mt-lg-1">Iniciar Sesión</a>
+                <span class="nav-link mt-lg-1">|</span>
+                <a class="nav-link mt-lg-1">Registrarse</a>
+            </li>
+        </ul>
+    </div>
     <nav class="navbar navbar-expand-lg">
         <div class="contenedor">
-            <div class="seccion-cuenta">
-                <ul class="mb-2 mb-lg-0" style="list-style: none">
-                    <li>
-                        <a class="btn" role="button">Iniciar Sesión</a>
-                        <span>|</span>
-                        <a class="btn" role="button">Registrarse</a>
-                    </li>
-                </ul>
-            </div>
+
             <div class="barra">
                 <div>
-                    <img src="@/assets/logo.png" alt="Logo" class="logo" />
+                    <router-link to="/">
+                        <img src="@/assets/logo.png" alt="Logo" class="logo" />
+                    </router-link>
                 </div>
 
                 <div class="container-fluid">
@@ -22,36 +26,39 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page">
-                                    <router-link to="/">Inicio</router-link>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link">Equipos</a>
-                            </li>
+                        <ul class="navbar-nav mx-auto mt-lg-2">
                             <li class="nav-item">
                                 <a class="nav-link">Selecciones</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link"><router-link to="/nosotros">Nosotros</router-link></a>
+                                <a class="nav-link">Clubes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link">Pedidos</a>
+                                <a class="nav-link">Hombre</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">Mujer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">Niño</a>
                             </li>
                         </ul>
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Buscar" name="query" id="query" />
-                            <button class="btn btn-navbar" type="submit" style="background-color: white">
-                                🔍︎
-                            </button>
-                        </form>
-                        <ul class="mb-2 mb-lg-0" style="list-style: none">
-                            <li>
-                                <a class="btn btn-navbar btn-carrito" role="button">🛒</a>
-                            </li>
-                        </ul>
+                        <div class="busqueda-bolsa">
+                            <form class="d-flex" role="search">
+                                <div class="input-group">
+                                    <input class="form-control input-busqueda" type="search" placeholder="Buscar"
+                                        name="query" id="query" />
+                                    <div class="input-group-append">
+                                        <button class="btn mt-1" type="submit">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <a class="btn btn-navbar btn-bolsa" role="button">
+                                <i class="bi bi-bag"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,34 +93,55 @@ export default {
 }
 
 .logo {
-    width: 140px;
+    width: 120px;
     height: 50px;
     margin-left: 20px;
+    margin-bottom: 5px;
 }
 
-.navbar-nav{
+.navbar-nav {
     display: flex;
     justify-content: center;
 }
 
 .nav-link {
     color: black;
+    margin-left: 10px;
 }
 
-.nav-link a:hover {
-    color: gray;
+.nav-link:hover {
+    color: #44115c;
+    font-weight: bold;
 }
 
-.btn-carrito {
+.busqueda-bolsa{
+    display: flex;
+}
+
+.btn-bolsa {
     background-color: white;
     font-size: 20px;
+    margin-left: 15px;
+    margin-right: 30px;
 }
 
 .titulo {
     margin: 30px;
 }
 
-.bg-recuperar-contraseña {
-    background-color: #c8d6e0;
+.bi-person-circle {
+    font-size: 20px;
+    margin: auto;
+}
+
+.input-busqueda {
+    border-radius: 18px;
+    border-right: 0px;
+}
+
+.input-group-append {
+    border: 1px solid #E6E6E6;
+    border-left: 0px;
+    border-radius: 18px;
 }
 </style>
