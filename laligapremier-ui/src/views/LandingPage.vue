@@ -26,7 +26,7 @@
     </div>
   </div>
   <div class="epocas">
-    <div class="epoca-clasica">
+    <div>
       <img src="@/assets//images//clasico.png" alt="Clásico" />
       <div class="contenido-clasico">
         <p class="txt-epoca">CLÁSICO</p>
@@ -34,7 +34,7 @@
         <p id="descripcion-clasico">Davids, Paises Bajos</p>
       </div>
     </div>
-    <div class="epoca-moderna">
+    <div>
       <img src="@/assets//images//moderno.png" alt="Moderno" />
       <div class="contenido-moderno">
         <p class="txt-epoca">MODERNO</p>
@@ -42,6 +42,70 @@
         <p id="descripcion-moderno">Haaland, Manchester City</p>
       </div>
     </div>
+  </div>
+  <div class="novedades">
+    <h1>NOVEDADES</h1>
+    <section id="products">
+      <div class="container py-3">
+        <div class="row">
+          <div class="offset-md-0 offset-sm-1 contenedor-camisetas">
+            <div class="card tarjeta">
+              <img class="img-camiseta" src="../assets/images/camiseta_colo_colo.png" />
+              <div class="card-body tarjeta-cuerpo">
+                <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
+                <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
+                    class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span
+                    class="far fa-star"></span> </div>
+                <div class="d-flex align-items-center justify-content-between pt-3 p-2">
+                  <div class="d-flex flex-column">
+                    <div>
+                      <strong class="fs-4">$56765765</strong>
+                    </div>
+                  </div>
+                  <a class="btn btn-primary px-2">Ver Detalles</a>
+                </div>
+              </div>
+            </div>
+            <div class="card tarjeta">
+              <img class="img-camiseta" src="../assets/images/camiseta_barcelona.png" />
+              <div class="card-body tarjeta-cuerpo">
+                <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
+                <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
+                    class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span
+                    class="far fa-star"></span> </div>
+                <div class="d-flex align-items-center justify-content-between pt-3 p-2">
+                  <div class="d-flex flex-column">
+                    <div>
+                      <strong class="fs-4">$56765765</strong>
+                    </div>
+                  </div>
+                  <a class="btn btn-primary px-2">Ver Detalles</a>
+                </div>
+              </div>
+
+            </div>
+            <div class="card tarjeta">
+              <img class="img-camiseta" src="../assets/images/camiseta_brasil.png" />
+              <div class="card-body tarjeta-cuerpo">
+                <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
+                <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
+                    class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span
+                    class="far fa-star"></span> </div>
+                <div class="d-flex align-items-center justify-content-between pt-3 p-2">
+                  <div class="d-flex flex-column">
+                    <div>
+                      <strong class="fs-4">$56765765</strong>
+                    </div>
+                  </div>
+                  <a class="btn btn-primary px-2">Ver Detalles</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -53,6 +117,7 @@ export default {
 </script>
 
 <style>
+/* ----- SECCIÓN BIENVENIDA ----- */
 .img-bienvenida {
   width: 100%;
 }
@@ -76,6 +141,8 @@ export default {
   height: 200px;
   margin-left: 90px;
 }
+
+/* ----- SECCIÓN ESTILOS (HOMBRE, MUJER y NIÑO) ----- */
 
 .estilos h1 {
   font-weight: bolder;
@@ -104,6 +171,8 @@ export default {
   font-size: large;
 }
 
+/* ----- SECCIÓN ÉPOCAS (CLÁSICO - MODERNO) ----- */
+
 .epocas {
   display: flex;
   justify-content: center;
@@ -126,17 +195,17 @@ export default {
   text-align: end;
 }
 
-.txt-epoca{
+.txt-epoca {
   font-size: 40px;
   margin-bottom: 1%;
 }
 
-#descripcion-clasico{
+#descripcion-clasico {
   margin-bottom: 19%;
   transform: translateX(220%);
 }
 
-#descripcion-moderno{
+#descripcion-moderno {
   margin-bottom: 16%;
   transform: translateX(-165%);
 }
@@ -146,4 +215,38 @@ export default {
   color: white;
   font-weight: bold;
 }
+
+/* ----- SECCIÓN NOVEDADES ----- */
+
+.novedades h1 {
+  font-weight: bolder;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.container {
+  width: 100%;
+}
+
+.contenedor-camisetas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.tarjeta {
+  width: calc(33.33% - 5%); /* Calcula el ancho de cada tarjeta */
+  margin-bottom: 5%; /* Espacio entre las filas */
+  background-color: #E6E6E6;
+}
+
+.img-camiseta {
+  height: 300px;
+  width: 100%;
+  padding: 5%;
+  padding-left: 8%;
+  padding-right: 8%;
+  margin-top: 10%;
+}
+
 </style>
