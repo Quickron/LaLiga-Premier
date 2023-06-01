@@ -1,7 +1,125 @@
 <template>
   <div class="contenedor-vista-camisetas">
     <div class="filtros">
-      <h3>FILTROS</h3>
+      <h3><i class="bi bi-filter"></i> FILTROS</h3>
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle menu-talla" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Talla
+        </button>
+
+        <div class="dropdown-menu contenedor-talla" aria-labelledby="dropdownMenuButton1">
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              XS
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <label class="form-check-label" for="flexCheckChecked">
+              S
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              M
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              L
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              XL
+            </label>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle menu-talla" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Marca
+        </button>
+
+        <div class="dropdown-menu contenedor-talla" aria-labelledby="dropdownMenuButton1">
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Adidas
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <label class="form-check-label" for="flexCheckChecked">
+              Nike
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Puma
+            </label>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle menu-talla" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Precio
+        </button>
+
+        <div class="dropdown-menu contenedor-talla" aria-labelledby="dropdownMenuButton1">
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              $20.000 - $30.000
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <label class="form-check-label" for="flexCheckChecked">
+              $30.000 - $40.000
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              $40.000 - $50.000
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              $50.000 - $60.000
+            </label>
+          </div>
+
+        </div>
+      </div>
+
     </div>
     <div class="novedades">
       <section id="products">
@@ -15,7 +133,8 @@
                   <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
                   <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
                       class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
-                    <span class="far fa-star"></span> </div>
+                    <span class="far fa-star"></span>
+                  </div>
                   <div class="d-flex align-items-center justify-content-between pt-3 p-2">
                     <div class="d-flex flex-column">
                       <div>
@@ -33,7 +152,8 @@
                   <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
                   <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
                       class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
-                    <span class="far fa-star"></span> </div>
+                    <span class="far fa-star"></span>
+                  </div>
                   <div class="d-flex align-items-center justify-content-between pt-3 p-2">
                     <div class="d-flex flex-column">
                       <div>
@@ -51,7 +171,8 @@
                   <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
                   <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
                       class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
-                    <span class="far fa-star"></span> </div>
+                    <span class="far fa-star"></span>
+                  </div>
                   <div class="d-flex align-items-center justify-content-between pt-3 p-2">
                     <div class="d-flex flex-column">
                       <div>
@@ -69,7 +190,8 @@
                   <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
                   <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
                       class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
-                    <span class="far fa-star"></span> </div>
+                    <span class="far fa-star"></span>
+                  </div>
                   <div class="d-flex align-items-center justify-content-between pt-3 p-2">
                     <div class="d-flex flex-column">
                       <div>
@@ -87,7 +209,8 @@
                   <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
                   <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
                       class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
-                    <span class="far fa-star"></span> </div>
+                    <span class="far fa-star"></span>
+                  </div>
                   <div class="d-flex align-items-center justify-content-between pt-3 p-2">
                     <div class="d-flex flex-column">
                       <div>
@@ -105,7 +228,8 @@
                   <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
                   <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
                       class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
-                    <span class="far fa-star"></span> </div>
+                    <span class="far fa-star"></span>
+                  </div>
                   <div class="d-flex align-items-center justify-content-between pt-3 p-2">
                     <div class="d-flex flex-column">
                       <div>
@@ -138,6 +262,7 @@ export default {
   flex-direction: row;
 }
 
+/* ----- FILTROS ----- */
 .filtros {
   width: 19%;
   background-color: #E6E6E6;
@@ -149,9 +274,23 @@ export default {
 .filtros h3 {
   font-weight: bolder;
   margin-top: 2%;
-  margin-bottom: 2%;
+  margin-bottom: 10%;
 }
 
+.menu-talla{
+  width: 80%;
+}
+
+.contenedor-talla{
+  width: 80%;
+  padding: 5%;
+}
+
+.dropdown {
+  margin-bottom: 50%;
+}
+
+/* ----- CAMISETAS ----- */
 .container {
   margin-left: 8%;
 }
