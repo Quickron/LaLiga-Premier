@@ -235,8 +235,8 @@ export default {
 }
 
 .tarjeta {
-  width: calc(33.33% - 5%); /* Calcula el ancho de cada tarjeta */
-  margin-bottom: 5%; /* Espacio entre las filas */
+  width: calc(33.33% - 5%);
+  margin-bottom: 5%;
   background-color: #E6E6E6;
 }
 

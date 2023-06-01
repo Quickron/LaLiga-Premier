@@ -3,7 +3,7 @@
         <ul class="mb-2 mb-lg-0" style="list-style: none">
             <li class="d-flex">
                 <i class="bi bi-person-circle"></i>
-                <a class="nav-link mt-lg-1">Iniciar Sesión</a>
+                <a class="nav-link mt-lg-1" id="iniciar-sesion">Iniciar Sesión</a>
                 <span class="nav-link mt-lg-1">|</span>
                 <a class="nav-link mt-lg-1">Registrarse</a>
             </li>
@@ -114,7 +114,7 @@ export default {
     font-weight: bold;
 }
 
-.busqueda-bolsa{
+.busqueda-bolsa {
     display: flex;
 }
 
