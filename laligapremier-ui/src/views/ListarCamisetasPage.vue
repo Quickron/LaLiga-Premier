@@ -4,12 +4,12 @@
       <h3><i class="bi bi-filter"></i> FILTROS</h3>
 
       <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle menu-talla" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+        <button class="btn btn-secondary dropdown-toggle menu-talla" type="button" id="talla" data-bs-toggle="dropdown"
           aria-expanded="false">
           Talla
         </button>
 
-        <div class="dropdown-menu contenedor-talla" aria-labelledby="dropdownMenuButton1">
+        <div class="dropdown-menu contenedor-talla" aria-labelledby="talla">
 
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -50,12 +50,12 @@
       </div>
 
       <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle menu-talla" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+        <button class="btn btn-secondary dropdown-toggle menu-talla" type="button" id="marca" data-bs-toggle="dropdown"
           aria-expanded="false">
           Marca
         </button>
 
-        <div class="dropdown-menu contenedor-talla" aria-labelledby="dropdownMenuButton1">
+        <div class="dropdown-menu contenedor-talla" aria-labelledby="marca">
 
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -82,12 +82,12 @@
       </div>
 
       <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle menu-talla" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+        <button class="btn btn-secondary dropdown-toggle menu-talla" type="button" id="precio" data-bs-toggle="dropdown"
           aria-expanded="false">
           Precio
         </button>
 
-        <div class="dropdown-menu contenedor-talla" aria-labelledby="dropdownMenuButton1">
+        <div class="dropdown-menu contenedor-talla" aria-labelledby="precio">
 
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -120,6 +120,31 @@
         </div>
       </div>
 
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle menu-talla" type="button" id="marca" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Club / Selección
+        </button>
+
+        <div class="dropdown-menu contenedor-talla" aria-labelledby="marca">
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Club
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <label class="form-check-label" for="flexCheckChecked">
+              Selección
+            </label>
+          </div>
+
+        </div>
+      </div>
+
     </div>
     <div class="novedades">
       <section id="products">
@@ -128,6 +153,10 @@
             <div class="offset-md-0 offset-sm-1 contenedor-camisetas">
 
               <div class="card tarjeta">
+                <div class="iconos-tarjeta">
+                  <i class="bi bi-heart mx-3"></i>
+                  <i class="bi bi-handbag"></i>
+                </div>
                 <img class="img-camiseta" src="../assets/images/camiseta_colo_colo.png" />
                 <div class="card-body tarjeta-cuerpo">
                   <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
@@ -147,6 +176,10 @@
               </div>
 
               <div class="card tarjeta">
+                <div class="iconos-tarjeta">
+                  <i class="bi bi-heart mx-3"></i>
+                  <i class="bi bi-handbag"></i>
+                </div>
                 <img class="img-camiseta" src="../assets/images/camiseta_barcelona.png" />
                 <div class="card-body tarjeta-cuerpo">
                   <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
@@ -166,6 +199,10 @@
 
               </div>
               <div class="card tarjeta">
+                <div class="iconos-tarjeta">
+                  <i class="bi bi-heart mx-3"></i>
+                  <i class="bi bi-handbag"></i>
+                </div>
                 <img class="img-camiseta" src="../assets/images/camiseta_brasil.png" />
                 <div class="card-body tarjeta-cuerpo">
                   <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
@@ -185,6 +222,10 @@
               </div>
 
               <div class="card tarjeta">
+                <div class="iconos-tarjeta">
+                  <i class="bi bi-heart mx-3"></i>
+                  <i class="bi bi-handbag"></i>
+                </div>
                 <img class="img-camiseta" src="../assets/images/camiseta_colo_colo.png" />
                 <div class="card-body tarjeta-cuerpo">
                   <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
@@ -204,6 +245,10 @@
               </div>
 
               <div class="card tarjeta">
+                <div class="iconos-tarjeta">
+                  <i class="bi bi-heart mx-3"></i>
+                  <i class="bi bi-handbag"></i>
+                </div>
                 <img class="img-camiseta" src="../assets/images/camiseta_barcelona.png" />
                 <div class="card-body tarjeta-cuerpo">
                   <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
@@ -223,6 +268,10 @@
 
               </div>
               <div class="card tarjeta">
+                <div class="iconos-tarjeta">
+                  <i class="bi bi-heart mx-3"></i>
+                  <i class="bi bi-handbag"></i>
+                </div>
                 <img class="img-camiseta" src="../assets/images/camiseta_brasil.png" />
                 <div class="card-body tarjeta-cuerpo">
                   <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
@@ -277,11 +326,11 @@ export default {
   margin-bottom: 10%;
 }
 
-.menu-talla{
+.menu-talla {
   width: 80%;
 }
 
-.contenedor-talla{
+.contenedor-talla {
   width: 80%;
   padding: 5%;
 }
@@ -308,12 +357,19 @@ export default {
   background-color: #E6E6E6;
 }
 
+.iconos-tarjeta {
+  display: flex;
+  justify-content: end;
+  margin: 5%;
+  font-size: 30px;
+}
+
 .img-camiseta {
   height: 300px;
   width: 100%;
   padding: 5%;
   padding-left: 8%;
   padding-right: 8%;
-  margin-top: 10%;
+  margin-top: -8%;
 }
 </style>
