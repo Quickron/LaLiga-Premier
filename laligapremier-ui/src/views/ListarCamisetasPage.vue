@@ -154,12 +154,12 @@
 
               <div class="card tarjeta">
                 <div class="iconos-tarjeta">
-                  <i class="bi bi-heart mx-3"></i>
-                  <i class="bi bi-handbag"></i>
+                  <i class="bi bi-heart mx-2 mt-1"></i>
+                  <i class="bi bi-bag mx-3 mb-1"></i>
                 </div>
                 <img class="img-camiseta" src="../assets/images/camiseta_colo_colo.png" />
                 <div class="card-body tarjeta-cuerpo">
-                  <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
+                  <h6 class="nombreCamisetaListado pt-1">Nombre Camiseta</h6>
                   <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
                       class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
                     <span class="far fa-star"></span>
@@ -170,19 +170,21 @@
                         <strong class="fs-4">$56765765</strong>
                       </div>
                     </div>
-                    <a class="btn btn-primary px-2">Ver Detalles</a>
+                    <router-link to="/detalle/id">
+                      <a class="btn btn-detalles px-2">Ver Detalles</a>
+                    </router-link>
                   </div>
                 </div>
               </div>
 
               <div class="card tarjeta">
                 <div class="iconos-tarjeta">
-                  <i class="bi bi-heart mx-3"></i>
-                  <i class="bi bi-handbag"></i>
+                  <i class="bi bi-heart mx-2 mt-1"></i>
+                  <i class="bi bi-bag mx-3 mb-1"></i>
                 </div>
                 <img class="img-camiseta" src="../assets/images/camiseta_barcelona.png" />
                 <div class="card-body tarjeta-cuerpo">
-                  <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
+                  <h6 class="nombreCamisetaListado pt-1">Nombre Camiseta</h6>
                   <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
                       class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
                     <span class="far fa-star"></span>
@@ -193,19 +195,21 @@
                         <strong class="fs-4">$56765765</strong>
                       </div>
                     </div>
-                    <a class="btn btn-primary px-2">Ver Detalles</a>
+                    <router-link to="/detalle/id">
+                      <a class="btn btn-detalles px-2">Ver Detalles</a>
+                    </router-link>
                   </div>
                 </div>
 
               </div>
               <div class="card tarjeta">
                 <div class="iconos-tarjeta">
-                  <i class="bi bi-heart mx-3"></i>
-                  <i class="bi bi-handbag"></i>
+                  <i class="bi bi-heart mx-2 mt-1"></i>
+                  <i class="bi bi-bag mx-3 mb-1"></i>
                 </div>
                 <img class="img-camiseta" src="../assets/images/camiseta_brasil.png" />
                 <div class="card-body tarjeta-cuerpo">
-                  <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
+                  <h6 class="nombreCamisetaListado pt-1">Nombre Camiseta</h6>
                   <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
                       class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
                     <span class="far fa-star"></span>
@@ -216,19 +220,21 @@
                         <strong class="fs-4">$56765765</strong>
                       </div>
                     </div>
-                    <a class="btn btn-primary px-2">Ver Detalles</a>
+                    <router-link to="/detalle/id">
+                      <a class="btn btn-detalles px-2">Ver Detalles</a>
+                    </router-link>
                   </div>
                 </div>
               </div>
 
               <div class="card tarjeta">
                 <div class="iconos-tarjeta">
-                  <i class="bi bi-heart mx-3"></i>
-                  <i class="bi bi-handbag"></i>
+                  <i class="bi bi-heart mx-2 mt-1"></i>
+                  <i class="bi bi-bag mx-3 mb-1"></i>
                 </div>
                 <img class="img-camiseta" src="../assets/images/camiseta_colo_colo.png" />
                 <div class="card-body tarjeta-cuerpo">
-                  <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
+                  <h6 class="nombreCamisetaListado pt-1">Nombre Camiseta</h6>
                   <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
                       class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
                     <span class="far fa-star"></span>
@@ -239,19 +245,21 @@
                         <strong class="fs-4">$56765765</strong>
                       </div>
                     </div>
-                    <a class="btn btn-primary px-2">Ver Detalles</a>
+                    <router-link to="/detalle/id">
+                      <a class="btn btn-detalles px-2">Ver Detalles</a>
+                    </router-link>
                   </div>
                 </div>
               </div>
 
               <div class="card tarjeta">
                 <div class="iconos-tarjeta">
-                  <i class="bi bi-heart mx-3"></i>
-                  <i class="bi bi-handbag"></i>
+                  <i class="bi bi-heart mx-2 mt-1"></i>
+                  <i class="bi bi-bag mx-3 mb-1"></i>
                 </div>
                 <img class="img-camiseta" src="../assets/images/camiseta_barcelona.png" />
                 <div class="card-body tarjeta-cuerpo">
-                  <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
+                  <h6 class="nombreCamisetaListado pt-1">Nombre Camiseta</h6>
                   <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
                       class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
                     <span class="far fa-star"></span>
@@ -262,19 +270,21 @@
                         <strong class="fs-4">$56765765</strong>
                       </div>
                     </div>
-                    <a class="btn btn-primary px-2">Ver Detalles</a>
+                    <router-link to="/detalle/id">
+                      <a class="btn btn-detalles px-2">Ver Detalles</a>
+                    </router-link>
                   </div>
                 </div>
-
               </div>
+
               <div class="card tarjeta">
                 <div class="iconos-tarjeta">
-                  <i class="bi bi-heart mx-3"></i>
-                  <i class="bi bi-handbag"></i>
+                  <i class="bi bi-heart mx-2 mt-1"></i>
+                  <i class="bi bi-bag mx-3 mb-1"></i>
                 </div>
                 <img class="img-camiseta" src="../assets/images/camiseta_brasil.png" />
                 <div class="card-body tarjeta-cuerpo">
-                  <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
+                  <h6 class="nombreCamisetaListado pt-1">Nombre Camiseta</h6>
                   <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
                       class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
                     <span class="far fa-star"></span>
@@ -285,10 +295,13 @@
                         <strong class="fs-4">$56765765</strong>
                       </div>
                     </div>
-                    <a class="btn btn-primary px-2">Ver Detalles</a>
+                    <router-link to="/detalle/id">
+                      <a class="btn btn-detalles px-2">Ver Detalles</a>
+                    </router-link>
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -364,6 +377,10 @@ export default {
   font-size: 30px;
 }
 
+.nombreCamisetaListado{
+  font-weight: bold;
+}
+
 .img-camiseta {
   height: 300px;
   width: 100%;
@@ -371,5 +388,17 @@ export default {
   padding-left: 8%;
   padding-right: 8%;
   margin-top: -8%;
+}
+
+.btn-detalles{
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-detalles:hover{
+  background-color: #180026;
+  color: white;
+  font-weight: bold;
 }
 </style>

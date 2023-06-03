@@ -21,12 +21,11 @@
               <div class="tecno1">
                 <p>HTML</p>
                 <p>CSS</p>
-                <p>JAVA</p>
-                <p>SPRING BOOT</p>
+                <p>JAVASCRIPT</p>
               </div>
               <div>
-                <p>JAVASCRIPT</p>
                 <p>VUEJS</p>
+                <p>EXPRESSJS</p>
               </div>
             </div>
 

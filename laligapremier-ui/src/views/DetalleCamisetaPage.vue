@@ -49,10 +49,10 @@
             <p class="desc-ver-camiseta">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo consectetur
               minima fuga id assumenda perspiciatis facere, quae consequatur tempore. Perferendis ex mollitia dolorem
               ipsam debitis velit similique consequatur, et praesentium!</p>
-            <h4 class="precio txt-destacado">Precio: $4354835483</h4>
+            <h4 class="precio">$4354835483</h4>
             <div class="mt-4">
               <label>
-                <h6 class="cantidad txt-destacado">Cantidad <input type="number" min="1" class="casilla-cantidad">
+                <h6 class="cantidad">Cantidad <input type="number" min="1" class="casilla-cantidad">
                 </h6>
               </label>
             </div>
@@ -177,6 +177,7 @@ export default {
   width: 60%;
   padding: 5%;
   background-color: lightgray;
+  text-align: start;
 }
 
 .cuerpo-ver-camiseta {
@@ -196,6 +197,14 @@ export default {
   font-weight: bold;
   font-size: 40px;
   margin-bottom: 5%;
+}
+
+.precio {
+  font-weight: bold;
+}
+
+.casilla-cantidad{
+  width: 18%;
 }
 
 .tallas {
