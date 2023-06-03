@@ -1,13 +1,13 @@
 <template>
   <div class="container py-4">
-          <div class="card bg-dark text-white">
-              <h4 class="card-header">Formulario Camiseta</h4>
+          <div class="card bg-light">
+              <h4 class="card-header">Crear Camiseta</h4>
               <div class="card-body">
 
                   <form enctype="multipart/form-data">
                       <div class="form-group row py-2">
                           <label class="col-sm-2 col-form-label">Club / Selección</label>
-                          <div class="col-sm-6">
+                          <div class="col-sm-1">
                               <select>
                                   <option>Club</option>
                                   <option>Selección</option>
@@ -52,7 +52,7 @@
                       </div>
                       <div class="form-group row py-2">
                           <label class="col-sm-2 col-form-label">Talla</label>
-                          <div class="col-sm-6">
+                          <div class="col-sm-1">
                               <select>
                                   <option>XS</option>
                                   <option>S</option>
@@ -65,7 +65,7 @@
                       <div class="form-group row py-2">
                           <div class="form-group row">
                               <label class="col-sm-2 col-form-label">Marca</label>
-                              <div class="col-sm-6">
+                              <div class="col-sm-1">
                                   <select>
                                       <option>Adidas</option>
                                       <option>Nike</option>
@@ -86,14 +86,14 @@
                               </div>
                           </div>
                           <div class="form-group row py-2">
-                              <label for="file" class="col-sm-2 col-form-label">Foto</label>
+                              <label for="file" class="col-sm-2 col-form-label">Subir Foto</label>
                               <div class="col-sm-6">
                                   <input type="file" name="file" class="form-control"/>
                               </div>
                           </div>
                       <div class="form-group row">
-                          <div class="col-sm-6 mt-5 mx-3">
-                              <input type="submit" value="Guardar" class="btn btn-secondary" />
+                          <div class="mt-5 btn-publicar">
+                              <input type="submit" value="Publicar" class="btn btn-dark" />
                               <tr></tr>
                           </div>
                       </div>
@@ -121,12 +121,10 @@ export default {
     padding: 5%;
     display: flex;
     justify-content: center;
-    background-color: #c8d6e0;
     border-radius: 15px;
 }
 
 .subir-imagen{
-    background-color: white;
     border-radius: 15px;
     padding: 30%;
     height: 90%;
@@ -145,5 +143,11 @@ export default {
 
 .formulario-camiseta {
     margin-left: 50px;
+}
+
+.btn-publicar{
+    display: flex;
+    justify-content: start;
+    margin-left: 3%;
 }
 </style>
