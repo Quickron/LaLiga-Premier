@@ -46,21 +46,25 @@
           <form>
 
             <h3 class="titulo-ver-camiseta">Nombre Camiseta</h3>
+            
             <p class="desc-ver-camiseta">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo consectetur
               minima fuga id assumenda perspiciatis facere, quae consequatur tempore. Perferendis ex mollitia dolorem
               ipsam debitis velit similique consequatur, et praesentium!</p>
-            <h4 class="precio">$4354835483</h4>
-            <div class="mt-4">
-              <label>
-                <h6 class="cantidad">Cantidad <input type="number" min="1" class="casilla-cantidad">
-                </h6>
-              </label>
-            </div>
-            <div class="tallas mt-4 form-check">
-              <h6 class="txt-destacado tallas">Talla</h6>
-              <div>
 
+            <h4 class="precio">$4354835483</h4>
+
+            <div class="mt-4 bloque-cantidad">
+              <div class="cantidad-input">
+                <h6 class="cantidad">Cantidad </h6>
+                <input type="number" min="1" class="casilla-cantidad">
+                <button class="btn btn-cantidad rounded-pill">+</button>
+                <button class="btn btn-cantidad rounded-pill">-</button>
               </div>
+            </div>
+
+            <div class="tallas mt-4">
+              <h6 class="talla-txt">Talla</h6>
+
               <label class="radio talla mx-1">
                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                 <span class="form-check-label" for="flexRadioDefault1">
@@ -94,7 +98,7 @@
             </div>
 
             <div class="action d-flex justify-content-center">
-              <button class="btn btn-success btn-bolsa-camiseta" type="submit">Añadir a la bolsa</button>
+              <button class="btn btn-bolsa-camiseta" type="submit">Añadir a la bolsa</button>
             </div>
 
           </form>
@@ -111,10 +115,10 @@
             </p>
 
             <!-- Info camiseta -->
-            <div class="collapse show" id="collapseExample">
+            <div class="collapse" id="collapseExample">
 
 
-              <table class="table dropdown-item border info-mas-detalles">
+              <table class="table info-mas-detalles">
                 <tr>
                   <th scope="row">Club / Selección</th>
                   <td>Club</td>
@@ -157,7 +161,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .contenedorCamiseta {
   display: flex;
   justify-content: space-between;
@@ -167,7 +171,7 @@ export default {
 .fotosCamiseta {
   margin-left: 10%;
   margin-right: 5%;
-  margin-top: 3%;
+  margin-top: 4%;
   width: 40%;
 }
 
@@ -180,17 +184,21 @@ export default {
   text-align: start;
 }
 
-.cuerpo-ver-camiseta {
-  display: flex;
-  justify-content: center;
-}
-
 .carruselCamiseta{
   width: 100%;
 }
 
 .btn-bolsa-camiseta{
-  margin-top: 5%;
+  margin-top: 8%;
+  background-color: black;
+  font-weight: bold;
+  color: white;
+}
+
+.btn-bolsa-camiseta:hover{
+  background-color: #180026;
+  font-weight: bold;
+  color: white;
 }
 
 .titulo-ver-camiseta{
@@ -203,8 +211,36 @@ export default {
   font-weight: bold;
 }
 
+.bloque-cantidad{
+  display: flex;
+  justify-content: start;
+  width: 100%;
+}
+
+.cantidad {
+  font-weight: bold;
+  margin-right: 3%;
+  margin-top: 2%;
+}
+
+.cantidad-input {
+  display: flex;
+  justify-content: start;
+}
+
 .casilla-cantidad{
-  width: 18%;
+  width: 16%;
+  height: 50%;
+  margin-right: 5%;
+  margin-top: 2%;
+}
+
+.btn-cantidad{
+  background-color: white;
+  margin-right: 2%;
+  height: 80%;
+  font-weight: bold;
+  padding-bottom: 3%;
 }
 
 .tallas {
@@ -213,8 +249,13 @@ export default {
   margin-right: 15%;
 }
 
+.talla-txt{
+  font-weight: bold;
+  text-align: start;
+}
+
 .info-mas-detalles, .info-mas-detalles:hover{
   padding: 5%;
-  background-color: white;
+  margin-left: 1%;
 }
 </style>
