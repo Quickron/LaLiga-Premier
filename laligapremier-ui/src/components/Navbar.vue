@@ -1,30 +1,106 @@
 <template>
+
+    <!-- Barra de Cuentas -->
     <div class="seccion-cuenta">
         <ul class="mb-2 mb-lg-0" style="list-style: none">
             <li class="d-flex">
                 <i class="bi bi-person-circle"></i>
-                <a class="nav-link mt-lg-1" id="iniciar-sesion">Iniciar Sesión</a>
-                <span class="nav-link mt-lg-1">|</span>
-                <a class="nav-link mt-lg-1">Registrarse</a>
+                <a class="link-cuenta mt-lg-1" id="iniciar-sesion" data-bs-toggle="modal" data-bs-target="#iniciarSesionModal">Iniciar Sesión</a>
+                <span class="mt-lg-1 ms-3 me-1">|</span>
+                <a class="link-cuenta mt-lg-1 me-4" data-bs-toggle="modal" data-bs-target="#registroModal">Registrarse</a>
             </li>
         </ul>
     </div>
+
+    <!-- Pop Up de Iniciar Sesión -->
+    <div class="modal fade" id="iniciarSesionModal" tabindex="-1" aria-labelledby="iniciarSesionModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Iniciar Sesión</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="message-text">
+                            <a href="/">¿Olvidaste tu contraseña?</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Entrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pop Up de Registro -->
+    <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Registro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Nombre de Usuario</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="message-text">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Repetir Contraseña</label>
+                            <input type="password" class="form-control" id="message-text">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="contenedor">
 
             <div class="barra">
+
+                <!-- Logo -->
                 <div>
                     <router-link to="/">
                         <img src="@/assets/logo.png" alt="Logo" class="logo" />
                     </router-link>
                 </div>
 
+                <!-- Links -->
                 <div class="container-fluid">
+
+                    <!-- Esconde navbar cuando no hay suficiente resolución  -->
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+
+                    <!-- Navbar en sí -->
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mx-auto mt-lg-2">
                             <li class="nav-item">
@@ -43,7 +119,11 @@
                                 <a class="nav-link">Niño</a>
                             </li>
                         </ul>
+
+                        <!-- Parte central del navbar -->
                         <div class="busqueda-bolsa">
+
+                            <!-- Barra de búsqueda -->
                             <form class="d-flex" role="search">
                                 <div class="input-group">
                                     <input class="form-control input-busqueda" type="search" placeholder="Buscar"
@@ -55,15 +135,21 @@
                                     </div>
                                 </div>
                             </form>
+
+                            <!-- Botón de favoritos -->
                             <a class="btn btn-navbar btn-favoritos" role="button">
                                 <i class="bi bi-heart"></i>
                             </a>
+
+                            <!-- Botón de bolsa -->
                             <a class="btn btn-navbar btn-bolsa" role="button">
                                 <i class="bi bi-bag"></i>
                             </a>
+
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </nav>
@@ -75,7 +161,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .contenedor {
     display: flex;
     flex-direction: column;
@@ -87,6 +173,19 @@ export default {
     padding: 10px;
     display: flex;
     justify-content: end;
+}
+
+.link-cuenta {
+    color: black;
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+.link-cuenta:hover {
+    color: black;
+    font-weight: bolder;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .barra {
@@ -135,7 +234,7 @@ export default {
     color: white;
 }
 
-.btn-favoritos{
+.btn-favoritos {
     background-color: white;
     font-size: 20px;
     margin-left: 15px;
@@ -144,10 +243,6 @@ export default {
 .btn-favoritos:hover {
     background-color: black;
     color: white;
-}
-
-.titulo {
-    margin: 30px;
 }
 
 .bi-person-circle {
