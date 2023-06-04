@@ -106,8 +106,8 @@
           <div class="mt-5">
             <!-- Botón desplegable -->
             <p>
-              <a class="btn btn-secondary txt-destacado w-100 d-flex align-items-center justify-content-between"
-                data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true"
+              <a class="btn btn-detalles"
+                data-bs-toggle="collapse" href="#dropdownDetalles" role="button" aria-expanded="true"
                 aria-controls="collapseExample">
                 <span class="fas fa-bars"><span class="ps-3">+ Detalles</span></span>
                 <span class="fas fa-chevron-down"></span>
@@ -115,7 +115,7 @@
             </p>
 
             <!-- Info camiseta -->
-            <div class="collapse" id="collapseExample">
+            <div class="collapse" id="dropdownDetalles">
 
 
               <table class="table info-mas-detalles">
@@ -168,6 +168,7 @@ export default {
   margin-top: 3%;
 }
 
+/* ----- Carrusel Camiseta ----- */
 .fotosCamiseta {
   margin-left: 10%;
   margin-right: 5%;
@@ -175,6 +176,11 @@ export default {
   width: 40%;
 }
 
+.carruselCamiseta{
+  width: 100%;
+}
+
+/* ----- Descripción Camiseta ----- */
 .descripcionCamiseta {
   margin-left: 5%;
   margin-right: 10%;
@@ -182,23 +188,6 @@ export default {
   padding: 5%;
   background-color: lightgray;
   text-align: start;
-}
-
-.carruselCamiseta{
-  width: 100%;
-}
-
-.btn-bolsa-camiseta{
-  margin-top: 8%;
-  background-color: black;
-  font-weight: bold;
-  color: white;
-}
-
-.btn-bolsa-camiseta:hover{
-  background-color: #180026;
-  font-weight: bold;
-  color: white;
 }
 
 .titulo-ver-camiseta{
@@ -252,6 +241,25 @@ export default {
 .talla-txt{
   font-weight: bold;
   text-align: start;
+}
+
+.btn-bolsa-camiseta{
+  margin-top: 8%;
+  background-color: black;
+  font-weight: bold;
+  color: white;
+}
+
+.btn-bolsa-camiseta:hover{
+  background-color: #180026;
+  font-weight: bold;
+  color: white;
+}
+
+.btn-detalles{
+  background-color:#180026;
+  color: white;
+  width: 100%;
 }
 
 .info-mas-detalles, .info-mas-detalles:hover{

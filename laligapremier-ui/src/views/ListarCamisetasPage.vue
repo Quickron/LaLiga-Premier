@@ -1,16 +1,15 @@
 <template>
   <div class="contenedor-vista-camisetas">
+
+    <!-- Filtros -->
     <div class="filtros">
       <h3><i class="bi bi-filter"></i> FILTROS</h3>
 
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle menu-talla" type="button" id="talla" data-bs-toggle="dropdown"
-          aria-expanded="false">
-          Talla
-        </button>
+      <!-- Tallas -->
+      <div class="contenedor-filtro">
+        <h4>Talla</h4>
 
-        <div class="dropdown-menu contenedor-talla" aria-labelledby="talla">
-
+        <div class="opciones-filtro">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
@@ -19,7 +18,7 @@
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
             <label class="form-check-label" for="flexCheckChecked">
               S
             </label>
@@ -45,18 +44,14 @@
               XL
             </label>
           </div>
-
         </div>
       </div>
 
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle menu-talla" type="button" id="marca" data-bs-toggle="dropdown"
-          aria-expanded="false">
-          Marca
-        </button>
+      <!-- Marcas -->
+      <div class="contenedor-filtro">
+        <h4>Marca</h4>
 
-        <div class="dropdown-menu contenedor-talla" aria-labelledby="marca">
-
+        <div class="opciones-filtro">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
@@ -65,7 +60,7 @@
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
             <label class="form-check-label" for="flexCheckChecked">
               Nike
             </label>
@@ -81,14 +76,11 @@
         </div>
       </div>
 
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle menu-talla" type="button" id="precio" data-bs-toggle="dropdown"
-          aria-expanded="false">
-          Precio
-        </button>
+      <!-- Precios -->
+      <div class="contenedor-filtro">
+        <h4>Precio</h4>
 
-        <div class="dropdown-menu contenedor-talla" aria-labelledby="precio">
-
+        <div class="opciones-filtro-precio">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
@@ -97,7 +89,7 @@
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
             <label class="form-check-label" for="flexCheckChecked">
               $30.000 - $40.000
             </label>
@@ -116,19 +108,15 @@
               $50.000 - $60.000
             </label>
           </div>
-
         </div>
       </div>
 
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle menu-talla" type="button" id="marca" data-bs-toggle="dropdown"
-          aria-expanded="false">
-          Club / Selección
-        </button>
+      <!-- Club o Selección -->
+      <div class="contenedor-filtro">
+        <h4>Club / Selección</h4>
 
-        <div class="dropdown-menu contenedor-talla" aria-labelledby="marca">
-
-          <div class="form-check">
+        <div class="opciones-filtro-club-seleccion">
+          <div class="form-check me-3">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
               Club
@@ -136,7 +124,7 @@
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
             <label class="form-check-label" for="flexCheckChecked">
               Selección
             </label>
@@ -145,7 +133,15 @@
         </div>
       </div>
 
+      <!-- Botones -->
+      <div class="botones-filtros">
+        <button class="btn btn-success me-4">Aplicar Filtros</button>
+        <button class="btn btn-danger">Eliminar Filtros</button>
+      </div>
+
     </div>
+
+    <!-- Camisetas Novedades -->
     <div class="novedades">
       <section id="products">
         <div class="container py-3">
@@ -339,17 +335,30 @@ export default {
   margin-bottom: 10%;
 }
 
-.menu-talla {
-  width: 80%;
+.contenedor-filtro {
+  margin-bottom: 30%;
 }
 
-.contenedor-talla {
-  width: 80%;
-  padding: 5%;
+.opciones-filtro{
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
-.dropdown {
-  margin-bottom: 50%;
+.opciones-filtro-precio{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.opciones-filtro-club-seleccion{
+  display: flex;
+  justify-content: center;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 /* ----- CAMISETAS ----- */
