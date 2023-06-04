@@ -16,9 +16,9 @@
     <div class="modal fade" id="iniciarSesionModal" tabindex="-1" aria-labelledby="iniciarSesionModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header d-flex">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     <h5 class="modal-title" id="exampleModalLabel">Iniciar Sesión</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
@@ -28,14 +28,13 @@
                         </div>
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="message-text">
-                            <a href="/">¿Olvidaste tu contraseña?</a>
+                            <input type="password" class="form-control mb-2" id="message-text">
+                            <a href="/" class="olvidar-contraseña">¿Olvidaste tu contraseña?</a>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Entrar</button>
+                    <button type="button" class="btn btn-popup">Entrar</button>
                 </div>
             </div>
         </div>
@@ -46,8 +45,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     <h5 class="modal-title" id="exampleModalLabel">Registro</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
@@ -70,8 +69,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-popup">Guardar</button>
                 </div>
             </div>
         </div>
@@ -168,6 +166,7 @@ export default {
     width: 100%;
 }
 
+/* ----- Barra Cuenta ----- */
 .seccion-cuenta {
     background-color: #E6E6E6;
     padding: 10px;
@@ -188,6 +187,48 @@ export default {
     cursor: pointer;
 }
 
+/* ----- Pop Ups ----- */
+
+.modal-content{
+    background-color: #2B1E70;
+    color: white;
+    text-align: start;
+}
+
+.modal-header {
+    flex-direction: column;
+    text-align: center;
+    background-color: #130c3a;
+    border: none;
+}
+
+.olvidar-contraseña{
+    color: white;
+}
+
+.olvidar-contraseña:hover{
+    color: lightgray;
+}
+
+.modal-footer{
+    border: none;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-popup{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-popup:hover{
+    background-color: #130c3a;
+    color: white;
+    font-weight: bold;
+}
+
+/* ----- Navbar----- */
 .barra {
     margin-top: 10px;
     display: flex;
@@ -250,6 +291,7 @@ export default {
     margin: auto;
 }
 
+/* ----- Barra de búsqueda ----- */
 .input-busqueda {
     border-radius: 18px;
     border-right: 0px;
