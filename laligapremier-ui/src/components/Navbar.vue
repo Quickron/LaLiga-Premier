@@ -55,6 +55,9 @@
                                     </div>
                                 </div>
                             </form>
+                            <a class="btn btn-navbar btn-favoritos" role="button">
+                                <i class="bi bi-heart"></i>
+                            </a>
                             <a class="btn btn-navbar btn-bolsa" role="button">
                                 <i class="bi bi-bag"></i>
                             </a>
@@ -110,8 +113,10 @@ export default {
 }
 
 .nav-link:hover {
-    color: #44115c;
-    font-weight: bold;
+    color: black;
+    font-weight: bolder;
+    font-size: 18px;
+    border-bottom: 2px solid black;
 }
 
 .busqueda-bolsa {
@@ -121,8 +126,24 @@ export default {
 .btn-bolsa {
     background-color: white;
     font-size: 20px;
-    margin-left: 15px;
+    margin-left: 10px;
     margin-right: 30px;
+}
+
+.btn-bolsa:hover {
+    background-color: black;
+    color: white;
+}
+
+.btn-favoritos{
+    background-color: white;
+    font-size: 20px;
+    margin-left: 15px;
+}
+
+.btn-favoritos:hover {
+    background-color: black;
+    color: white;
 }
 
 .titulo {

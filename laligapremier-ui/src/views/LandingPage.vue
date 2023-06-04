@@ -1,4 +1,5 @@
 <template>
+
   <div class="bienvenida">
     <img class="img-bienvenida" src="../assets/images/bienvenida.png" alt="Imagen de Bienvenida">
     <div class="textos-bienvenida">
@@ -8,29 +9,39 @@
       <img src="@/assets/logo.png" alt="Logo" class="logo" />
     </div>
   </div>
+
   <div class="estilos">
     <h1>DESCUBRE TU ESTILO</h1>
     <div class="estilos-imgs">
-      <div>
-        <img src="@/assets//images/estilo_hombre.png" alt="Estilo Hombre" />
-        <p>Hombre</p>
+      <div class="estilo">
+        <router-link to="/camisetas" style="text-decoration: none;">
+          <img src="@/assets//images/estilo_hombre.png" alt="Estilo Hombre" />
+          <p>Hombre</p>
+        </router-link>
       </div>
-      <div>
-        <img src="@/assets//images//estilo_mujer.png" alt="Estilo Mujer" />
-        <p>Mujer</p>
+      <div class="estilo">
+        <router-link to="/camisetas" style="text-decoration: none;">
+          <img src="@/assets//images/estilo_mujer.png" alt="Estilo Hombre" />
+          <p>Mujer</p>
+        </router-link>
       </div>
-      <div>
-        <img src="@/assets//images//estilo_niño.png" alt="Estilo Niño" />
-        <p>Niño</p>
+      <div class="estilo">
+        <router-link to="/camisetas" style="text-decoration: none;">
+          <img src="@/assets//images/estilo_niño.png" alt="Estilo Hombre" />
+          <p>Niño</p>
+        </router-link>
       </div>
     </div>
   </div>
+
   <div class="epocas">
     <div>
       <img src="@/assets//images//clasico.png" alt="Clásico" />
       <div class="contenido-clasico">
         <p class="txt-epoca">CLÁSICO</p>
-        <button class="btn btn-epoca rounded-pill">Ver</button>
+        <router-link to="/camisetas">
+          <button class="btn btn-epoca rounded-pill">Ver</button>
+        </router-link>
         <p id="descripcion-clasico">Davids, Paises Bajos</p>
       </div>
     </div>
@@ -38,70 +49,96 @@
       <img src="@/assets//images//moderno.png" alt="Moderno" />
       <div class="contenido-moderno">
         <p class="txt-epoca">MODERNO</p>
-        <button class="btn btn-epoca rounded-pill">Ver</button>
+        <router-link to="/camisetas">
+          <button class="btn btn-epoca rounded-pill">Ver</button>
+        </router-link>
         <p id="descripcion-moderno">Haaland, Manchester City</p>
       </div>
     </div>
   </div>
+
   <div class="novedades">
     <h1>NOVEDADES</h1>
     <section id="products">
-      <div class="container py-3">
+      <div class=" py-3">
         <div class="row">
-          <div class="offset-md-0 offset-sm-1 contenedor-camisetas">
+          <div class="offset-md-0 offset-sm-1 contenedor-camisetas-novedades">
+
             <div class="card tarjeta">
-              <img class="img-camiseta" src="../assets/images/camiseta_colo_colo.png" />
-              <div class="card-body tarjeta-cuerpo">
-                <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
-                <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
-                    class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span
-                    class="far fa-star"></span> </div>
-                <div class="d-flex align-items-center justify-content-between pt-3 p-2">
-                  <div class="d-flex flex-column">
-                    <div>
-                      <strong class="fs-4">$56765765</strong>
-                    </div>
-                  </div>
-                  <a class="btn btn-primary px-2">Ver Detalles</a>
+                <div class="iconos-tarjeta">
+                  <i class="bi bi-heart mx-2 mt-1"></i>
+                  <i class="bi bi-bag mx-3 mb-1"></i>
                 </div>
-              </div>
-            </div>
-            <div class="card tarjeta">
-              <img class="img-camiseta" src="../assets/images/camiseta_barcelona.png" />
-              <div class="card-body tarjeta-cuerpo">
-                <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
-                <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
-                    class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span
-                    class="far fa-star"></span> </div>
-                <div class="d-flex align-items-center justify-content-between pt-3 p-2">
-                  <div class="d-flex flex-column">
-                    <div>
-                      <strong class="fs-4">$56765765</strong>
-                    </div>
+                <img class="img-camiseta" src="../assets/images/camiseta_colo_colo.png" />
+                <div class="card-body tarjeta-cuerpo">
+                  <h6 class="nombreCamisetaListado pt-1">Nombre Camiseta</h6>
+                  <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
+                      class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
+                    <span class="far fa-star"></span>
                   </div>
-                  <a class="btn btn-primary px-2">Ver Detalles</a>
+                  <div class="d-flex align-items-center justify-content-between pt-3 p-2">
+                    <div class="d-flex flex-column">
+                      <div>
+                        <strong class="fs-4">$56765765</strong>
+                      </div>
+                    </div>
+                    <router-link to="/detalle/id">
+                      <a class="btn btn-detalles px-2">Ver Detalles</a>
+                    </router-link>
+                  </div>
                 </div>
               </div>
 
-            </div>
             <div class="card tarjeta">
-              <img class="img-camiseta" src="../assets/images/camiseta_brasil.png" />
-              <div class="card-body tarjeta-cuerpo">
-                <h6 class="font-weight-bold pt-1">Nombre Camiseta</h6>
-                <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
-                    class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span
-                    class="far fa-star"></span> </div>
-                <div class="d-flex align-items-center justify-content-between pt-3 p-2">
-                  <div class="d-flex flex-column">
-                    <div>
-                      <strong class="fs-4">$56765765</strong>
-                    </div>
+                <div class="iconos-tarjeta">
+                  <i class="bi bi-heart mx-2 mt-1"></i>
+                  <i class="bi bi-bag mx-3 mb-1"></i>
+                </div>
+                <img class="img-camiseta" src="../assets/images/camiseta_barcelona.png" />
+                <div class="card-body tarjeta-cuerpo">
+                  <h6 class="nombreCamisetaListado pt-1">Nombre Camiseta</h6>
+                  <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
+                      class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
+                    <span class="far fa-star"></span>
                   </div>
-                  <a class="btn btn-primary px-2">Ver Detalles</a>
+                  <div class="d-flex align-items-center justify-content-between pt-3 p-2">
+                    <div class="d-flex flex-column">
+                      <div>
+                        <strong class="fs-4">$56765765</strong>
+                      </div>
+                    </div>
+                    <router-link to="/detalle/id">
+                      <a class="btn btn-detalles px-2">Ver Detalles</a>
+                    </router-link>
+                  </div>
+                </div>
+              </div>
+            
+            <div class="card tarjeta">
+                <div class="iconos-tarjeta">
+                  <i class="bi bi-heart mx-2 mt-1"></i>
+                  <i class="bi bi-bag mx-3 mb-1"></i>
+                </div>
+                <img class="img-camiseta" src="../assets/images/camiseta_brasil.png" />
+                <div class="card-body tarjeta-cuerpo">
+                  <h6 class="nombreCamisetaListado pt-1">Nombre Camiseta</h6>
+                  <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
+                      class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
+                    <span class="far fa-star"></span>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between pt-3 p-2">
+                    <div class="d-flex flex-column">
+                      <div>
+                        <strong class="fs-4">$56765765</strong>
+                      </div>
+                    </div>
+                    <router-link to="/detalle/id">
+                      <a class="btn btn-detalles px-2">Ver Detalles</a>
+                    </router-link>
+                  </div>
                 </div>
               </div>
 
-            </div>
           </div>
         </div>
       </div>
@@ -143,7 +180,6 @@ export default {
 }
 
 /* ----- SECCIÓN ESTILOS (HOMBRE, MUJER y NIÑO) ----- */
-
 .estilos h1 {
   font-weight: bolder;
   margin-top: 2%;
@@ -155,7 +191,7 @@ export default {
   margin-top: 3%;
 }
 
-.estilos-imgs>div {
+.estilos-imgs > div {
   margin-left: 5%;
   margin-right: 5%;
 }
@@ -169,6 +205,18 @@ export default {
 .estilos-imgs p {
   margin-top: 2%;
   font-size: large;
+  color: black;
+  text-decoration: none;
+}
+
+.estilo img:hover {
+  height: 350px;
+  width: 350px;
+  border: 2px solid black;
+}
+
+.estilo:hover {
+  font-weight: bold;
 }
 
 /* ----- SECCIÓN ÉPOCAS (CLÁSICO - MODERNO) ----- */
@@ -216,6 +264,12 @@ export default {
   font-weight: bold;
 }
 
+.btn-epoca:hover {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
+
 /* ----- SECCIÓN NOVEDADES ----- */
 
 .novedades h1 {
@@ -224,14 +278,13 @@ export default {
   margin-bottom: 2%;
 }
 
-.container {
-  width: 100%;
-}
-
-.contenedor-camisetas {
+.contenedor-camisetas-novedades {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .tarjeta {
