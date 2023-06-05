@@ -1,5 +1,4 @@
 <template>
-
   <div class="bienvenida">
     <img class="img-bienvenida" src="../assets/images/bienvenida.png" alt="Imagen de Bienvenida">
     <div class="textos-bienvenida">
@@ -64,80 +63,13 @@
         <div class="row">
           <div class="offset-md-0 offset-sm-1 contenedor-camisetas-novedades">
 
-            <div class="card tarjeta">
-                <div class="iconos-tarjeta">
-                  <i class="bi bi-heart mx-2 mt-1"></i>
-                  <i class="bi bi-bag mx-3 mb-1"></i>
-                </div>
-                <img class="img-camiseta" src="../assets/images/camiseta_colo_colo.png" />
-                <div class="card-body tarjeta-cuerpo">
-                  <h6 class="nombreCamisetaListado pt-1">Nombre Camiseta</h6>
-                  <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
-                      class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
-                    <span class="far fa-star"></span>
-                  </div>
-                  <div class="d-flex align-items-center justify-content-between pt-3 p-2">
-                    <div class="d-flex flex-column">
-                      <div>
-                        <strong class="fs-4">$56765765</strong>
-                      </div>
-                    </div>
-                    <router-link to="/detalle/id">
-                      <a class="btn btn-detalles px-2">Ver Detalles</a>
-                    </router-link>
-                  </div>
-                </div>
+            <div class="card tarjeta" v-for="(camiseta, index) in camisetasNovedades" :key="index">
+              <div class="iconos-tarjeta">
+                <i class="bi bi-heart mx-2 mt-1"></i>
+                <i class="bi bi-bag mx-3 mb-1"></i>
               </div>
-
-            <div class="card tarjeta">
-                <div class="iconos-tarjeta">
-                  <i class="bi bi-heart mx-2 mt-1"></i>
-                  <i class="bi bi-bag mx-3 mb-1"></i>
-                </div>
-                <img class="img-camiseta" src="../assets/images/camiseta_barcelona.png" />
-                <div class="card-body tarjeta-cuerpo">
-                  <h6 class="nombreCamisetaListado pt-1">Nombre Camiseta</h6>
-                  <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
-                      class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
-                    <span class="far fa-star"></span>
-                  </div>
-                  <div class="d-flex align-items-center justify-content-between pt-3 p-2">
-                    <div class="d-flex flex-column">
-                      <div>
-                        <strong class="fs-4">$56765765</strong>
-                      </div>
-                    </div>
-                    <router-link to="/detalle/id">
-                      <a class="btn btn-detalles px-2">Ver Detalles</a>
-                    </router-link>
-                  </div>
-                </div>
-              </div>
-            
-            <div class="card tarjeta">
-                <div class="iconos-tarjeta">
-                  <i class="bi bi-heart mx-2 mt-1"></i>
-                  <i class="bi bi-bag mx-3 mb-1"></i>
-                </div>
-                <img class="img-camiseta" src="../assets/images/camiseta_brasil.png" />
-                <div class="card-body tarjeta-cuerpo">
-                  <h6 class="nombreCamisetaListado pt-1">Nombre Camiseta</h6>
-                  <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span
-                      class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span>
-                    <span class="far fa-star"></span>
-                  </div>
-                  <div class="d-flex align-items-center justify-content-between pt-3 p-2">
-                    <div class="d-flex flex-column">
-                      <div>
-                        <strong class="fs-4">$56765765</strong>
-                      </div>
-                    </div>
-                    <router-link to="/detalle/id">
-                      <a class="btn btn-detalles px-2">Ver Detalles</a>
-                    </router-link>
-                  </div>
-                </div>
-              </div>
+              <TarjetaCamiseta :camiseta="camiseta" />
+            </div>
 
           </div>
         </div>
@@ -147,13 +79,27 @@
 </template>
 
 <script>
+import TarjetaCamiseta from '@/components/TarjetaCamiseta.vue';
+import obtenerCamisetas from '@/mocks/camiseta'
 
 export default {
   name: 'LandingPage',
+  components: {
+    TarjetaCamiseta,
+  },
+  data() {
+    return {
+      camisetasNovedades: [],
+    }
+  },
+  async mounted() {
+    this.camisetasNovedades = obtenerCamisetas;
+  },
 }
 </script>
 
-<style>
+
+<style scoped>
 /* ----- SECCIÓN BIENVENIDA ----- */
 .img-bienvenida {
   width: 100%;
@@ -191,7 +137,7 @@ export default {
   margin-top: 3%;
 }
 
-.estilos-imgs > div {
+.estilos-imgs>div {
   margin-left: 5%;
   margin-right: 5%;
 }
@@ -301,5 +247,4 @@ export default {
   padding-right: 8%;
   margin-top: 10%;
 }
-
 </style>
