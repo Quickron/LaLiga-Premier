@@ -64,6 +64,17 @@
                           </div>
                       </div>
                       <div class="form-group row py-2">
+                          <label class="col-sm-2 col-form-label">Público</label>
+                          <div class="col-sm-1">
+                              <select>
+                                <option selected>Seleccionar Público</option>
+                                  <option>Hombre</option>
+                                  <option>Mujer</option>
+                                  <option>Niño</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="form-group row py-2">
                           <div class="form-group row">
                               <label class="col-sm-2 col-form-label">Marca</label>
                               <div class="col-sm-1">
@@ -88,7 +99,7 @@
                               </div>
                           </div>
                           <div class="form-group row py-2">
-                              <label class="col-sm-2 col-form-label">Cantidad</label>
+                              <label class="col-sm-2 col-form-label">Stock</label>
                               <div class="col-sm-6">
                                   <input type="number" class="form-control">
                               </div>
@@ -96,7 +107,7 @@
                           <div class="form-group row py-2">
                               <label for="file" class="col-sm-2 col-form-label">Subir Foto</label>
                               <div class="col-sm-6">
-                                  <input type="file" name="file" class="form-control"/>
+                                  <input type="file" name="file" multiple class="form-control"/>
                               </div>
                           </div>
                           <div class="form-group row py-2">

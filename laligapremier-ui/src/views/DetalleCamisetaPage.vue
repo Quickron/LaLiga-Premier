@@ -14,24 +14,20 @@
             <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
               aria-label="Slide 3"></button>
           </div>
+
           <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="10000">
-              <img src="@/assets/images/camiseta_barcelona.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item" data-bs-interval="2000">
-              <img src="@/assets/images/camiseta_colo_colo.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="@/assets/images/camiseta_brasil.png" class="d-block w-100" alt="...">
+            <div class="carousel-item active" data-bs-interval="10000" v-for="(imagen, index) in camiseta.imagenes" :key="index">
+              <img :src="imagen" class="d-block w-100" alt="Imagen Camiseta">
             </div>
           </div>
+
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+            <span class="visually-hidden">Anterior</span>
           </button>
           <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+            <span class="visually-hidden">Siguiente</span>
           </button>
         </div>
         
@@ -45,13 +41,11 @@
 
           <form>
 
-            <h3 class="titulo-ver-camiseta">Nombre Camiseta</h3>
+            <h3 class="titulo-ver-camiseta">{{ camiseta.nombre }}</h3>
             
-            <p class="desc-ver-camiseta">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo consectetur
-              minima fuga id assumenda perspiciatis facere, quae consequatur tempore. Perferendis ex mollitia dolorem
-              ipsam debitis velit similique consequatur, et praesentium!</p>
+            <p class="desc-ver-camiseta">{{ camiseta.descripcion }}</p>
 
-            <h4 class="precio">$4354835483</h4>
+            <h4 class="precio">${{ camiseta.precio }}</h4>
 
             <div class="mt-4 bloque-cantidad">
               <div class="cantidad-input">
@@ -65,36 +59,11 @@
             <div class="tallas mt-4">
               <h6 class="talla-txt">Talla</h6>
 
-              <label class="radio talla mx-1">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                <span class="form-check-label" for="flexRadioDefault1">
-                  XS
-                </span>
+              <label class="radio talla mx-1" v-for="(talla, index) in tallas" :key="index">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="talla">
+                <span class="form-check-label mx-1" for="talla">{{ talla }}</span>
               </label>
-              <label class="radio talla mx-1">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                <span class="form-check-label" for="flexRadioDefault1">
-                  S
-                </span>
-              </label>
-              <label class="radio talla mx-1">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                <span class="form-check-label" for="flexRadioDefault1">
-                  M
-                </span>
-              </label>
-              <label class="radio talla mx-1">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                <span class="form-check-label" for="flexRadioDefault1">
-                  L
-                </span>
-              </label>
-              <label class="radio talla mx-1">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                <span class="form-check-label" for="flexRadioDefault1">
-                  XL
-                </span>
-              </label>
+
             </div>
 
             <div class="action d-flex justify-content-center">
@@ -121,27 +90,31 @@
               <table class="table info-mas-detalles">
                 <tr>
                   <th scope="row">Club / Selección</th>
-                  <td>Club</td>
+                  <td>{{ camiseta.tipo }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Equipo</th>
+                  <td>{{ camiseta.equipo }}</td>
                 </tr>
                 <tr>
                   <th scope="row">Liga</th>
-                  <td>La Liga</td>
+                  <td>{{ camiseta.liga }}</td>
                 </tr>
                 <tr>
                   <th scope="row">Temporada</th>
-                  <td>2022-2023</td>
+                  <td>{{ camiseta.temporada }}</td>
                 </tr>
                 <tr>
                   <th scope="row">Marca</th>
-                  <td>Nike</td>
+                  <td>{{ camiseta.marca }}</td>
                 </tr>
                 <tr>
                   <th scope="row">Dorsal</th>
-                  <td>10</td>
+                  <td>{{ camiseta.dorsal }}</td>
                 </tr>
                 <tr>
                   <th scope="row">Jugador</th>
-                  <td>Messi</td>
+                  <td>{{ camiseta.jugador }}</td>
                 </tr>
               </table>
             </div>
@@ -155,9 +128,19 @@
 </template>
 
 <script>
-
+import { obtenerCamistaPorId } from '@/mocks/camiseta'
 export default {
   name: 'DetalleCamisetaPage',
+  data() {
+    return {
+      tallas: [],
+      camiseta: Object,
+    }
+  },
+  async mounted() {
+    this.tallas = ["XS", "S", "M", "L", "XL", "2XL"];
+    this.camiseta = obtenerCamistaPorId(1).camiseta;
+  },
 }
 </script>
 

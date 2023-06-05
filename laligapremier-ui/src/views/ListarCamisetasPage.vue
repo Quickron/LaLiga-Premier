@@ -141,8 +141,8 @@
 
     </div>
 
-    <!-- Camisetas Novedades -->
-    <div class="novedades">
+    <!-- Todas las camisetas -->
+    <div>
       <section id="products">
         <div class="container py-3">
           <div class="row">
@@ -255,30 +255,5 @@ export default {
   justify-content: end;
   margin: 5%;
   font-size: 30px;
-}
-
-.nombreCamisetaListado{
-  font-weight: bold;
-}
-
-.img-camiseta {
-  height: 300px;
-  width: 100%;
-  padding: 5%;
-  padding-left: 8%;
-  padding-right: 8%;
-  margin-top: -8%;
-}
-
-.btn-detalles{
-  background-color: black;
-  color: white;
-  font-weight: bold;
-}
-
-.btn-detalles:hover{
-  background-color: #180026;
-  color: white;
-  font-weight: bold;
 }
 </style>

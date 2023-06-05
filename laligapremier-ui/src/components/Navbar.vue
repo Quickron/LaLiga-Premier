@@ -13,32 +13,7 @@
     </div>
 
     <!-- Pop Up de Iniciar Sesión -->
-    <div class="modal fade" id="iniciarSesionModal" tabindex="-1" aria-labelledby="iniciarSesionModal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header d-flex">
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                    <h5 class="modal-title" id="exampleModalLabel">Iniciar Sesión</h5>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Correo Electrónico</label>
-                            <input type="email" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="message-text" class="col-form-label">Contraseña</label>
-                            <input type="password" class="form-control mb-2" id="message-text">
-                            <a href="/" class="olvidar-contraseña">¿Olvidaste tu contraseña?</a>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-popup">Entrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <IniciarSesionFormVue></IniciarSesionFormVue>
 
     <!-- Pop Up de Registro -->
     <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModal" aria-hidden="true">
@@ -154,8 +129,12 @@
 </template>
 
 <script>
+import IniciarSesionFormVue from './IniciarSesionForm.vue';
 export default {
     name: "NavBar",
+    components: {
+        IniciarSesionFormVue,
+    }
 };
 </script>
 
