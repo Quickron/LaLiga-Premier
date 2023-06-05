@@ -80,7 +80,7 @@
 
 <script>
 import TarjetaCamiseta from '@/components/TarjetaCamiseta.vue';
-import obtenerCamisetas from '@/mocks/camiseta'
+import { obtenerCamisetasNovedades } from '@/mocks/camiseta'
 
 export default {
   name: 'LandingPage',
@@ -93,7 +93,7 @@ export default {
     }
   },
   async mounted() {
-    this.camisetasNovedades = obtenerCamisetas;
+    this.camisetasNovedades = obtenerCamisetasNovedades;
   },
 }
 </script>
@@ -239,12 +239,10 @@ export default {
   background-color: #E6E6E6;
 }
 
-.img-camiseta {
-  height: 300px;
-  width: 100%;
-  padding: 5%;
-  padding-left: 8%;
-  padding-right: 8%;
-  margin-top: 10%;
+.iconos-tarjeta {
+  display: flex;
+  justify-content: end;
+  margin: 5%;
+  font-size: 30px;
 }
 </style>
