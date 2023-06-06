@@ -13,42 +13,10 @@
     </div>
 
     <!-- Pop Up de Iniciar Sesión -->
-    <IniciarSesionFormVue></IniciarSesionFormVue>
+    <IniciarSesionFormVue />
 
     <!-- Pop Up de Registro -->
-    <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="registroModal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                    <h5 class="modal-title" id="exampleModalLabel">Registro</h5>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Nombre de Usuario</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Correo Electrónico</label>
-                            <input type="email" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="mb-3">
-                            <label for="message-text" class="col-form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="message-text">
-                        </div>
-                        <div class="mb-3">
-                            <label for="message-text" class="col-form-label">Repetir Contraseña</label>
-                            <input type="password" class="form-control" id="message-text">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-popup">Guardar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <RegistroForm />
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
@@ -130,10 +98,12 @@
 
 <script>
 import IniciarSesionFormVue from './IniciarSesionForm.vue';
+import RegistroForm from './RegistroForm.vue';
 export default {
     name: "NavBar",
     components: {
         IniciarSesionFormVue,
+        RegistroForm,
     }
 };
 </script>
@@ -164,47 +134,6 @@ export default {
     font-weight: bolder;
     font-size: 16px;
     cursor: pointer;
-}
-
-/* ----- Pop Ups ----- */
-
-.modal-content{
-    background-color: #2B1E70;
-    color: white;
-    text-align: start;
-}
-
-.modal-header {
-    flex-direction: column;
-    text-align: center;
-    background-color: #130c3a;
-    border: none;
-}
-
-.olvidar-contraseña{
-    color: white;
-}
-
-.olvidar-contraseña:hover{
-    color: lightgray;
-}
-
-.modal-footer{
-    border: none;
-    display: flex;
-    justify-content: center;
-}
-
-.btn-popup{
-    background-color: black;
-    color: white;
-    font-weight: bold;
-}
-
-.btn-popup:hover{
-    background-color: #130c3a;
-    color: white;
-    font-weight: bold;
 }
 
 /* ----- Navbar----- */

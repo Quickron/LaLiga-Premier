@@ -1,5 +1,5 @@
 <template>
-    <img class="img-camiseta" :src="camiseta.imagen" />
+    <img class="img-camiseta" :src="camiseta.imagenes[0]" />
     <div class="card-body tarjeta-cuerpo">
         <h6 class="nombreCamisetaListado pt-1">{{ camiseta.nombre }}</h6>
         <div class="d-flex align-items-center product"> <span class="fas fa-star"></span> <span class="fas fa-star"></span>

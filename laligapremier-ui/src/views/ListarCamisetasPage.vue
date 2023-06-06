@@ -142,7 +142,7 @@
     </div>
 
     <!-- Todas las camisetas -->
-    <div>
+    <div class="w-100">
       <section id="products">
         <div class="container py-3">
           <div class="row">
