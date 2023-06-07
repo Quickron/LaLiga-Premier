@@ -48,12 +48,7 @@
                         <label class="col-sm-2 col-form-label">Talla</label>
                         <div class="col-sm-1">
                             <select v-model="camiseta.talla">
-                                <option selected>Seleccionar Talla</option>
-                                <option>XS</option>
-                                <option>S</option>
-                                <option>M</option>
-                                <option>L</option>
-                                <option>XL</option>
+                                <option v-for="(talla, index) in tallas" :key="index">{{ talla }}</option>
                             </select>
                         </div>
                     </div>
@@ -61,10 +56,17 @@
                         <label class="col-sm-2 col-form-label">Público</label>
                         <div class="col-sm-1">
                             <select v-model="camiseta.publico">
-                                <option selected>Seleccionar Público</option>
                                 <option>Hombre</option>
                                 <option>Mujer</option>
-                                <option>Niño</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row py-2">
+                        <label class="col-sm-2 col-form-label">Época</label>
+                        <div class="col-sm-1">
+                            <select v-model="camiseta.epoca">
+                                <option selected>Moderno</option>
+                                <option>Clásico</option>
                             </select>
                         </div>
                     </div>
@@ -73,10 +75,7 @@
                             <label class="col-sm-2 col-form-label">Marca</label>
                             <div class="col-sm-1">
                                 <select v-model="camiseta.marca">
-                                    <option selected>Seleccionar Marca</option>
-                                    <option>Adidas</option>
-                                    <option>Nike</option>
-                                    <option>Puma</option>
+                                    <option v-for="(marca, index) in marcas" :key="index">{{ marca }}</option>
                                 </select>
                             </div>
                         </div>
@@ -118,10 +117,7 @@
                             <span class="col-sm-1">ó</span>
                             <div class="col-sm-1">
                                 <select v-model="camiseta.token">
-                                    <option selected>Seleccionar Token</option>
-                                    <option>mati_fernandez</option>
-                                    <option>messi_che</option>
-                                    <option>eltoro</option>
+                                    <option v-for="(token, index) in tokens" :key="index">{{ token }}</option>
                                 </select>
                             </div>
                         </div>
@@ -136,6 +132,9 @@
                         <div class="form-group row">
                             <div class="mt-5 btn-publicar">
                                 <input type="submit" value="Publicar" class="btn btn-dark" />
+                                <router-link to="/detalle/id">
+                                    <input type="submit" value="Publicar y Ver" class="btn btn-success mx-3" @click="enviarForm"/>
+                                </router-link>
                                 <tr></tr>
                             </div>
                         </div>
@@ -147,7 +146,7 @@
 </template>
 
 <script>
-
+import { obtenerTallas, obtenerMarcas, obtenerTokens } from '@/mocks/camiseta'
 export default {
     name: 'CrearCamisetaPage',
     data() {
@@ -164,6 +163,7 @@ export default {
                 temporada: "",
                 talla: "",
                 publico: "",
+                epoca: "",
                 marca: "",
                 nombre: "",
                 descripcion: "",
@@ -172,7 +172,15 @@ export default {
                 imagenes: [],
                 token: "",
             },
+            tallas: [],
+            marcas: [],
+            tokens: []
         }
+    },
+    async mounted(){
+        this.tallas = obtenerTallas;
+        this.marcas = obtenerMarcas;
+        this.tokens = obtenerTokens;
     },
     computed: {
         nombreInvalido() {
@@ -203,6 +211,7 @@ export default {
                 temporada: "",
                 talla: "",
                 publico: "",
+                epoca: "",
                 marca: "",
                 nombre: "",
                 descripcion: "",
@@ -210,7 +219,10 @@ export default {
                 stock: 0,
                 imagenes: [],
                 token: "",
-            }
+            },
+            this.tallas = [],
+            this.marcas = [],
+            this.tokens = [];
         },
     },
 }

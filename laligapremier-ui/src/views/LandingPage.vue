@@ -20,14 +20,8 @@
       </div>
       <div class="estilo">
         <router-link to="/camisetas" style="text-decoration: none;">
-          <img src="@/assets//images/estilo_mujer.png" alt="Estilo Hombre" />
+          <img src="@/assets//images/estilo_mujer.png" alt="Estilo Mujer" />
           <p>Mujer</p>
-        </router-link>
-      </div>
-      <div class="estilo">
-        <router-link to="/camisetas" style="text-decoration: none;">
-          <img src="@/assets//images/estilo_niño.png" alt="Estilo Hombre" />
-          <p>Niño</p>
         </router-link>
       </div>
     </div>

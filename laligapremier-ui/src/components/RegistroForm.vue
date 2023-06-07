@@ -61,6 +61,7 @@ export default {
                 nombre: "",
                 correo: "",
                 clave: "",
+                rol: "usuario",
             },
             claveRepetida: "",
         }
@@ -100,6 +101,7 @@ export default {
                 nombre: "",
                 correo: "",
                 clave: "",
+                rol: "usuario",
             },
                 this.claveRepetida = "";
         },

@@ -16,7 +16,8 @@
           </div>
 
           <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="10000" v-for="(imagen, index) in camiseta.imagenes" :key="index">
+            <div class="carousel-item active" data-bs-interval="10000" v-for="(imagen, index) in camiseta.imagenes"
+              :key="index">
               <img :src="imagen" class="d-block w-100" alt="Imagen Camiseta">
             </div>
           </div>
@@ -30,7 +31,7 @@
             <span class="visually-hidden">Siguiente</span>
           </button>
         </div>
-        
+
 
       </div>
 
@@ -39,35 +40,58 @@
         <!-- Descripción Camiseta-->
         <div class="details">
 
-          <form>
+          <form @submit.prevent="enviarForm">
 
             <h3 class="titulo-ver-camiseta">{{ camiseta.nombre }}</h3>
-            
+
             <p class="desc-ver-camiseta">{{ camiseta.descripcion }}</p>
 
             <h4 class="precio">${{ camiseta.precio }}</h4>
 
-            <div class="mt-4 bloque-cantidad">
-              <div class="cantidad-input">
-                <h6 class="cantidad">Cantidad </h6>
-                <input type="number" min="1" class="casilla-cantidad">
-                <button class="btn btn-cantidad rounded-pill">+</button>
-                <button class="btn btn-cantidad rounded-pill">-</button>
-              </div>
+            <div class="tallas mt-4" v-if="camiseta.stock > 0">
+              <h6 class="talla-txt">Para</h6>
+
+              <label class="radio talla mx-1">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="talla" v-model="publico">
+                <span class="form-check-label mx-1" for="talla">Hombre</span>
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="talla" v-model="publico">
+                <span class="form-check-label mx-1" for="talla">Mujer</span>
+              </label>
+
             </div>
 
-            <div class="tallas mt-4">
+            <div class="tallas mt-4" v-if="camiseta.stock > 0">
               <h6 class="talla-txt">Talla</h6>
 
               <label class="radio talla mx-1" v-for="(talla, index) in tallas" :key="index">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="talla">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="talla" v-model="this.talla">
                 <span class="form-check-label mx-1" for="talla">{{ talla }}</span>
               </label>
 
             </div>
 
-            <div class="action d-flex justify-content-center">
+            <div class="mt-4 bloque-cantidad" v-if="camiseta.stock > 0">
+              <div class="cantidad-input">
+                <h6 class="cantidad">Cantidad </h6>
+                <input type="number" min="1" class="casilla-cantidad" v-model="cantidad">
+                <button class="btn btn-cantidad rounded-pill">+</button>
+                <button class="btn btn-cantidad rounded-pill">-</button>
+                <div class="alert alert-danger" role="alert" v-if="cantidad > camiseta.stock">
+                  ¡No quedan suficientes unidades! Selecciona un valor menor.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12" v-else>
+              <div class="alert alert-danger" role="alert">
+                ¡Camiseta Agotada! Consulta más tarde.
+              </div>
+            </div>
+
+            <div class="action d-flex justify-content-center" v-if="camiseta.stock > 0 && camiseta.stock >= cantidad">
               <button class="btn btn-bolsa-camiseta" type="submit">Añadir a la bolsa</button>
+            </div>
+            <div class="action d-flex justify-content-center" v-else>
+              <button class="btn btn-bolsa-camiseta disabled" type="submit">Añadir a la bolsa</button>
             </div>
 
           </form>
@@ -75,9 +99,8 @@
           <div class="mt-5">
             <!-- Botón desplegable -->
             <p>
-              <a class="btn btn-detalles"
-                data-bs-toggle="collapse" href="#dropdownDetalles" role="button" aria-expanded="true"
-                aria-controls="collapseExample">
+              <a class="btn btn-detalles" data-bs-toggle="collapse" href="#dropdownDetalles" role="button"
+                aria-expanded="true" aria-controls="collapseExample">
                 <span class="fas fa-bars"><span class="ps-3">+ Detalles</span></span>
                 <span class="fas fa-chevron-down"></span>
               </a>
@@ -128,18 +151,25 @@
 </template>
 
 <script>
-import { obtenerCamistaPorId } from '@/mocks/camiseta'
+import { obtenerCamistasPorToken, obtenerTallasPorToken, obtenerCamisetaPorTalla } from '@/mocks/camiseta'
 export default {
   name: 'DetalleCamisetaPage',
   data() {
     return {
       tallas: [],
+      camisetas: [],
       camiseta: Object,
+      cantidad: 1,
+      talla: "",
+      publico: "Hombre",
+      stock: 0
     }
   },
   async mounted() {
-    this.tallas = ["XS", "S", "M", "L", "XL", "2XL"];
-    this.camiseta = obtenerCamistaPorId(1).camiseta;
+    this.camisetas = obtenerCamistasPorToken("gavi_fcb").camisetas;
+    this.camiseta = this.camisetas[0];
+    this.tallas = obtenerTallasPorToken("gavi_fcb").tallas;
+    this.stock = obtenerCamisetaPorTalla(this.talla).camiseta.stock;
   },
 }
 </script>
@@ -159,7 +189,7 @@ export default {
   width: 40%;
 }
 
-.carruselCamiseta{
+.carruselCamiseta {
   width: 100%;
 }
 
@@ -173,7 +203,7 @@ export default {
   text-align: start;
 }
 
-.titulo-ver-camiseta{
+.titulo-ver-camiseta {
   font-weight: bold;
   font-size: 40px;
   margin-bottom: 5%;
@@ -183,7 +213,7 @@ export default {
   font-weight: bold;
 }
 
-.bloque-cantidad{
+.bloque-cantidad {
   display: flex;
   justify-content: start;
   width: 100%;
@@ -200,14 +230,14 @@ export default {
   justify-content: start;
 }
 
-.casilla-cantidad{
+.casilla-cantidad {
   width: 16%;
   height: 50%;
   margin-right: 5%;
   margin-top: 2%;
 }
 
-.btn-cantidad{
+.btn-cantidad {
   background-color: white;
   margin-right: 2%;
   height: 80%;
@@ -221,31 +251,32 @@ export default {
   margin-right: 15%;
 }
 
-.talla-txt{
+.talla-txt {
   font-weight: bold;
   text-align: start;
 }
 
-.btn-bolsa-camiseta{
+.btn-bolsa-camiseta {
   margin-top: 8%;
   background-color: black;
   font-weight: bold;
   color: white;
 }
 
-.btn-bolsa-camiseta:hover{
+.btn-bolsa-camiseta:hover {
   background-color: #180026;
   font-weight: bold;
   color: white;
 }
 
-.btn-detalles{
-  background-color:#180026;
+.btn-detalles {
+  background-color: #180026;
   color: white;
   width: 100%;
 }
 
-.info-mas-detalles, .info-mas-detalles:hover{
+.info-mas-detalles,
+.info-mas-detalles:hover {
   padding: 5%;
   margin-left: 1%;
 }

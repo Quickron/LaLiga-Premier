@@ -57,7 +57,7 @@
                                 <a class="nav-link">Mujer</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link">Niño</a>
+                                <a class="nav-link">Clásicas</a>
                             </li>
                         </ul>
 
