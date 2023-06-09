@@ -153,25 +153,23 @@
 </template>
 
 <script>
-import { obtenerCamistasPorToken, obtenerTallasPorToken, obtenerCamisetaPorTalla } from '@/mocks/camiseta'
+import { obtenerItemCamiseta, obtenerTallasPorCamiseta, obtenerCamisetaPorId } from '@/mocks/camiseta'
 export default {
   name: 'DetalleCamisetaPage',
   data() {
     return {
       tallas: [],
-      camisetas: [],
       camiseta: Object,
       cantidad: 1,
-      talla: "S",
-      publico: "Hombre",
+      talla: "",
+      publico: "",
       stock: 0
     }
   },
   async mounted() {
-    this.camisetas = obtenerCamistasPorToken("gavi_fcb").camisetas;
-    this.camiseta = this.camisetas[0];
-    this.tallas = obtenerTallasPorToken("gavi_fcb").tallas;
-    this.stock = obtenerCamisetaPorTalla(this.talla).camiseta.stock;
+    this.camiseta = obtenerCamisetaPorId(2);
+    this.tallas = obtenerTallasPorCamiseta(this.camiseta).tallas;
+    this.stock = obtenerItemCamiseta(this.camiseta).itemCamiseta.stock;
   },
     computed: {
         nombreInvalido() {
@@ -195,8 +193,8 @@ export default {
         },
         resetForm() {
             this.cantidad = 1,
-            this.talla = "S",
-            this.publico = "Hombre",
+            this.talla = "",
+            this.publico = "",
             this.stock = 0;
         },
   }
