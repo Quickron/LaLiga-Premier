@@ -51,11 +51,13 @@
             <div class="tallas mt-4" v-if="camiseta.stock > 0">
               <h6 class="talla-txt">Para</h6>
 
+              <label class="radio talla mx-4">
+                <input type="radio" class="btn-check" name="publico" id="hombre" value="Hombre" checked v-model="publico">
+                <label class="btn btn-radio" for="hombre">Hombre</label>
+              </label>
               <label class="radio talla mx-1">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="talla" v-model="publico">
-                <span class="form-check-label mx-1" for="talla">Hombre</span>
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="talla" v-model="publico">
-                <span class="form-check-label mx-1" for="talla">Mujer</span>
+                <input type="radio" class="btn-check" name="publico" id="mujer" value="Mujer" v-model="publico">
+                <label class="btn btn-radio" for="mujer">Mujer</label>
               </label>
 
             </div>
@@ -63,9 +65,9 @@
             <div class="tallas mt-4" v-if="camiseta.stock > 0">
               <h6 class="talla-txt">Talla</h6>
 
-              <label class="radio talla mx-1" v-for="(talla, index) in tallas" :key="index">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="talla" v-model="this.talla">
-                <span class="form-check-label mx-1" for="talla">{{ talla }}</span>
+              <label class="radio talla mx-1" v-for="(tallaString, index) in tallas" :key="index">
+                <input type="radio" class="btn-check" name="tallas" :id="index" :value="tallaString" v-model="talla">
+                <label class="btn btn-radio" :for="index">{{ tallaString }}</label>
               </label>
 
             </div>
@@ -160,7 +162,7 @@ export default {
       camisetas: [],
       camiseta: Object,
       cantidad: 1,
-      talla: "",
+      talla: "S",
       publico: "Hombre",
       stock: 0
     }
@@ -171,6 +173,33 @@ export default {
     this.tallas = obtenerTallasPorToken("gavi_fcb").tallas;
     this.stock = obtenerCamisetaPorTalla(this.talla).camiseta.stock;
   },
+    computed: {
+        nombreInvalido() {
+            return this.camiseta.nombre.length < 1;
+        },
+    },
+  methods: {
+    enviarForm() {
+            if (this.nombreInvalido) {
+                this.error = true;
+                this.sent = false;
+                return;
+            }
+            this.error = false;
+            this.sent = true;
+            this.$emit("camiseta-detalle", this.camiseta);
+            console.log(this.publico)
+            console.log(this.talla)
+            console.log(this.cantidad)
+            this.resetForm();
+        },
+        resetForm() {
+            this.cantidad = 1,
+            this.talla = "S",
+            this.publico = "Hombre",
+            this.stock = 0;
+        },
+  }
 }
 </script>
 
@@ -245,9 +274,23 @@ export default {
   padding-bottom: 3%;
 }
 
+.btn-radio {
+  background-color: #44115C;
+  color: white;
+}
+
+.btn-radio:hover {
+  background-color: #180026;
+  color: white;
+}
+
+.btn-check:checked + .btn-radio {
+    background-color: #180026;
+    color: white;
+}
+
 .tallas {
   display: flex;
-  justify-content: space-between;
   margin-right: 15%;
 }
 

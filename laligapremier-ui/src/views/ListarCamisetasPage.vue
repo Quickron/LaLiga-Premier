@@ -111,28 +111,6 @@
         </div>
       </div>
 
-      <!-- Club o Selección -->
-      <div class="contenedor-filtro">
-        <h4>Club / Selección</h4>
-
-        <div class="opciones-filtro-club-seleccion">
-          <div class="form-check me-3">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Club
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-            <label class="form-check-label" for="flexCheckChecked">
-              Selección
-            </label>
-          </div>
-
-        </div>
-      </div>
-
       <!-- Botones -->
       <div class="botones-filtros">
         <button class="btn btn-success me-4">Aplicar Filtros</button>
