@@ -5,6 +5,9 @@
             <div class="card-body">
 
                 <form enctype="multipart/form-data" @submit.prevent="enviarForm">
+                    
+                    <ItemCamisetaFormVue @agregar-item="agregarItem"></ItemCamisetaFormVue>
+
                     <div class="form-group row py-2">
                         <label class="col-sm-2 col-form-label">Club / Selección</label>
                         <div class="col-sm-1">
@@ -17,31 +20,31 @@
                     <div class="form-group row py-2">
                         <label class="col-sm-2 col-form-label">Equipo</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" v-model="camiseta.equipo"/>
+                            <input type="text" class="form-control" v-model="camiseta.equipo" />
                         </div>
                     </div>
                     <div class="form-group row py-2">
                         <label class="col-sm-2 col-form-label">Liga</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" v-model="camiseta.liga"/>
+                            <input type="text" class="form-control" v-model="camiseta.liga" />
                         </div>
                     </div>
                     <div class="form-group row py-2">
                         <label class="col-sm-2 col-form-label">Dorsal</label>
                         <div class="col-sm-6">
-                            <input type="number" class="form-control" v-model="camiseta.dorsal"/>
+                            <input type="number" class="form-control" v-model="camiseta.dorsal" />
                         </div>
                     </div>
                     <div class="form-group row py-2">
                         <label class="col-sm-2 col-form-label">Jugador</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" v-model="camiseta.jugador"/>
+                            <input type="text" class="form-control" v-model="camiseta.jugador" />
                         </div>
                     </div>
                     <div class="form-group row py-2">
                         <label class="col-sm-2 col-form-label">Temporada</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" v-model="camiseta.temporada"/>
+                            <input type="text" class="form-control" v-model="camiseta.temporada" />
                         </div>
                     </div>
                     <div class="form-group row py-2">
@@ -82,19 +85,20 @@
                         <div class="form-group row py-2">
                             <label class="col-sm-2 col-form-label">Nombre Camiseta</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" v-model="camiseta.nombre"/>
+                                <input type="text" class="form-control" v-model="camiseta.nombre" />
                             </div>
                         </div>
                         <div class="form-group row py-2">
                             <label class="col-sm-2 col-form-label">Descripción</label>
                             <div class="col-sm-6">
-                                <textarea type="text" rows="3" class="form-control" v-model="camiseta.descripcion"></textarea>
+                                <textarea type="text" rows="3" class="form-control"
+                                    v-model="camiseta.descripcion"></textarea>
                             </div>
                         </div>
                         <div class="form-group row py-2">
                             <label class="col-sm-2 col-form-label">Precio</label>
                             <div class="col-sm-6">
-                                <input type="number" class="form-control" v-model="camiseta.precio"/>
+                                <input type="number" class="form-control" v-model="camiseta.precio" />
                             </div>
                         </div>
                         <div class="form-group row py-2">
@@ -104,23 +108,12 @@
                             </div>
                         </div>
                         <div class="form-group row py-2">
-                            <label for="file" class="col-sm-2 col-form-label">Subir Fotos</label>
+                            <label for="file" class="col-sm-2 col-form-label">Subir Fotos (URL)</label>
                             <div class="col-sm-6">
-                                <input type="text" name="file" multiple class="form-control"  v-model="camiseta.imagenes"/>
+                                <input type="text" name="file" multiple class="form-control" v-model="camiseta.imagenes" />
                             </div>
                         </div>
-                        <div class="form-group row py-2">
-                            <label class="col-sm-2 col-form-label">Token</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" v-model="camiseta.token">
-                            </div>
-                            <span class="col-sm-1">ó</span>
-                            <div class="col-sm-1">
-                                <select v-model="camiseta.token">
-                                    <option v-for="(token, index) in tokens" :key="index">{{ token }}</option>
-                                </select>
-                            </div>
-                        </div>
+
                         <div class="col-md-12">
                             <div v-if="error" class="alert alert-danger" role="alert">
                                 ¡Debes rellenar todos los campos!
@@ -129,11 +122,13 @@
                                 ¡La camiseta se ha registrado correctamente!
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <div class="mt-5 btn-publicar">
                                 <input type="submit" value="Publicar" class="btn btn-dark" />
                                 <router-link to="/detalle/id">
-                                    <input type="submit" value="Publicar y Ver" class="btn btn-success mx-3" @click="enviarForm"/>
+                                    <input type="submit" value="Publicar y Ver" class="btn btn-success mx-3"
+                                        @click="enviarForm" />
                                 </router-link>
                                 <tr></tr>
                             </div>
@@ -146,9 +141,13 @@
 </template>
 
 <script>
-import { obtenerTallas, obtenerMarcas, obtenerTokens } from '@/mocks/camiseta'
+import { obtenerTallas, obtenerMarcas } from '@/mocks/camiseta'
+import ItemCamisetaFormVue from '@/components/ItemCamisetaForm.vue'
 export default {
     name: 'CrearCamisetaPage',
+    components: {
+        ItemCamisetaFormVue,
+    },
     data() {
         return {
             camiseta: {
@@ -168,19 +167,21 @@ export default {
                 nombre: "",
                 descripcion: "",
                 precio: 0,
-                stock: 0,
                 imagenes: [],
-                token: "",
+                itemsCamiseta: []
+            },
+            itemCamiseta: {
+                publico: "",
+                talla: "",
+                stock: ""
             },
             tallas: [],
             marcas: [],
-            tokens: []
         }
     },
-    async mounted(){
+    async mounted() {
         this.tallas = obtenerTallas;
         this.marcas = obtenerMarcas;
-        this.tokens = obtenerTokens;
     },
     computed: {
         nombreInvalido() {
@@ -196,6 +197,7 @@ export default {
             }
             this.error = false;
             this.sent = true;
+            this.camiseta.itemsCamiseta.push(this.itemCamiseta);
             this.$emit("camiseta-registro", this.camiseta);
             console.log(this.camiseta)
             this.resetForm();
@@ -209,20 +211,19 @@ export default {
                 dorsal: 0,
                 jugador: "",
                 temporada: "",
-                talla: "",
-                publico: "",
                 epoca: "",
                 marca: "",
                 nombre: "",
                 descripcion: "",
                 precio: 0,
-                stock: 0,
                 imagenes: [],
-                token: "",
+                itemsCamiseta: []
             },
-            this.tallas = [],
-            this.marcas = [],
-            this.tokens = [];
+                this.tallas = [],
+                this.marcas = [];
+        },
+        agregarItem(item) {
+            this.camiseta.itemsCamiseta = [...this.camiseta.itemsCamiseta, item];
         },
     },
 }

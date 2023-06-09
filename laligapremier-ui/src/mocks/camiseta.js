@@ -4,6 +4,8 @@ const obtenerCamisetas = require('@/mocks/camisetas.json');
 
 const obtenerTallas = ["XS", "S", "M", "L", "XL", "2XL"];
 
+const obtenerPublico = ["Hombre", "Mujer"];
+
 const obtenerMarcas = ["Adidas", "Nike", "Puma"];
 
 const obtenerTokens= ["gavi_fcb", "messi_che", "haaland_mci"];
@@ -112,4 +114,4 @@ const obtenerCamisetaPorTalla = (talla) => ({
 });
 
 export { obtenerCamisetasNovedades , obtenerCamisetas, obtenerCamistaPorId, obtenerCamistasPorToken, obtenerTallasPorToken, obtenerCamisetaPorTalla,
-    obtenerTallas, obtenerMarcas, obtenerTokens };
+    obtenerTallas, obtenerMarcas, obtenerPublico, obtenerTokens };
