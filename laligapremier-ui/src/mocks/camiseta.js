@@ -8,8 +8,6 @@ const obtenerPublico = ["Hombre", "Mujer"];
 
 const obtenerMarcas = ["Adidas", "Nike", "Puma"];
 
-const obtenerTokens= ["gavi_fcb", "messi_che", "haaland_mci"];
-
 const obtenerCamistaPorId = (id) => ({
     camiseta: {
         id: id,
@@ -114,4 +112,4 @@ const obtenerCamisetaPorTalla = (talla) => ({
 });
 
 export { obtenerCamisetasNovedades , obtenerCamisetas, obtenerCamistaPorId, obtenerCamistasPorToken, obtenerTallasPorToken, obtenerCamisetaPorTalla,
-    obtenerTallas, obtenerMarcas, obtenerPublico, obtenerTokens };
+    obtenerTallas, obtenerMarcas, obtenerPublico };

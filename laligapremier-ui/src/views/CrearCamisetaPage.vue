@@ -6,7 +6,10 @@
 
                 <form enctype="multipart/form-data" @submit.prevent="enviarForm">
                     
-                    <ItemCamisetaFormVue @agregar-item="agregarItem"></ItemCamisetaFormVue>
+                    <ItemCamisetaForm @agregar-item="agregarItem"></ItemCamisetaForm>
+
+                    <ItemCamisetaTable :items-camiseta="camiseta.itemsCamiseta"
+                    @eliminar-item="eliminarItem"></ItemCamisetaTable>
 
                     <div class="form-group row py-2">
                         <label class="col-sm-2 col-form-label">Club / Selección</label>
@@ -48,23 +51,6 @@
                         </div>
                     </div>
                     <div class="form-group row py-2">
-                        <label class="col-sm-2 col-form-label">Talla</label>
-                        <div class="col-sm-1">
-                            <select v-model="camiseta.talla">
-                                <option v-for="(talla, index) in tallas" :key="index">{{ talla }}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row py-2">
-                        <label class="col-sm-2 col-form-label">Público</label>
-                        <div class="col-sm-1">
-                            <select v-model="camiseta.publico">
-                                <option>Hombre</option>
-                                <option>Mujer</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row py-2">
                         <label class="col-sm-2 col-form-label">Época</label>
                         <div class="col-sm-1">
                             <select v-model="camiseta.epoca">
@@ -102,12 +88,6 @@
                             </div>
                         </div>
                         <div class="form-group row py-2">
-                            <label class="col-sm-2 col-form-label">Stock</label>
-                            <div class="col-sm-6">
-                                <input type="number" class="form-control" v-model="camiseta.stock">
-                            </div>
-                        </div>
-                        <div class="form-group row py-2">
                             <label for="file" class="col-sm-2 col-form-label">Subir Fotos (URL)</label>
                             <div class="col-sm-6">
                                 <input type="text" name="file" multiple class="form-control" v-model="camiseta.imagenes" />
@@ -141,12 +121,14 @@
 </template>
 
 <script>
-import { obtenerTallas, obtenerMarcas } from '@/mocks/camiseta'
-import ItemCamisetaFormVue from '@/components/ItemCamisetaForm.vue'
+import { obtenerMarcas } from '@/mocks/camiseta'
+import ItemCamisetaForm from '@/components/ItemCamisetaForm.vue'
+import ItemCamisetaTable from '@/components/ItemCamisetaTable.vue'
 export default {
     name: 'CrearCamisetaPage',
     components: {
-        ItemCamisetaFormVue,
+        ItemCamisetaForm,
+        ItemCamisetaTable
     },
     data() {
         return {
@@ -160,8 +142,6 @@ export default {
                 dorsal: 0,
                 jugador: "",
                 temporada: "",
-                talla: "",
-                publico: "",
                 epoca: "",
                 marca: "",
                 nombre: "",
@@ -173,14 +153,12 @@ export default {
             itemCamiseta: {
                 publico: "",
                 talla: "",
-                stock: ""
+                stock: 0
             },
-            tallas: [],
             marcas: [],
         }
     },
     async mounted() {
-        this.tallas = obtenerTallas;
         this.marcas = obtenerMarcas;
     },
     computed: {
@@ -197,7 +175,11 @@ export default {
             }
             this.error = false;
             this.sent = true;
-            this.camiseta.itemsCamiseta.push(this.itemCamiseta);
+
+            if(this.itemCamiseta.publico != "" && this.itemCamiseta.talla != "" && this.itemCamiseta.stock > 0) {
+                this.camiseta.itemsCamiseta.push(this.itemCamiseta);
+            }
+            
             this.$emit("camiseta-registro", this.camiseta);
             console.log(this.camiseta)
             this.resetForm();
@@ -219,11 +201,13 @@ export default {
                 imagenes: [],
                 itemsCamiseta: []
             },
-                this.tallas = [],
                 this.marcas = [];
         },
         agregarItem(item) {
             this.camiseta.itemsCamiseta = [...this.camiseta.itemsCamiseta, item];
+        },
+        eliminarItem(index){
+            this.camiseta.itemsCamiseta.splice(index, 1);
         },
     },
 }
