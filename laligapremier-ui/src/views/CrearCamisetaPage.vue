@@ -200,8 +200,8 @@ export default {
                 precio: 0,
                 imagenes: [],
                 itemsCamiseta: []
-            },
-                this.marcas = [];
+            }
+                // this.marcas = [];
         },
         agregarItem(item) {
             this.camiseta.itemsCamiseta = [...this.camiseta.itemsCamiseta, item];
