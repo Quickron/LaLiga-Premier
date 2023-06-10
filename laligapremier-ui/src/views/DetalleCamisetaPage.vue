@@ -48,7 +48,7 @@
 
             <h4 class="precio">${{ camiseta.precio }}</h4>
 
-            <div class="tallas mt-4" v-if="camiseta.stock > 0">
+            <div class="tallas mt-4" v-if="stock > 0">
               <h6 class="talla-txt">Para</h6>
 
               <label class="radio talla mx-4">
@@ -62,7 +62,7 @@
 
             </div>
 
-            <div class="tallas mt-4" v-if="camiseta.stock > 0">
+            <div class="tallas mt-4" v-if="stock > 0">
               <h6 class="talla-txt">Talla</h6>
 
               <label class="radio talla mx-1" v-for="(tallaString, index) in tallas" :key="index">
@@ -72,13 +72,13 @@
 
             </div>
 
-            <div class="mt-4 bloque-cantidad" v-if="camiseta.stock > 0">
+            <div class="mt-4 bloque-cantidad" v-if="stock > 0">
               <div class="cantidad-input">
                 <h6 class="cantidad">Cantidad </h6>
                 <input type="number" min="1" class="casilla-cantidad" v-model="cantidad">
                 <button class="btn btn-cantidad rounded-pill">+</button>
                 <button class="btn btn-cantidad rounded-pill">-</button>
-                <div class="alert alert-danger" role="alert" v-if="cantidad > camiseta.stock">
+                <div class="alert alert-danger" role="alert" v-if="cantidad > stock">
                   ¡No quedan suficientes unidades! Selecciona un valor menor.
                 </div>
               </div>
@@ -89,7 +89,7 @@
               </div>
             </div>
 
-            <div class="action d-flex justify-content-center" v-if="camiseta.stock > 0 && camiseta.stock >= cantidad">
+            <div class="action d-flex justify-content-center" v-if="stock > 0 && stock >= cantidad">
               <button class="btn btn-bolsa-camiseta" type="submit">Añadir a la bolsa</button>
             </div>
             <div class="action d-flex justify-content-center" v-else>
@@ -143,11 +143,9 @@
                 </tr>
               </table>
             </div>
-
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -170,6 +168,9 @@ export default {
     this.camiseta = obtenerCamisetaPorId(2);
     this.tallas = obtenerTallasPorCamiseta(this.camiseta).tallas;
     this.stock = obtenerItemCamiseta(this.camiseta).itemCamiseta.stock;
+
+
+
   },
     computed: {
         nombreInvalido() {
@@ -194,8 +195,8 @@ export default {
         resetForm() {
             this.cantidad = 1,
             this.talla = "",
-            this.publico = "",
-            this.stock = 0;
+            this.publico = ""
+           
         },
   }
 }
