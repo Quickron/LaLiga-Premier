@@ -12,12 +12,17 @@ async function registrarUsuario(req, res) {
       clave = claveEncriptada;
   
       let error = "Falta el campo ";
+
+      const usuariosBD = await UsuarioModel.find({});
   
       if(nombre === undefined){
           error += "nombre"
           res.status(400).send({error: error});
       } else if (correo === undefined){
           error += "correo"
+          res.status(400).send({error: error});
+      } else if (correoRepetido(correo, usuariosBD)) {
+          error = "Correo ya registrado, intente con otro."
           res.status(400).send({error: error});
       } else if (clave === undefined) {
           error += "clave"
@@ -38,5 +43,9 @@ async function registrarUsuario(req, res) {
       res.status(500).send({error: err});
     }
 }
+
+function correoRepetido(correo, usuarios) {
+    return usuarios.some(usuario => usuario.correo === correo);
+  }
 
 export { registrarUsuario };
