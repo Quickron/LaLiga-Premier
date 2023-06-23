@@ -16,3 +16,5 @@ router.post('/crear-camiseta' , crearCamiseta),
 router.put('/editarcamiseta/:idCamiseta', editarCamiseta)
 
 router.delete('/eliminar-camiseta/:idCamiseta' , eliminarCamiseta)
+
+export default router;

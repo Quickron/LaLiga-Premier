@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import envs from './configs/environments.js';
 //import ruta from './routes/mensajeria.routes.js';
+import routerCamiseta from './routes/routesCamiseta.js'
 import connect from './configs/mongo.js';
 
 const app = express();
@@ -9,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//app.use('', ruta);
+app.use('/', routerCamiseta);
 
 console.log('Conectando a la base de datos...');
 connect()
