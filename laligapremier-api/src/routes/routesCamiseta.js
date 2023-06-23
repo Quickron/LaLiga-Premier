@@ -16,8 +16,4 @@ router.post('/crear-camiseta' , crearCamiseta),
 router.put('/editarcamiseta/:idCamiseta', editarCamiseta)
 
 router.delete('/eliminar-camiseta/:idCamiseta' , eliminarCamiseta)
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/taller-gasm
 export default router;

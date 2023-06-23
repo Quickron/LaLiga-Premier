@@ -71,7 +71,7 @@ async function eliminarCamiseta(req, res) {
          res.status(404).send({ error: "No se ha encontrado la camiseta en la base de datos!" });
       } else {
          await CamisetaModel.deleteOne(camiseta);
-         res.status(204).send("Camiseta eliminada correctamente.");
+         res.status(204).send({ textoRespuesta: "Camiseta eliminada correctamente." });
       }
       
     }
