@@ -18,9 +18,10 @@ async function editarCamiseta(req, res) {
 
 async function listarCamiseta(req, res) {
   try {
-    //completar
+    const camisetasBD = await CamisetaModel.find({});
+    res.status(200).send(camisetasBD);
   } catch (err) {
-    //completar
+      res.status(500).send({ error: err });
   }
 }
 
