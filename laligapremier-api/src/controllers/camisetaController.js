@@ -94,7 +94,7 @@ async function editarCamiseta(req, res) {
 
         const camisetaActualizada = await camiseta.save();
 
-        res.status(200).send(camisetaActualizada);
+        res.status(201).send(camisetaActualizada);
     } catch (err) {
         res.status(500).send(err);
         return;
