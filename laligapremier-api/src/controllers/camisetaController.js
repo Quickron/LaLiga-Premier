@@ -32,14 +32,8 @@ async function eliminarCamiseta(req, res) {
       res.status(400).send({ error: "Falta el parámetro idCamiseta" });
     } else {
       let camiseta = null;
-      const camisetasBD = await CamisetaModel.find({});
 
-      for (let i = 0; i < camisetasBD.length; i++) {
-        const camisetaArray = camisetasBD[i];
-        if (camisetaArray._id === idCamiseta) {
-          camiseta = camisetaArray;
-        }
-      }
+      camiseta = await CamisetaModel.findById(idCamiseta);
 
       if (camiseta === null) {
          res.status(404).send({ error: "No se ha encontrado la camiseta en la base de datos!" });
