@@ -76,8 +76,8 @@
               <div class="cantidad-input">
                 <h6 class="cantidad">Cantidad </h6>
                 <input type="number" min="1" class="casilla-cantidad" v-model="cantidad">
-                <button class="btn btn-cantidad rounded-pill">+</button>
-                <button class="btn btn-cantidad rounded-pill">-</button>
+                <button class="btn btn-cantidad rounded-pill" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
+                <button class="btn btn-cantidad rounded-pill" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
                 <div class="alert alert-danger" role="alert" v-if="cantidad > stock">
                   ¡No quedan suficientes unidades! Selecciona un valor menor.
                 </div>

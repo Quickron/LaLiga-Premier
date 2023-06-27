@@ -4,6 +4,7 @@ import ListarCamisetasPage from '../views/ListarCamisetasPage.vue'
 import CrearCamisetaPage from '../views/CrearCamisetaPage.vue'
 import DetalleCamisetaPage from '../views/DetalleCamisetaPage.vue'
 import NosotrosPage from '../views/NosotrosPage.vue'
+import BolsaPage from '../views/BolsaPage.vue'
 
 
 const routes = [
@@ -31,6 +32,11 @@ const routes = [
     path: '/nosotros',
     name: 'nosotros',
     component: NosotrosPage
+  },
+  {
+    path: '/bolsa',
+    name: 'bolsa',
+    component: BolsaPage
   }
 ]
 
