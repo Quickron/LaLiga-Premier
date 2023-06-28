@@ -17,7 +17,7 @@
                                     <hr class="my-4">
                                     <!-- <h4 v-if="items.length == 0">No hay camisetas en el carrito</h4> -->
 
-                                    <div class="row mb-4 d-flex justify-content-between align-items-center" th:each="item: ${items}">
+                                    <div class="row mb-4 d-flex justify-content-between align-items-center" th:each="item: ${items}" @camiseta-detalle="agregarItemBolsa">
                                         <div class="col-md-2 col-lg-2 col-xl-2">
                                             <img class="img-fluid rounded-3" src="../../public/favicon.png" style="height: 60px; width: 60px;"  />
                                         </div>
@@ -96,11 +96,20 @@ export default {
     name: "BolsaPage",
     data() {
         return {
-            itemsBolsa: []
+            itemsBolsa: [],
+            itemBolsa: Object,
         }
     },
     async mounted() {
-        this.itemsBolsa = this.$refs('camiseta-detalle', (itemBolsa) => { this.itemsBolsa = itemBolsa })
+        // Obtén el objeto camisetaBolsa de los parámetros de la ruta
+      this.itemBolsa = this.$route.query.itemBolsa;
+      this.itemsBolsa.push(this.itemBolsa)
+      console.log(this.itemBolsa)
+    },
+    methods: {
+        agregarItemBolsa() {
+            this.itemsBolsa = [...this.itemsBolsa, this.itemBolsa];
+        }
     }
 }
 </script>

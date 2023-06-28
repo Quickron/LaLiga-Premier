@@ -3,7 +3,7 @@
         <img class="img-fluid rounded-3" src="../../public/favicon.png" style="height: 60px; width: 60px;" />
     </div>
     <div class="col-md-3 col-lg-3 col-xl-3">
-        <h6 class="text-black mb-0">Nombre Camiseta</h6>
+        <h6 class="text-black mb-0">{{ camiseta.nombre }}</h6>
         <h6 class="text-muted">Talla M</h6>
     </div>
     <div class="col-md-3 col-lg-2 col-xl-2 d-flex justify-content-center">
@@ -33,10 +33,8 @@
 <script>
 export default {
     name: "ItemBolsa",
-    data() {
-        return {
-            camisetas: [],
-        }
+    props: {
+        camiseta: Object,
     }
 }
 </script>
