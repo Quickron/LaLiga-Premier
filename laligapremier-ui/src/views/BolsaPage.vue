@@ -94,6 +94,14 @@
 <script>
 export default {
     name: "BolsaPage",
+    data() {
+        return {
+            itemsBolsa: []
+        }
+    },
+    async mounted() {
+        this.itemsBolsa = this.$refs('camiseta-detalle', (itemBolsa) => { this.itemsBolsa = itemBolsa })
+    }
 }
 </script>
 

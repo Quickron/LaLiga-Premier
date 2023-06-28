@@ -52,7 +52,7 @@
               <h6 class="talla-txt">Para</h6>
 
               <label class="radio talla mx-4">
-                <input type="radio" class="btn-check" name="publico" id="hombre" value="Hombre" checked v-model="publico">
+                <input type="radio" class="btn-check" name="publico" id="hombre" value="Hombre" v-model="publico">
                 <label class="btn btn-radio" for="hombre">Hombre</label>
               </label>
               <label class="radio talla mx-1">
@@ -76,8 +76,10 @@
               <div class="cantidad-input">
                 <h6 class="cantidad">Cantidad </h6>
                 <input type="number" min="1" class="casilla-cantidad" v-model="cantidad">
-                <button class="btn btn-cantidad rounded-pill" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
-                <button class="btn btn-cantidad rounded-pill" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
+                <button class="btn btn-cantidad rounded-pill"
+                  @click="incrementar">+</button>
+                <button class="btn btn-cantidad rounded-pill"
+                  @click="disminuir">-</button>
                 <div class="alert alert-danger" role="alert" v-if="cantidad > stock">
                   ¡No quedan suficientes unidades! Selecciona un valor menor.
                 </div>
@@ -156,48 +158,90 @@ export default {
   name: 'DetalleCamisetaPage',
   data() {
     return {
+      camisetaId: "",
       tallas: [],
       camiseta: Object,
       cantidad: 1,
       talla: "",
       publico: "",
-      stock: 0
+      stock: 0,
+      camisetaBolsa: Object,
+      itemBolsa: Object,
     }
   },
   async mounted() {
-    this.camiseta = obtenerCamisetaPorId(2);
+    this.camisetaId = "2";
+    this.camiseta = obtenerCamisetaPorId(this.camisetaId);
     this.tallas = obtenerTallasPorCamiseta(this.camiseta).tallas;
     this.stock = obtenerItemCamiseta(this.camiseta).itemCamiseta.stock;
 
-
-
   },
-    computed: {
-        nombreInvalido() {
-            return this.camiseta.nombre.length < 1;
-        },
+  computed: {
+    nombreInvalido() {
+      return this.camiseta.nombre.length < 1;
     },
+  },
   methods: {
+    incrementar(event) {
+    event.preventDefault(); // Evitar el envío del formulario
+    this.cantidad++;
+    const input = event.target.parentNode.querySelector('input[type=number]');
+    input.stepUp();
+  },
+  
+  disminuir(event) {
+    event.preventDefault(); // Evitar el envío del formulario
+    if (this.cantidad > 1) {
+      this.cantidad--;
+    }
+    const input = event.target.parentNode.querySelector('input[type=number]');
+    input.stepDown();
+  },
+
     enviarForm() {
-            if (this.nombreInvalido) {
-                this.error = true;
-                this.sent = false;
-                return;
-            }
-            this.error = false;
-            this.sent = true;
-            this.$emit("camiseta-detalle", this.camiseta);
-            console.log(this.publico)
-            console.log(this.talla)
-            console.log(this.cantidad)
-            this.resetForm();
-        },
-        resetForm() {
-            this.cantidad = 1,
-            this.talla = "",
-            this.publico = ""
-           
-        },
+      if (this.nombreInvalido) {
+        this.error = true;
+        this.sent = false;
+        return;
+      }
+      this.error = false;
+      this.sent = true;
+
+      this.camisetaBolsa = {
+        imagenes: this.camiseta.imagenes,
+        nombre: this.camiseta.nombre,
+        descripcion: this.camiseta.descripcion,
+        equipo: this.camiseta.equipo,
+        liga: this.camiseta.liga,
+        precio: this.camiseta.precio,
+        temporada: this.camiseta.temporada,
+        tipo: this.camiseta.tipo,
+        marca: this.camiseta.marca,
+        dorsal: this.camiseta.dorsal,
+        jugador: this.camiseta.jugador,
+        itemsCamista: {
+          publico: this.publico,
+          talla: this.talla,
+          stock: this.cantidad,
+        }
+      }
+      console.log(this.camisetaBolsa)
+      this.itemBolsa = {
+        camisetaId: this.camisetaId,
+        camisetaBolsa: this.camisetaBolsa,
+      }
+      console.log(this.itemBolsa)
+
+
+      this.$emit("camiseta-detalle", this.itemBolsa);
+      this.resetForm();
+    },
+    resetForm() {
+      this.cantidad = 1,
+        this.talla = "",
+        this.publico = ""
+
+    },
   }
 }
 </script>
@@ -283,9 +327,9 @@ export default {
   color: white;
 }
 
-.btn-check:checked + .btn-radio {
-    background-color: #180026;
-    color: white;
+.btn-check:checked+.btn-radio {
+  background-color: #180026;
+  color: white;
 }
 
 .tallas {
