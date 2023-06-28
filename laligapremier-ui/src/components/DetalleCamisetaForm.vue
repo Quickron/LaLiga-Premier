@@ -123,10 +123,11 @@ export default {
                 marca: this.camiseta.marca,
                 dorsal: this.camiseta.dorsal,
                 jugador: this.camiseta.jugador,
-                itemsCamista: {
+                itemsCamiseta: {
                     publico: this.publico,
                     talla: this.talla,
-                    stock: this.cantidad,
+                    stock: this.camiseta.itemsCamiseta.stock,
+                    cantidad: this.cantidad
                 }
             }
             this.$emit("camiseta-bolsa", this.camisetaBolsa);

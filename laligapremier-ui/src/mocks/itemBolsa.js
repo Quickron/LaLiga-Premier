@@ -22,6 +22,7 @@ const obtenerItemsBolsaPorUsuario = (usuarioId) => ({
           {
             publico: "Hombre",
             talla: "L",
+            stock: 6,
             cantidad: 3,
           },
       },
@@ -49,6 +50,7 @@ const obtenerItemsBolsaPorUsuario = (usuarioId) => ({
             {
               publico: "Hombre",
               talla: "M",
+              stock: 10,
               cantidad: 1,
             },
         },
