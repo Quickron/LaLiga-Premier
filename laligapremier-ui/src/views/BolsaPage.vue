@@ -15,40 +15,10 @@
                                     </div>
 
                                     <hr class="my-4">
-                                    <!-- <h4 v-if="items.length == 0">No hay camisetas en el carrito</h4> -->
+                                    <h4 v-if="itemsBolsa.length == 0">No hay camisetas en el carrito</h4>
 
-                                    <div class="row mb-4 d-flex justify-content-between align-items-center" th:each="item: ${items}" @camiseta-detalle="agregarItemBolsa">
-                                        <div class="col-md-2 col-lg-2 col-xl-2">
-                                            <img class="img-fluid rounded-3" src="../../public/favicon.png" style="height: 60px; width: 60px;"  />
-                                        </div>
-                                        <div class="col-md-3 col-lg-3 col-xl-3">
-                                            <h6 class="text-black mb-0">Nombre Camiseta</h6>
-                                            <h6 class="text-muted">Talla M</h6>
-                                        </div>
-                                        <div class="col-md-3 col-lg-2 col-xl-2 d-flex justify-content-center">
-                                            <h6 class="mb-0">$99999</h6>
-                                        </div>
-                                        <div class="col-md-3 col-lg-4 col-xl-2 d-flex">
-
-                                            <input id="form1" min="1" name="quantity" value="1" type="number"
-                                                   class="form-control form-control-sm" />
-                                            <a class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                <i class="bi bi-plus-circle-fill"></i>
-                                            </a>
-                                            <a class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                <i class="bi bi-dash-circle-fill"></i>
-                                            </a>
-                                        </div>
-                                        <div class="col-md-3 col-lg-2 col-xl-2 d-flex justify-content-center">
-                                            <h6 class="mb-0">$99999</h6>
-                                        </div>
-                                        <div class="col-lg-1">
-                                            <a href="/" data-mdb-toggle="tooltip" title="Eliminar"><i
-                                                    class="bi bi-trash-fill text-danger"></i></a>
-                                        </div>
-                                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                            <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
-                                        </div>
+                                    <div class="row mb-4 d-flex justify-content-between align-items-center" v-for="(itemBolsa, index) in itemsBolsa" :key="index">
+                                        <ItemBolsa :camiseta="itemBolsa.camisetaBolsa"></ItemBolsa>
                                     </div>
 
                                     <hr class="my-4">
@@ -92,25 +62,24 @@
 </template>
 
 <script>
+import { obtenerUsuarioSesion } from '@/mocks/usuario'
+import { obtenerItemsBolsaPorUsuario } from '@/mocks/itemBolsa'
+import ItemBolsa from '@/components/ItemBolsa.vue'
 export default {
     name: "BolsaPage",
+    components: {
+        ItemBolsa
+    },
     data() {
         return {
             itemsBolsa: [],
-            itemBolsa: Object,
+            usuario: Object,
         }
     },
     async mounted() {
-        // Obtén el objeto camisetaBolsa de los parámetros de la ruta
-      this.itemBolsa = this.$route.query.itemBolsa;
-      this.itemsBolsa.push(this.itemBolsa)
-      console.log(this.itemBolsa)
+        this.usuario = obtenerUsuarioSesion;
+        this.itemsBolsa = obtenerItemsBolsaPorUsuario(this.usuario.nombre).itemsBolsa;
     },
-    methods: {
-        agregarItemBolsa() {
-            this.itemsBolsa = [...this.itemsBolsa, this.itemBolsa];
-        }
-    }
 }
 </script>
 
