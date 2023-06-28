@@ -40,63 +40,7 @@
         <!-- Descripción Camiseta-->
         <div class="details">
 
-          <form @submit.prevent="enviarForm">
-
-            <h3 class="titulo-ver-camiseta">{{ camiseta.nombre }}</h3>
-
-            <p class="desc-ver-camiseta">{{ camiseta.descripcion }}</p>
-
-            <h4 class="precio">${{ camiseta.precio }}</h4>
-
-            <div class="tallas mt-4" v-if="stock > 0">
-              <h6 class="talla-txt">Para</h6>
-
-              <label class="radio talla mx-4">
-                <input type="radio" class="btn-check" name="publico" id="hombre" value="Hombre" checked v-model="publico">
-                <label class="btn btn-radio" for="hombre">Hombre</label>
-              </label>
-              <label class="radio talla mx-1">
-                <input type="radio" class="btn-check" name="publico" id="mujer" value="Mujer" v-model="publico">
-                <label class="btn btn-radio" for="mujer">Mujer</label>
-              </label>
-
-            </div>
-
-            <div class="tallas mt-4" v-if="stock > 0">
-              <h6 class="talla-txt">Talla</h6>
-
-              <label class="radio talla mx-1" v-for="(tallaString, index) in tallas" :key="index">
-                <input type="radio" class="btn-check" name="tallas" :id="index" :value="tallaString" v-model="talla">
-                <label class="btn btn-radio" :for="index">{{ tallaString }}</label>
-              </label>
-
-            </div>
-
-            <div class="mt-4 bloque-cantidad" v-if="stock > 0">
-              <div class="cantidad-input">
-                <h6 class="cantidad">Cantidad </h6>
-                <input type="number" min="1" class="casilla-cantidad" v-model="cantidad">
-                <button class="btn btn-cantidad rounded-pill">+</button>
-                <button class="btn btn-cantidad rounded-pill">-</button>
-                <div class="alert alert-danger" role="alert" v-if="cantidad > stock">
-                  ¡No quedan suficientes unidades! Selecciona un valor menor.
-                </div>
-              </div>
-            </div>
-            <div class="col-md-12" v-else>
-              <div class="alert alert-danger" role="alert">
-                ¡Camiseta Agotada! Consulta más tarde.
-              </div>
-            </div>
-
-            <div class="action d-flex justify-content-center" v-if="stock > 0 && stock >= cantidad">
-              <button class="btn btn-bolsa-camiseta" type="submit">Añadir a la bolsa</button>
-            </div>
-            <div class="action d-flex justify-content-center" v-else>
-              <button class="btn btn-bolsa-camiseta disabled" type="submit">Añadir a la bolsa</button>
-            </div>
-
-          </form>
+          <DetalleCamisetaForm :camiseta="this.camiseta" @camiseta-bolsa="agregarCamisetaBolsa"></DetalleCamisetaForm>
 
           <div class="mt-5">
             <!-- Botón desplegable -->
@@ -151,53 +95,45 @@
 </template>
 
 <script>
-import { obtenerItemCamiseta, obtenerTallasPorCamiseta, obtenerCamisetaPorId } from '@/mocks/camiseta'
+import { obtenerCamisetaPorId } from '@/mocks/camiseta'
+import { obtenerUsuarioSesion } from '@/mocks/usuario'
+import DetalleCamisetaForm from '@/components/DetalleCamisetaForm.vue'
 export default {
   name: 'DetalleCamisetaPage',
+  components: {
+    DetalleCamisetaForm
+  },
   data() {
     return {
-      tallas: [],
+      camisetaId: "",
       camiseta: Object,
-      cantidad: 1,
-      talla: "",
-      publico: "",
-      stock: 0
+      camisetaBolsa: Object,
+      itemBolsa: Object,
+      usuario: Object
     }
   },
   async mounted() {
-    this.camiseta = obtenerCamisetaPorId(2);
-    this.tallas = obtenerTallasPorCamiseta(this.camiseta).tallas;
-    this.stock = obtenerItemCamiseta(this.camiseta).itemCamiseta.stock;
-
-
-
+    this.camisetaId = "2";
+    this.camiseta = obtenerCamisetaPorId(this.camisetaId);
+    this.usuario = obtenerUsuarioSesion;
   },
-    computed: {
-        nombreInvalido() {
-            return this.camiseta.nombre.length < 1;
-        },
+  computed: {
+    nombreInvalido() {
+      return this.camiseta.nombre.length < 1;
     },
+  },
   methods: {
-    enviarForm() {
-            if (this.nombreInvalido) {
-                this.error = true;
-                this.sent = false;
-                return;
-            }
-            this.error = false;
-            this.sent = true;
-            this.$emit("camiseta-detalle", this.camiseta);
-            console.log(this.publico)
-            console.log(this.talla)
-            console.log(this.cantidad)
-            this.resetForm();
-        },
-        resetForm() {
-            this.cantidad = 1,
-            this.talla = "",
-            this.publico = ""
-           
-        },
+    agregarCamisetaBolsa(item) {
+      this.camisetaBolsa = item;
+      this.rellenarItemBolsa()
+    },
+    rellenarItemBolsa() {
+      this.itemBolsa = {
+        usuario: this.usuario,
+        camisetaId: this.camisetaId,
+        camisetaBolsa: this.camisetaBolsa,
+      }
+    }
   }
 }
 </script>
@@ -229,86 +165,6 @@ export default {
   padding: 5%;
   background-color: lightgray;
   text-align: start;
-}
-
-.titulo-ver-camiseta {
-  font-weight: bold;
-  font-size: 40px;
-  margin-bottom: 5%;
-}
-
-.precio {
-  font-weight: bold;
-}
-
-.bloque-cantidad {
-  display: flex;
-  justify-content: start;
-  width: 100%;
-}
-
-.cantidad {
-  font-weight: bold;
-  margin-right: 3%;
-  margin-top: 2%;
-}
-
-.cantidad-input {
-  display: flex;
-  justify-content: start;
-}
-
-.casilla-cantidad {
-  width: 16%;
-  height: 50%;
-  margin-right: 5%;
-  margin-top: 2%;
-}
-
-.btn-cantidad {
-  background-color: white;
-  margin-right: 2%;
-  height: 80%;
-  font-weight: bold;
-  padding-bottom: 3%;
-}
-
-.btn-radio {
-  background-color: #44115C;
-  color: white;
-}
-
-.btn-radio:hover {
-  background-color: #180026;
-  color: white;
-}
-
-.btn-check:checked + .btn-radio {
-    background-color: #180026;
-    color: white;
-}
-
-.tallas {
-  display: flex;
-  margin-right: 15%;
-}
-
-.talla-txt {
-  font-weight: bold;
-  text-align: start;
-}
-
-.btn-bolsa-camiseta {
-  margin-top: 8%;
-  background-color: black;
-  font-weight: bold;
-  color: white;
-}
-
-.btn-bolsa-camiseta:hover {
-  background-color: #180026;
-  font-weight: bold;
-  color: white;
 }
 
 .btn-detalles {

@@ -83,7 +83,7 @@
                             </a>
 
                             <!-- Botón de bolsa -->
-                            <a class="btn btn-navbar btn-bolsa" role="button">
+                            <a class="btn btn-navbar btn-bolsa" role="button" href="/bolsa">
                                 <i class="bi bi-bag"></i>
                             </a>
 
