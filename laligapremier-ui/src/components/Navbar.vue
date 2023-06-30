@@ -1,15 +1,29 @@
 <template>
-
     <!-- Barra de Cuentas -->
     <div class="seccion-cuenta">
-        <ul class="mb-2 mb-lg-0" style="list-style: none">
+        <ul class="mb-2 mb-lg-0" style="list-style: none" v-if="usuarioAutenticado === null">
             <li class="d-flex">
                 <i class="bi bi-person-circle"></i>
-                <a class="link-cuenta mt-lg-1" id="iniciar-sesion" data-bs-toggle="modal" data-bs-target="#iniciarSesionModal">Iniciar Sesión</a>
+                <a class="link-cuenta mt-lg-1" id="iniciar-sesion" data-bs-toggle="modal"
+                    data-bs-target="#iniciarSesionModal">Iniciar Sesión</a>
                 <span class="mt-lg-1 ms-3 me-1">|</span>
                 <a class="link-cuenta mt-lg-1 me-4" data-bs-toggle="modal" data-bs-target="#registroModal">Registrarse</a>
             </li>
         </ul>
+        <div class="flex" style="display: flex; flex-direction: row;" id="navbarNavDarkDropdown" v-else>
+            <OpcionesAdmin  v-if="usuarioAutenticado.rol === 'administrador'"></OpcionesAdmin>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <strong class="mx-2">{{ nombreUsuario }}</strong>
+                    </button>
+                    <div class="dropdown-menu">
+                        <router-link class="dropdown-item" to="/">Ajustar Cuenta</router-link>
+                        <a class="dropdown-item" href="/">Cerrar Sesión</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <!-- Pop Up de Iniciar Sesión -->
@@ -99,12 +113,25 @@
 <script>
 import IniciarSesionFormVue from './IniciarSesionForm.vue';
 import RegistroForm from './RegistroForm.vue';
+import { obtenerUsuarioSesion } from '@/mocks/usuario'
+import OpcionesAdmin from './OpcionesAdmin.vue';
 export default {
     name: "NavBar",
     components: {
         IniciarSesionFormVue,
         RegistroForm,
-    }
+        OpcionesAdmin,
+    },
+    data() {
+        return {
+            usuarioAutenticado: null,
+            nombreUsuario: "",
+        }
+    },
+    async mounted() {
+        this.usuarioAutenticado = obtenerUsuarioSesion;
+        this.nombreUsuario = this.usuarioAutenticado.nombre;
+    },
 };
 </script>
 
