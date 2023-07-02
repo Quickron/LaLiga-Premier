@@ -44,6 +44,10 @@ async function registrarUsuario(req, res) {
     }
 }
 
+
+
+
+// TODO: mover esta funcion a un package de logica como SERVICES
 function correoRepetido(correo, usuarios) {
     return usuarios.some(usuario => usuario.correo === correo);
   }
