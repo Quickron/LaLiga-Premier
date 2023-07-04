@@ -14,3 +14,26 @@ export function authRequired(req, res, next ){
         return res.status(403).send({error : 'no tienes los permisos (falta token o esta expirado)'});
     }
 }
+
+export function hasRole(role) {
+	return async function (req, res, next) {
+		const { roles } = await UsuarioModel.findById(req.id).exec();
+		if (roles.includes(role)) return next();
+
+		return res.status(401).send({
+			error: `Usuario no tiene el rol de ${role}`
+		})
+
+	};
+}
+
+export function hasAnyRole(roleToCheck){
+	return async function(req , res , next){
+		const {roles} = await UsuarioModel.findById(req.id).exec();
+		if(roleToCheck.some((role) => roles.includes(role))) return next();
+
+		return res.status(401).send({
+			error : `Usuario no tiene ningun de los siguientes roles: [${roleToCheck.join()}]`
+		})
+	}
+}
