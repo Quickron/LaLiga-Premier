@@ -6,9 +6,10 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body contenedor-admin">
-            <a href="/"><i class="bi bi-plus-square-fill"></i> Agregar Camiseta</a>
-            <a href="/"><i class="bi bi-list-task"></i> Todas las Camisetas</a>
-            <a href="/"><i class="bi bi-bar-chart-line-fill"></i> Estadísticas</a>
+            <a href="/crear-camiseta"><i class="bi bi-plus-square-fill"></i> Agregar Camiseta</a>
+            <a href="/registro-camisetas"><i class="bi bi-list-task"></i> Todas las Camisetas</a>
+            <a href="/datos-relevantes/registrar-datos"><i class="bi bi-hdd-stack-fill"></i> Registrar Datos</a>
+            <a href="/datos-relevantes/estadisticas"><i class="bi bi-bar-chart-line-fill"></i> Estadísticas</a>
         </div>
     </div>
 </template>
