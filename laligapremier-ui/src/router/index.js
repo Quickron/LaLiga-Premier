@@ -6,6 +6,8 @@ import DetalleCamisetaPage from '../views/DetalleCamisetaPage.vue'
 import NosotrosPage from '../views/NosotrosPage.vue'
 import BolsaPage from '../views/BolsaPage.vue'
 import RegistroCamisetasPage from '../views/RegistroCamisetasPage.vue'
+import RegistrarDatosRelevantesPage from '../views/RegistrarDatosRelevantesPage.vue'
+import EstadisticasPage from '../views/EstadisticasPage.vue'
 
 const routes = [
   {
@@ -42,7 +44,17 @@ const routes = [
     path: '/registro-camisetas',
     name: 'registro_camisetas',
     component: RegistroCamisetasPage
-  }
+  },
+  {
+    path: '/datos-relevantes/registrar-datos',
+    name: 'registro_datos',
+    component: RegistrarDatosRelevantesPage
+  },
+  {
+    path: '/datos-relevantes/estadisticas',
+    name: 'estadisticas',
+    component: EstadisticasPage
+  },
 ]
 
 const router = createRouter({
