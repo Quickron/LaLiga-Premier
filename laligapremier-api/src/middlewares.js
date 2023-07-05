@@ -10,6 +10,9 @@ export function authRequired(req, res, next) {
 		const { id } = verifyToken(token)
 
 		req.id = id
+
+		console.log(`id capturado con el token ---- > ${id}`);
+
 		return next();
 	} catch (err) {
 		return res.status(403).send({ error: 'no tienes los permisos (falta token o esta expirado)' });

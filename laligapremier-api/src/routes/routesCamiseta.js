@@ -8,6 +8,7 @@ import {
     obtenerTallasCamiseta,
     obtenerStockCamiseta,
     listarNovedades,
+    filtrarCamisetas
 } from '../controllers/camisetaController.js'
 import { authRequired, hasRole } from '../middlewares.js';
 
@@ -15,6 +16,8 @@ const router = Router();
 
 
 router.get('/camisetas' , listarCamiseta)
+
+router.get('/camisetas/filtros' , filtrarCamisetas)
 
 router.post('/crear-camiseta' , authRequired , hasRole("administrador") ,crearCamiseta),
 

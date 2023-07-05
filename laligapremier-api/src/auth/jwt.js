@@ -1,6 +1,5 @@
 import jsonwebtoken from "jsonwebtoken";
 import environments from "../configs/environments.js";
-import UsuarioModel from "../models/usuario.model.js";
 
 const SECRET = environments.SECRET_KEY
 
