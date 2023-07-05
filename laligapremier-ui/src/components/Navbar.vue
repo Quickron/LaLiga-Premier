@@ -18,7 +18,6 @@
                         <strong class="mx-2">{{ usuarioAutenticado.nombre }}</strong>
                     </button>
                     <div class="dropdown-menu">
-                        <router-link class="dropdown-item" to="/">Ajustar Cuenta</router-link>
                         <a class="dropdown-item" @click="cerrarSesion">Cerrar Sesión</a>
                     </div>
                 </li>
@@ -147,6 +146,8 @@ export default {
     methods: {
         cerrarSesion() {
             localStorage.clear();
+            axios.defaults.headers.common['Authorization'] = '';
+            window.location.href = '/';
         },
     }
 };

@@ -45,7 +45,6 @@
 
 <script>
 import axios from 'axios';
-import { obtenerUsuariosRegistrados } from '@/mocks/usuario'
 export default {
     name: "IniciarSesionForm",
     data() {
@@ -66,19 +65,10 @@ export default {
         claveInvalida() {
             return this.usuario.clave.length < 1;
         },
-        usuarioNoRegistrado() {
-            return this.compararCorreos();
-        },
-        clavesNoCoinciden() {
-            return this.compararClaves();
-        },
-    },
-    async mounted() {
-        this.usuariosRegistrados = obtenerUsuariosRegistrados;
     },
     methods: {
         enviarForm() {
-            if (this.correoInvalido || this.claveInvalida || this.usuarioNoRegistrado || this.clavesNoCoinciden) {
+            if (this.correoInvalido || this.claveInvalida) {
                 this.error = true;
                 this.sent = false;
                 return;
@@ -91,12 +81,14 @@ export default {
                     localStorage.setItem('token', token);
                     console.log(usuario);
                     console.log(response.data);
-                    alert('¡Te has logeado correctamente!')
+                    window.location.href = '/';
+                    this.resetForm();
                 })
                 .catch(error => {
                     console.error(error);
+                    this.resetForm();
                 });
-            this.resetForm();
+            
         },
         resetForm() {
             this.usuario = {
@@ -106,24 +98,6 @@ export default {
                 clave: "",
             };
         },
-        compararCorreos() {
-            let distintos = true;
-            this.usuariosRegistrados.forEach(usuario => {
-                if(usuario.correo === this.usuario.correo){
-                    distintos = false
-                }
-            });
-            return distintos;
-        },
-        compararClaves() {
-            let distintos = true;
-            this.usuariosRegistrados.forEach(usuario => {
-                if(usuario.correo === this.usuario.correo && usuario.clave === this.usuario.clave){
-                    distintos = false
-                }
-            });
-            return distintos;
-        }
     },
 }
 </script>
