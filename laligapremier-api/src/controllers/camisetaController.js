@@ -104,7 +104,7 @@ async function editarCamiseta(req, res) {
         camiseta.temporada = camisetaNueva.temporada;
         camiseta.tipo = camisetaNueva.tipo;
         camiseta.marca = camisetaNueva.marca;
-        camiseta.itemsCamista = camisetaNueva.itemsCamista;
+        camiseta.itemsCamiseta = camisetaNueva.itemsCamiseta;
 
         if (camisetaNueva.dorsal !== undefined) camiseta.dorsal = camisetaNueva.dorsal;
         if (camisetaNueva.jugador !== undefined) camiseta.jugador = camisetaNueva.jugador;

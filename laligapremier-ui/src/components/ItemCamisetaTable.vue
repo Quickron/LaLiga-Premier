@@ -48,6 +48,8 @@ export default {
     async mounted() {
         this.tallas = obtenerTallas;
         this.publico = obtenerPublico;
+
+        
     },
 
 };
