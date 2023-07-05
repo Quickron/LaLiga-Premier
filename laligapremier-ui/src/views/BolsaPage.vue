@@ -49,8 +49,8 @@
                                             <h5>${{ precioTotal }}</h5>
                                         </div>
 
-                                        <a href="/" type="button" class="btn btn-dark btn-block btn-lg"
-                                            data-mdb-ripple-color="dark">Pagar</a>
+                                        <button type="button" class="btn btn-dark btn-block btn-lg"
+                                            data-mdb-ripple-color="dark" @click="pagarCarrito">Pagar</button>
 
                                     </div>
                                 </div>
@@ -78,6 +78,7 @@ export default {
             usuarioAutenticado: Object,
             precioTotal: 0,
             token: '',
+            camisetas: [],
         }
     },
     async mounted() {
@@ -108,6 +109,7 @@ export default {
                 }).then(response => {
                     this.itemsBolsa = response.data;
                     this.calcularPrecioTotal();
+                    this.obtenerCamisetas();
                 })
                     .catch(error => {
                         console.error(error);
@@ -118,7 +120,25 @@ export default {
             var subtotal = itemBolsa.camisetaBolsa.precio * itemBolsa.camisetaBolsa.itemsCamiseta.cantidad;
             return acumulador + subtotal;
         }, 0);
-        }
+        },
+        obtenerCamisetas() {
+            this.itemsBolsa.forEach(itemBolsa => {
+                this.camisetas.push(itemBolsa.camisetaBolsa);
+            });
+        },
+        pagarCarrito() {
+            axios.post('http://localhost:3000/pagar-carro', {usuario: this.usuarioAutenticado._id, camisetas: this.camisetas }, {
+                headers: {
+                    'Authorization': `Bearer ${this.token}`
+                }
+            })
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
     },
 }
 </script>
