@@ -9,6 +9,7 @@ const usuarioSchema = new mongoose.Schema(
     correo: {
       type: String,
       required: true,
+      unique: true,
     },
     rol: {
       type: String,
