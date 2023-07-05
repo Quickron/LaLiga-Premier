@@ -86,9 +86,40 @@ async function guardarCarrito(req, res) {
         })
     }
 }
+
+async function listarPedidos(req, res) {
+    try {
+        const pedidosBD = await CarritoModel.find({});
+        res.status(200).send(pedidosBD);
+    } catch (err) {
+        res.status(500).send({ error: err });
+    }
+}
+
+async function calcularGanancias(req, res) {
+    try {
+        const pedidosBD = await CarritoModel.find({});
+
+        let ganancias = 0;
+
+        pedidosBD.forEach(carrito => {
+            carrito.camisetas.forEach(camiseta => {
+                ganancias += camiseta.precio * camiseta.itemsCamiseta.cantidad;
+            });
+        });
+
+
+        res.status(200).send({ganancias: ganancias});
+    } catch (err) {
+        res.status(500).send({ error: err });
+    }
+}
+
 export {
     guardarItemBolsa,
     listarItemsBolsaPorUsuario,
     eliminarItemBolsa,
     guardarCarrito,
+    listarPedidos,
+    calcularGanancias,
 }

@@ -173,7 +173,13 @@ export default {
     },
     methods: {
         agregarItem(item) {
-            this.camiseta.itemsCamiseta = [...this.camiseta.itemsCamiseta, item];
+            const existeItem = this.camiseta.itemsCamiseta.some(
+                (itemCamiseta) => itemCamiseta.talla === item.talla && itemCamiseta.publico === item.publico
+            );
+
+            if (!existeItem) {
+                this.camiseta.itemsCamiseta.push(item);
+            }
         },
         eliminarItem(index) {
             this.camiseta.itemsCamiseta.splice(index, 1);
