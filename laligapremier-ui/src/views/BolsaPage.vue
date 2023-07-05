@@ -19,7 +19,7 @@
 
                                         <div class="row mb-4 d-flex justify-content-between align-items-center"
                                             v-for="(itemBolsa, index) in itemsBolsa" :key="index">
-                                            <ItemBolsa :camiseta="itemBolsa.camisetaBolsa"></ItemBolsa>
+                                            <ItemBolsa :itemBolsa="itemBolsa"></ItemBolsa>
                                         </div>
 
                                         <hr class="my-4">
@@ -83,10 +83,6 @@ export default {
     async mounted() {
         this.token = localStorage.getItem('token');
         this.obtenerUsuarioSesion();
-        this.precioTotal = this.itemsBolsa.reduce(function (acumulador, itemBolsa) {
-            var subtotal = itemBolsa.camisetaBolsa.precio * itemBolsa.camisetaBolsa.itemsCamiseta.cantidad;
-            return acumulador + subtotal;
-        }, 0);
     },
     methods: {
         obtenerUsuarioSesion() {
@@ -105,18 +101,23 @@ export default {
             }
         },
         obtenerItemsBolsaPorUsuario() {
-            console.log(this.usuarioAutenticado)
             axios.get(`http://localhost:3000/items-bolsa/${this.usuarioAutenticado._id}`, {
                     headers: {
                         'Authorization': `Bearer ${this.token}`
                     }
                 }).then(response => {
                     this.itemsBolsa = response.data;
-                    console.log(response.data)
+                    this.calcularPrecioTotal();
                 })
                     .catch(error => {
                         console.error(error);
                     });
+        },
+        calcularPrecioTotal() {
+            this.precioTotal = this.itemsBolsa.reduce(function (acumulador, itemBolsa) {
+            var subtotal = itemBolsa.camisetaBolsa.precio * itemBolsa.camisetaBolsa.itemsCamiseta.cantidad;
+            return acumulador + subtotal;
+        }, 0);
         }
     },
 }
