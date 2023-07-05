@@ -65,8 +65,7 @@
 </template>
 
 <script>
-import { obtenerUsuarioSesion } from '@/mocks/usuario'
-import { obtenerItemsBolsaPorUsuario } from '@/mocks/itemBolsa'
+import axios from 'axios'
 import ItemBolsa from '@/components/ItemBolsa.vue'
 export default {
     name: "BolsaPage",
@@ -76,17 +75,49 @@ export default {
     data() {
         return {
             itemsBolsa: [],
-            usuario: Object,
+            usuarioAutenticado: Object,
             precioTotal: 0,
+            token: '',
         }
     },
     async mounted() {
-        this.usuario = obtenerUsuarioSesion;
-        this.itemsBolsa = obtenerItemsBolsaPorUsuario(this.usuario.nombre).itemsBolsa;
+        this.token = localStorage.getItem('token');
+        this.obtenerUsuarioSesion();
         this.precioTotal = this.itemsBolsa.reduce(function (acumulador, itemBolsa) {
             var subtotal = itemBolsa.camisetaBolsa.precio * itemBolsa.camisetaBolsa.itemsCamiseta.cantidad;
             return acumulador + subtotal;
         }, 0);
+    },
+    methods: {
+        obtenerUsuarioSesion() {
+            if (this.token != null) {
+                axios.get('http://localhost:3000/auth/getMe', {
+                    headers: {
+                        'Authorization': `Bearer ${this.token}`
+                    }
+                }).then(response => {
+                    this.usuarioAutenticado = response.data.user;
+                    this.obtenerItemsBolsaPorUsuario();
+                })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+        },
+        obtenerItemsBolsaPorUsuario() {
+            console.log(this.usuarioAutenticado)
+            axios.get(`http://localhost:3000/items-bolsa/${this.usuarioAutenticado._id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${this.token}`
+                    }
+                }).then(response => {
+                    this.itemsBolsa = response.data;
+                    console.log(response.data)
+                })
+                    .catch(error => {
+                        console.error(error);
+                    });
+        }
     },
 }
 </script>
@@ -94,4 +125,5 @@ export default {
 <style scoped>
 .resumen {
     background-color: #c8d6e0;
-}</style>
+}
+</style>

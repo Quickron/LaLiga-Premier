@@ -48,8 +48,9 @@
             </div>
         </div>
 
-        <div class="action d-flex justify-content-center" v-if="stock > 0 && stock >= cantidad && publico != '' && talla != ''">
-            <button class="btn btn-bolsa-camiseta" type="submit" >Añadir a la bolsa</button>
+        <div class="action d-flex justify-content-center"
+            v-if="stock > 0 && stock >= cantidad && publico != '' && talla != ''">
+            <button class="btn btn-bolsa-camiseta" type="submit">Añadir a la bolsa</button>
         </div>
         <div class="action d-flex justify-content-center" v-else>
             <button class="btn btn-bolsa-camiseta disabled" type="submit">Añadir a la bolsa</button>
@@ -65,7 +66,10 @@ export default {
     props: {
         camiseta: {
             type: Object,
-        }
+        },
+        idCamiseta: {
+            type: String,
+        },
     },
     data() {
         return {
@@ -80,7 +84,9 @@ export default {
         }
     },
     async mounted() {
-        this.obtenerTallasCamiseta();
+        this.$nextTick(() => {
+            this.obtenerTallasCamiseta();
+        });
     },
     computed: {
         nombreInvalido() {
@@ -99,7 +105,7 @@ export default {
     },
     methods: {
         obtenerTallasCamiseta() {
-            axios.get(`http://localhost:3000/obtener-tallas/64a4fff49283a1e72ebde5a6`, {
+            axios.get(`http://localhost:3000/obtener-tallas/${this.idCamiseta}`, {
                 headers: {
                     'Authorization': `Bearer ${this.token}`
                 }
@@ -111,7 +117,7 @@ export default {
                 });
         },
         obtenerStock() {
-            axios.post(`http://localhost:3000/obtener-stock/64a4fff49283a1e72ebde5a6`, {publico: this.publico, talla: this.talla} , {
+            axios.post(`http://localhost:3000/obtener-stock/${this.idCamiseta}`, { publico: this.publico, talla: this.talla }, {
                 headers: {
                     'Authorization': `Bearer ${this.token}`
                 }
@@ -188,83 +194,83 @@ export default {
 </script>
 
 <style scoped>
-    .titulo-ver-camiseta {
-  font-weight: bold;
-  font-size: 40px;
-  margin-bottom: 5%;
+.titulo-ver-camiseta {
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 5%;
 }
 
 .precio {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .bloque-cantidad {
-  display: flex;
-  justify-content: start;
-  width: 100%;
+    display: flex;
+    justify-content: start;
+    width: 100%;
 }
 
 .cantidad {
-  font-weight: bold;
-  margin-right: 3%;
-  margin-top: 2%;
+    font-weight: bold;
+    margin-right: 3%;
+    margin-top: 2%;
 }
 
 .cantidad-input {
-  display: flex;
-  justify-content: start;
+    display: flex;
+    justify-content: start;
 }
 
 .casilla-cantidad {
-  width: 16%;
-  height: 50%;
-  margin-right: 5%;
-  margin-top: 2%;
+    width: 16%;
+    height: 50%;
+    margin-right: 5%;
+    margin-top: 2%;
 }
 
 .btn-cantidad {
-  background-color: white;
-  margin-right: 2%;
-  height: 80%;
-  font-weight: bold;
-  padding-bottom: 3%;
+    background-color: white;
+    margin-right: 2%;
+    height: 80%;
+    font-weight: bold;
+    padding-bottom: 3%;
 }
 
 .btn-radio {
-  background-color: #44115C;
-  color: white;
+    background-color: #44115C;
+    color: white;
 }
 
 .btn-radio:hover {
-  background-color: #180026;
-  color: white;
+    background-color: #180026;
+    color: white;
 }
 
 .btn-check:checked+.btn-radio {
-  background-color: #180026;
-  color: white;
+    background-color: #180026;
+    color: white;
 }
 
 .tallas {
-  display: flex;
-  margin-right: 15%;
+    display: flex;
+    margin-right: 15%;
 }
 
 .talla-txt {
-  font-weight: bold;
-  text-align: start;
+    font-weight: bold;
+    text-align: start;
 }
 
 .btn-bolsa-camiseta {
-  margin-top: 8%;
-  background-color: black;
-  font-weight: bold;
-  color: white;
+    margin-top: 8%;
+    background-color: black;
+    font-weight: bold;
+    color: white;
 }
 
 .btn-bolsa-camiseta:hover {
-  background-color: #180026;
-  font-weight: bold;
-  color: white;
+    background-color: #180026;
+    font-weight: bold;
+    color: white;
 }
 </style>

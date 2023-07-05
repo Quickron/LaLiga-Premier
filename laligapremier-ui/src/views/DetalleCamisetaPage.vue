@@ -40,7 +40,7 @@
         <!-- Descripción Camiseta-->
         <div class="details">
 
-          <DetalleCamisetaForm :camiseta="this.camiseta" @camiseta-bolsa="agregarCamisetaBolsa"></DetalleCamisetaForm>
+          <DetalleCamisetaForm :camiseta="this.camiseta" :idCamiseta="this.camisetaId" @camiseta-bolsa="agregarCamisetaBolsa"></DetalleCamisetaForm>
 
           <div class="mt-5">
             <!-- Botón desplegable -->
@@ -106,7 +106,6 @@ export default {
     return {
       camisetaId: "",
       camiseta: Object,
-      camiseta2: Object,
       camisetaBolsa: Object,
       itemBolsa: Object,
       usuarioAutenticado: Object,
@@ -131,11 +130,23 @@ export default {
     },
     rellenarItemBolsa() {
       this.itemBolsa = {
-        usuario: this.usuarioAutenticado,
+        usuarioId: this.usuarioAutenticado._id,
         camisetaId: this.camisetaId,
         camisetaBolsa: this.camisetaBolsa,
       }
       console.log(this.itemBolsa)
+
+      axios.post('http://localhost:3000/guardar-item', this.itemBolsa, {
+                headers: {
+                    'Authorization': `Bearer ${this.token}`
+                }
+            })
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
     },
     obtenerCamiseta() {
       axios.get(`http://localhost:3000/obtener-camiseta/${this.camisetaId}`, {
