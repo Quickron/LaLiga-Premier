@@ -73,8 +73,8 @@
 </template>
 
 <script>
+import axios from 'axios';
 import TarjetaCamiseta from '@/components/TarjetaCamiseta.vue';
-import { obtenerCamisetasNovedades } from '@/mocks/camiseta'
 
 export default {
   name: 'LandingPage',
@@ -87,8 +87,19 @@ export default {
     }
   },
   async mounted() {
-    this.camisetasNovedades = obtenerCamisetasNovedades;
+    this.obtenerNovedades();
   },
+  methods: {
+    obtenerNovedades() {
+      axios.get('http://localhost:3000/novedades')
+      .then(response => {
+                this.camisetasNovedades = response.data;
+            })
+                .catch(error => {
+                    console.error(error);
+                });
+    }
+  }
 }
 </script>
 

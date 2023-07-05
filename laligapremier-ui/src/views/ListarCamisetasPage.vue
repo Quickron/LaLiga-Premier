@@ -129,7 +129,6 @@
               <div class="card tarjeta" v-for="(camiseta, index) in camisetas" :key="index">
                 <div class="iconos-tarjeta">
                   <i class="bi bi-heart mx-2 mt-1"></i>
-                  <i class="bi bi-bag mx-3 mb-1"></i>
                 </div>
                 <TarjetaCamiseta :camiseta="camiseta" />
               </div>
@@ -143,8 +142,8 @@
 </template>
 
 <script>
+import axios from 'axios';
 import TarjetaCamiseta from '@/components/TarjetaCamiseta.vue';
-import { obtenerCamisetas } from '@/mocks/camiseta'
 
 export default {
   name: 'ListarCamisetasPage',
@@ -157,7 +156,20 @@ export default {
     }
   },
   async mounted() {
-    this.camisetas = obtenerCamisetas;
+    const token = localStorage.getItem('token');
+        if (token != null) {
+            axios.get('http://localhost:3000/camisetas', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then(response => {
+                this.camisetas = response.data;
+            })
+                .catch(error => {
+                    console.error(error);
+                });
+
+        }
   },
 }
 </script>

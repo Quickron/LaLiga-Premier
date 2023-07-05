@@ -58,9 +58,9 @@ export default {
     name: "ItemCamisetaForm",
     data() {
         return {
+            sent: false,
+            error: false,
             itemCamiseta: {
-                sent: false,
-                error: false,
                 publico: "",
                 talla: "",
                 stock: 1,

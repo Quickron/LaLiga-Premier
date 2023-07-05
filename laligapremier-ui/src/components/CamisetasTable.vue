@@ -7,19 +7,39 @@
             <span>{{ camiseta.nombre }}</span>
         </td>
         <td class="align-middle">
-            <a href="/editar-camiseta" data-mdb-toggle="tooltip" title="Editar"><i
-                    class="bi bi-pencil-fill text-primary me-3"></i></a>
-            <a href="/eliminar-camiseta" data-mdb-toggle="tooltip" title="Eliminar"><i
-                    class="bi bi-trash-fill text-danger"></i></a>
+            <router-link :to="`/editarcamiseta/${camiseta._id}`" title="Editar"><i
+                    class="bi bi-pencil-fill text-primary me-3"></i></router-link>
+            <button class="btn" data-mdb-toggle="tooltip" title="Eliminar" @click="eliminarCamiseta"><i
+                    class="bi bi-trash-fill text-danger"></i></button>
         </td>
     </tr>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     name: "CamisetasTable",
     props: {
         camiseta: Object
+    },
+    methods: {
+        eliminarCamiseta() {
+            const token = localStorage.getItem('token');
+            if (token != null) {
+                axios.delete(`http://localhost:3000/eliminar-camiseta/${this.camiseta._id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                }).then(response => {
+                    this.camisetas = response.data;
+                    window.location.href = '/registro-camisetas';
+                })
+                    .catch(error => {
+                        console.error(error);
+                    });
+
+            }
+        }
     }
 }
 </script>

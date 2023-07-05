@@ -19,7 +19,7 @@
 
                                         <div class="row mb-4 d-flex justify-content-between align-items-center"
                                             v-for="(itemBolsa, index) in itemsBolsa" :key="index">
-                                            <ItemBolsa :camiseta="itemBolsa.camisetaBolsa"></ItemBolsa>
+                                            <ItemBolsa :itemBolsa="itemBolsa"></ItemBolsa>
                                         </div>
 
                                         <hr class="my-4">
@@ -49,8 +49,8 @@
                                             <h5>${{ precioTotal }}</h5>
                                         </div>
 
-                                        <a href="/" type="button" class="btn btn-dark btn-block btn-lg"
-                                            data-mdb-ripple-color="dark">Pagar</a>
+                                        <button type="button" class="btn btn-dark btn-block btn-lg"
+                                            data-mdb-ripple-color="dark" @click="pagarCarrito">Pagar</button>
 
                                     </div>
                                 </div>
@@ -65,8 +65,7 @@
 </template>
 
 <script>
-import { obtenerUsuarioSesion } from '@/mocks/usuario'
-import { obtenerItemsBolsaPorUsuario } from '@/mocks/itemBolsa'
+import axios from 'axios'
 import ItemBolsa from '@/components/ItemBolsa.vue'
 export default {
     name: "BolsaPage",
@@ -76,17 +75,70 @@ export default {
     data() {
         return {
             itemsBolsa: [],
-            usuario: Object,
+            usuarioAutenticado: Object,
             precioTotal: 0,
+            token: '',
+            camisetas: [],
         }
     },
     async mounted() {
-        this.usuario = obtenerUsuarioSesion;
-        this.itemsBolsa = obtenerItemsBolsaPorUsuario(this.usuario.nombre).itemsBolsa;
-        this.precioTotal = this.itemsBolsa.reduce(function (acumulador, itemBolsa) {
+        this.token = localStorage.getItem('token');
+        this.obtenerUsuarioSesion();
+    },
+    methods: {
+        obtenerUsuarioSesion() {
+            if (this.token != null) {
+                axios.get('http://localhost:3000/auth/getMe', {
+                    headers: {
+                        'Authorization': `Bearer ${this.token}`
+                    }
+                }).then(response => {
+                    this.usuarioAutenticado = response.data.user;
+                    this.obtenerItemsBolsaPorUsuario();
+                })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+        },
+        obtenerItemsBolsaPorUsuario() {
+            axios.get(`http://localhost:3000/items-bolsa/${this.usuarioAutenticado._id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${this.token}`
+                    }
+                }).then(response => {
+                    this.itemsBolsa = response.data;
+                    this.calcularPrecioTotal();
+                    this.obtenerCamisetas();
+                })
+                    .catch(error => {
+                        console.error(error);
+                    });
+        },
+        calcularPrecioTotal() {
+            this.precioTotal = this.itemsBolsa.reduce(function (acumulador, itemBolsa) {
             var subtotal = itemBolsa.camisetaBolsa.precio * itemBolsa.camisetaBolsa.itemsCamiseta.cantidad;
             return acumulador + subtotal;
         }, 0);
+        },
+        obtenerCamisetas() {
+            this.itemsBolsa.forEach(itemBolsa => {
+                this.camisetas.push(itemBolsa.camisetaBolsa);
+            });
+        },
+        pagarCarrito() {
+            axios.post('http://localhost:3000/pagar-carro', {usuario: this.usuarioAutenticado._id, camisetas: this.camisetas }, {
+                headers: {
+                    'Authorization': `Bearer ${this.token}`
+                }
+            })
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
     },
 }
 </script>
@@ -94,4 +146,5 @@ export default {
 <style scoped>
 .resumen {
     background-color: #c8d6e0;
-}</style>
+}
+</style>

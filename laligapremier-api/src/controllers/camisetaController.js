@@ -2,17 +2,22 @@ import CamisetaModel from "../models/camisetaModel.js";
 
 async function crearCamiseta(req, res) {
     try {
+        // Obtener los datos de la solicitud y convertirlos a mayúsculas
         const imagenesCamiseta = req.body.imagenes;
-        const nombreCamiseta = req.body.nombre;
-        const descripcionCamiseta = req.body.descripcion;
-        const equipoCamiseta = req.body.equipo;
-        const ligaCamiseta = req.body.liga;
+        const nombreCamiseta = req.body.nombre.toUpperCase();
+        const descripcionCamiseta = req.body.descripcion.toUpperCase();
+        const equipoCamiseta = req.body.equipo.toUpperCase();
+        const ligaCamiseta = req.body.liga.toUpperCase();
         const precioCamiseta = req.body.precio;
-        const temporadaCamiseta = req.body.temporada;
-        const tipoCamiseta = req.body.tipo;
-        const marcaCamiseta = req.body.marca;
-        const itemsCamisetaCam = req.body.itemsCamista;
+        const temporadaCamiseta = req.body.temporada
+        const tipoCamiseta = req.body.tipo.toUpperCase();
+        const marcaCamiseta = req.body.marca.toUpperCase();
+        const dorsalCamiseta = req.body.dorsal;
+        const itemsCamisetaCam = req.body.itemsCamiseta;
+        const jugadorCamisetta = req.body.jugador.toUpperCase();
+        const epocaCamiseta = req.body.epoca.toUpperCase();
 
+        // Verificar si faltan parámetros
         if (
             imagenesCamiseta === undefined ||
             nombreCamiseta === undefined ||
@@ -23,21 +28,33 @@ async function crearCamiseta(req, res) {
             temporadaCamiseta === undefined ||
             tipoCamiseta === undefined ||
             marcaCamiseta === undefined ||
-            itemsCamisetaCam === undefined
+            itemsCamisetaCam === undefined ||
+            epocaCamiseta === undefined
         ) {
             res.status(400).send('Faltan parámetros para crear la camiseta');
             return;
-        }
+        } else {
+            // Crear la camiseta con los atributos en mayúsculas
+            const camisetaCreada = await CamisetaModel.create({
+                imagenes: imagenesCamiseta,
+                nombre: nombreCamiseta,
+                descripcion: descripcionCamiseta,
+                equipo: equipoCamiseta,
+                liga: ligaCamiseta,
+                precio: precioCamiseta,
+                temporada: temporadaCamiseta,
+                tipo: tipoCamiseta,
+                marca: marcaCamiseta,
+                jugador : jugadorCamisetta,
+                dorsal : dorsalCamiseta,
+                epoca: epocaCamiseta,
+                itemsCamiseta: itemsCamisetaCam
+            });
 
-        else {
-            const camisetaCreada = await CamisetaModel.create({ ...req.body });
             res.status(201).send(camisetaCreada);
-
         }
-
     } catch (err) {
         res.status(500).send(err);
-        return;
     }
 }
 
@@ -55,7 +72,7 @@ async function editarCamiseta(req, res) {
         const temporadaCamiseta = req.body.temporada;
         const tipoCamiseta = req.body.tipo;
         const marcaCamiseta = req.body.marca;
-        const itemsCamisetaCam = req.body.itemsCamista;
+        const itemsCamisetaCam = req.body.itemsCamiseta;
 
         if (
             imagenesCamiseta === undefined ||
@@ -134,10 +151,115 @@ async function eliminarCamiseta(req, res) {
     }
 }
 
+async function obtenerCamisetaPorId(req,res) {
+	try {
+        let idCamiseta = req.params.idCamiseta;
+
+        if (idCamiseta === undefined) {
+            res.status(400).send({ error: "Falta el parámetro idCamiseta" });
+        } else {
+            let camiseta = null;
+
+            camiseta = await CamisetaModel.findById(idCamiseta);
+
+            if (camiseta === null) {
+                res.status(404).send({ error: "No se ha encontrado la camiseta en la base de datos!" });
+            } else {
+                res.status(200).send(camiseta);
+            }
+
+        }
+    } catch (err) {
+        res.status(500).send({ error: err });
+    }
+}
+
+async function obtenerTallasCamiseta(req,res) {
+	try {
+        let idCamiseta = req.params.idCamiseta;
+        if (idCamiseta === undefined) {
+            res.status(400).send({ error: "Falta el parámetro idCamiseta" });
+        } else {
+            let camiseta = null;
+
+            camiseta = await CamisetaModel.findById(idCamiseta);
+
+            const itemsCamiseta = camiseta.itemsCamiseta;
+
+            let tallas = [];
+
+            itemsCamiseta.forEach(itemCamiseta => {
+                tallas.push(itemCamiseta.talla);
+            });
+
+            tallas = tallas.filter((talla, index) => {
+                return tallas.indexOf(talla) === index;
+              });
+
+            if (camiseta === null) {
+                res.status(404).send({ error: "No se ha encontrado la camiseta en la base de datos!" });
+            } else {
+                res.status(200).send(tallas);
+            }
+
+        }
+    } catch (err) {
+        res.status(500).send({ error: err });
+    }
+}
+
+async function obtenerStockCamiseta(req,res) {
+	try {
+        const idCamiseta = req.params.idCamiseta;
+        let publico = req.body.publico;
+        let talla = req.body.talla;
+
+        if (idCamiseta === undefined) {
+            res.status(400).send({ error: "Falta el parámetro idCamiseta" });
+        } else {
+            let camiseta = null;
+
+            camiseta = await CamisetaModel.findById(idCamiseta);
+
+            const itemsCamiseta = camiseta.itemsCamiseta;
+
+            let stock = 0;
+
+            itemsCamiseta.forEach(itemCamiseta => {
+                if (itemCamiseta.publico === publico && itemCamiseta.talla === talla) {
+                    stock = itemCamiseta.stock;
+                }
+            });
+
+            if (camiseta === null) {
+                res.status(404).send({ error: "No se ha encontrado la camiseta en la base de datos!" });
+            } else {
+                res.status(200).send({stock: stock});
+            }
+
+        }
+    } catch (err) {
+        res.status(500).send({ error: err });
+    }
+}
+
+async function listarNovedades(req, res) {
+    try {
+        const novedades = await CamisetaModel.find({}).sort({ fecha: -1 }).limit(3);
+        res.status(200).send(novedades);
+    } catch (err) {
+        res.status(500).send({ error: err });
+    }
+}
+
 
 export {
     crearCamiseta,
     editarCamiseta,
     listarCamiseta,
-    eliminarCamiseta
+    eliminarCamiseta,
+    obtenerCamisetaPorId,
+    obtenerTallasCamiseta,
+    obtenerStockCamiseta,
+    listarNovedades,
 }

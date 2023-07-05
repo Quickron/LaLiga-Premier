@@ -3,7 +3,11 @@ import {
     crearCamiseta,
     editarCamiseta,
     listarCamiseta,
-    eliminarCamiseta
+    eliminarCamiseta,
+    obtenerCamisetaPorId,
+    obtenerTallasCamiseta,
+    obtenerStockCamiseta,
+    listarNovedades,
 } from '../controllers/camisetaController.js'
 import { authRequired, hasRole } from '../middlewares.js';
 
@@ -17,5 +21,13 @@ router.post('/crear-camiseta' , authRequired , hasRole("administrador") ,crearCa
 router.put('/editarcamiseta/:idCamiseta', authRequired , hasRole("administrador"), editarCamiseta)
 
 router.delete('/eliminar-camiseta/:idCamiseta' , authRequired , hasRole("administrador"), eliminarCamiseta)
+
+router.get('/obtener-camiseta/:idCamiseta' , obtenerCamisetaPorId)
+
+router.get('/obtener-tallas/:idCamiseta' , obtenerTallasCamiseta)
+
+router.post('/obtener-stock/:idCamiseta' , obtenerStockCamiseta)
+
+router.get('/novedades' , listarNovedades)
 
 export default router;

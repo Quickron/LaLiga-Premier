@@ -7,7 +7,7 @@
 
         <h4 class="precio">${{ camiseta.precio }}</h4>
 
-        <div class="tallas mt-4" v-if="stock > 0">
+        <div class="tallas mt-4" v-if="stock > 0 || publico">
             <h6 class="talla-txt">Para</h6>
 
             <label class="radio talla mx-4">
@@ -48,8 +48,9 @@
             </div>
         </div>
 
-        <div class="action d-flex justify-content-center" v-if="stock > 0 && stock >= cantidad">
-            <a class="btn btn-bolsa-camiseta" type="submit" href="/bolsa">Añadir a la bolsa</a>
+        <div class="action d-flex justify-content-center"
+            v-if="stock > 0 && stock >= cantidad && publico != '' && talla != ''">
+            <button class="btn btn-bolsa-camiseta" type="submit">Añadir a la bolsa</button>
         </div>
         <div class="action d-flex justify-content-center" v-else>
             <button class="btn btn-bolsa-camiseta disabled" type="submit">Añadir a la bolsa</button>
@@ -59,13 +60,16 @@
 </template>
 
 <script>
-import { obtenerItemCamiseta, obtenerTallasPorCamiseta } from '@/mocks/camiseta'
+import axios from 'axios';
 export default {
     name: "DetalleCamisetaForm",
     props: {
         camiseta: {
             type: Object,
-        }
+        },
+        idCamiseta: {
+            type: String,
+        },
     },
     data() {
         return {
@@ -73,21 +77,57 @@ export default {
             cantidad: 1,
             talla: "",
             publico: "",
-            stock: 0,
+            stock: 1,
             camisetaBolsa: Object,
             itemBolsa: Object,
+            objFiltro: Object,
         }
     },
     async mounted() {
-        this.tallas = obtenerTallasPorCamiseta(this.camiseta).tallas;
-        this.stock = obtenerItemCamiseta(this.camiseta).itemCamiseta.stock;
+        this.$nextTick(() => {
+            this.obtenerTallasCamiseta();
+        });
     },
     computed: {
         nombreInvalido() {
             return this.camiseta.nombre.length < 1;
         },
     },
+    watch: {
+        publico: {
+            handler: "actualizarStock",
+            immediate: true
+        },
+        talla: {
+            handler: "actualizarStock",
+            immediate: true
+        }
+    },
     methods: {
+        obtenerTallasCamiseta() {
+            axios.get(`http://localhost:3000/obtener-tallas/${this.idCamiseta}`, {
+                headers: {
+                    'Authorization': `Bearer ${this.token}`
+                }
+            }).then(response => {
+                this.tallas = response.data;
+            })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
+        obtenerStock() {
+            axios.post(`http://localhost:3000/obtener-stock/${this.idCamiseta}`, { publico: this.publico, talla: this.talla }, {
+                headers: {
+                    'Authorization': `Bearer ${this.token}`
+                }
+            }).then(response => {
+                this.stock = response.data.stock;
+            })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
         incrementar(event) {
             event.preventDefault(); // Evitar el envío del formulario
             this.cantidad++;
@@ -111,6 +151,8 @@ export default {
             this.error = false;
             this.sent = true;
 
+            this.obtenerStock();
+
             this.camisetaBolsa = {
                 imagenes: this.camiseta.imagenes,
                 nombre: this.camiseta.nombre,
@@ -126,10 +168,11 @@ export default {
                 itemsCamiseta: {
                     publico: this.publico,
                     talla: this.talla,
-                    stock: this.camiseta.itemsCamiseta.stock,
+                    stock: this.stock,
                     cantidad: this.cantidad
                 }
             }
+
             this.$emit("camiseta-bolsa", this.camisetaBolsa);
             this.resetForm();
         },
@@ -138,89 +181,96 @@ export default {
                 this.talla = "",
                 this.publico = ""
 
+        },
+        actualizarStock() {
+            if (this.publico && this.talla) {
+                this.obtenerStock();
+            } else {
+                this.stock = 1;
+            }
         }
     }
 }
 </script>
 
 <style scoped>
-    .titulo-ver-camiseta {
-  font-weight: bold;
-  font-size: 40px;
-  margin-bottom: 5%;
+.titulo-ver-camiseta {
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 5%;
 }
 
 .precio {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .bloque-cantidad {
-  display: flex;
-  justify-content: start;
-  width: 100%;
+    display: flex;
+    justify-content: start;
+    width: 100%;
 }
 
 .cantidad {
-  font-weight: bold;
-  margin-right: 3%;
-  margin-top: 2%;
+    font-weight: bold;
+    margin-right: 3%;
+    margin-top: 2%;
 }
 
 .cantidad-input {
-  display: flex;
-  justify-content: start;
+    display: flex;
+    justify-content: start;
 }
 
 .casilla-cantidad {
-  width: 16%;
-  height: 50%;
-  margin-right: 5%;
-  margin-top: 2%;
+    width: 16%;
+    height: 50%;
+    margin-right: 5%;
+    margin-top: 2%;
 }
 
 .btn-cantidad {
-  background-color: white;
-  margin-right: 2%;
-  height: 80%;
-  font-weight: bold;
-  padding-bottom: 3%;
+    background-color: white;
+    margin-right: 2%;
+    height: 80%;
+    font-weight: bold;
+    padding-bottom: 3%;
 }
 
 .btn-radio {
-  background-color: #44115C;
-  color: white;
+    background-color: #44115C;
+    color: white;
 }
 
 .btn-radio:hover {
-  background-color: #180026;
-  color: white;
+    background-color: #180026;
+    color: white;
 }
 
 .btn-check:checked+.btn-radio {
-  background-color: #180026;
-  color: white;
+    background-color: #180026;
+    color: white;
 }
 
 .tallas {
-  display: flex;
-  margin-right: 15%;
+    display: flex;
+    margin-right: 15%;
 }
 
 .talla-txt {
-  font-weight: bold;
-  text-align: start;
+    font-weight: bold;
+    text-align: start;
 }
 
 .btn-bolsa-camiseta {
-  margin-top: 8%;
-  background-color: black;
-  font-weight: bold;
-  color: white;
+    margin-top: 8%;
+    background-color: black;
+    font-weight: bold;
+    color: white;
 }
 
 .btn-bolsa-camiseta:hover {
-  background-color: #180026;
-  font-weight: bold;
-  color: white;
+    background-color: #180026;
+    font-weight: bold;
+    color: white;
 }
 </style>

@@ -31,9 +31,6 @@
                                 <div v-if="error && clavesNoCoinciden" class="alert alert-danger" role="alert">
                                     ¡Contraseña incorrecta!
                                 </div>
-                                <div v-if="sent" class="alert alert-success" role="alert">
-                                    ¡El usuario se ha logeado correctamente!
-                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -47,7 +44,7 @@
 </template>
 
 <script>
-import { obtenerUsuariosRegistrados } from '@/mocks/usuario'
+import axios from 'axios';
 export default {
     name: "IniciarSesionForm",
     data() {
@@ -68,28 +65,30 @@ export default {
         claveInvalida() {
             return this.usuario.clave.length < 1;
         },
-        usuarioNoRegistrado() {
-            return this.compararCorreos();
-        },
-        clavesNoCoinciden() {
-            return this.compararClaves();
-        },
-    },
-    async mounted() {
-        this.usuariosRegistrados = obtenerUsuariosRegistrados;
     },
     methods: {
         enviarForm() {
-            if (this.correoInvalido || this.claveInvalida || this.usuarioNoRegistrado || this.clavesNoCoinciden) {
+            if (this.correoInvalido || this.claveInvalida) {
                 this.error = true;
                 this.sent = false;
                 return;
             }
             this.error = false;
             this.sent = true;
-            console.log(this.usuario)
-            this.$emit("usuario-login", this.usuario);
-            this.resetForm();
+            axios.post('http://localhost:3000/auth/login', this.usuario)
+                .then(response => {
+                    const { usuario, token } = response.data;
+                    localStorage.setItem('token', token);
+                    console.log(usuario);
+                    console.log(response.data);
+                    window.location.href = '/';
+                    this.resetForm();
+                })
+                .catch(error => {
+                    console.error(error);
+                    this.resetForm();
+                });
+            
         },
         resetForm() {
             this.usuario = {
@@ -99,24 +98,6 @@ export default {
                 clave: "",
             };
         },
-        compararCorreos() {
-            let distintos = true;
-            this.usuariosRegistrados.forEach(usuario => {
-                if(usuario.correo === this.usuario.correo){
-                    distintos = false
-                }
-            });
-            return distintos;
-        },
-        compararClaves() {
-            let distintos = true;
-            this.usuariosRegistrados.forEach(usuario => {
-                if(usuario.correo === this.usuario.correo && usuario.clave === this.usuario.clave){
-                    distintos = false
-                }
-            });
-            return distintos;
-        }
     },
 }
 </script>

@@ -5,11 +5,11 @@
             <div class="card-body">
 
                 <form enctype="multipart/form-data" @submit.prevent="enviarForm">
-                    
+
                     <ItemCamisetaForm @agregar-item="agregarItem"></ItemCamisetaForm>
 
-                    <ItemCamisetaTable :items-camiseta="camiseta.itemsCamiseta"
-                    @eliminar-item="eliminarItem"></ItemCamisetaTable>
+                    <ItemCamisetaTable :items-camiseta="camiseta.itemsCamiseta" @eliminar-item="eliminarItem">
+                    </ItemCamisetaTable>
 
                     <div class="form-group row py-2">
                         <label class="col-sm-2 col-form-label">Club / Selección</label>
@@ -90,9 +90,17 @@
                         <div class="form-group row py-2">
                             <label for="file" class="col-sm-2 col-form-label">Subir Fotos (URL)</label>
                             <div class="col-sm-6">
-                                <input type="text" name="file" multiple class="form-control" v-model="camiseta.imagenes" />
+                                <div class="input-group">
+                                    <input type="text" name="file" multiple class="form-control" v-model="imagen" />
+                                    <div class="input-group-append">
+                                        <button class="btn btn-dark" @click.prevent="agregarImagen">+</button>
+                                    </div>
+                                </div>
                             </div>
+                            <div v-for="(imagen, index) in camiseta.imagenes" :key="index" class="ml-2">{{ imagen }}</div>
                         </div>
+
+
 
                         <div class="col-md-12">
                             <div v-if="error" class="alert alert-danger" role="alert">
@@ -106,10 +114,6 @@
                         <div class="form-group row">
                             <div class="mt-5 btn-publicar">
                                 <input type="submit" value="Publicar" class="btn btn-dark" />
-                                <router-link to="/detalle/id">
-                                    <input type="submit" value="Publicar y Ver" class="btn btn-success mx-3"
-                                        @click="enviarForm" />
-                                </router-link>
                                 <tr></tr>
                             </div>
                         </div>
@@ -121,6 +125,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { obtenerMarcas } from '@/mocks/camiseta'
 import ItemCamisetaForm from '@/components/ItemCamisetaForm.vue'
 import ItemCamisetaTable from '@/components/ItemCamisetaTable.vue'
@@ -133,9 +138,6 @@ export default {
     data() {
         return {
             camiseta: {
-                sent: false,
-                error: false,
-                id: 0,
                 tipo: "",
                 equipo: "",
                 liga: "",
@@ -155,7 +157,10 @@ export default {
                 talla: "",
                 stock: 0
             },
+            sent: false,
+            error: false,
             marcas: [],
+            imagen: '',
         }
     },
     async mounted() {
@@ -167,6 +172,15 @@ export default {
         },
     },
     methods: {
+        agregarItem(item) {
+            this.camiseta.itemsCamiseta = [...this.camiseta.itemsCamiseta, item];
+        },
+        eliminarItem(index) {
+            this.camiseta.itemsCamiseta.splice(index, 1);
+        },
+        agregarImagen() {
+            this.camiseta.imagenes.push(this.imagen);
+        },
         enviarForm() {
             if (this.nombreInvalido) {
                 this.error = true;
@@ -176,17 +190,27 @@ export default {
             this.error = false;
             this.sent = true;
 
-            if(this.itemCamiseta.publico != "" && this.itemCamiseta.talla != "" && this.itemCamiseta.stock > 0) {
+            if (this.itemCamiseta.publico != "" && this.itemCamiseta.talla != "" && this.itemCamiseta.stock > 0) {
                 this.camiseta.itemsCamiseta.push(this.itemCamiseta);
             }
-            
-            this.$emit("camiseta-registro", this.camiseta);
-            console.log(this.camiseta)
+            console.log(this.camiseta.itemsCamiseta)
+            const token = localStorage.getItem('token')
+
+            axios.post('http://localhost:3000/crear-camiseta', this.camiseta, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
             this.resetForm();
         },
         resetForm() {
             this.camiseta = {
-                id: 0,
                 tipo: "",
                 equipo: "",
                 liga: "",
@@ -201,13 +225,6 @@ export default {
                 imagenes: [],
                 itemsCamiseta: []
             }
-                // this.marcas = [];
-        },
-        agregarItem(item) {
-            this.camiseta.itemsCamiseta = [...this.camiseta.itemsCamiseta, item];
-        },
-        eliminarItem(index){
-            this.camiseta.itemsCamiseta.splice(index, 1);
         },
     },
 }

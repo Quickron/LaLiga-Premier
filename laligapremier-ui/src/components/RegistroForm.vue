@@ -36,9 +36,6 @@
                             <div v-if="clavesNoCoinciden" class="alert alert-danger" role="alert">
                                 ¡Las contraseñas deben coincidir!
                             </div>
-                            <div v-if="sent" class="alert alert-success" role="alert">
-                                ¡El usuario se ha registrado correctamente!
-                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-popup">Guardar</button>
@@ -51,6 +48,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     name: "RegistroForm",
     data() {
@@ -92,8 +90,15 @@ export default {
             }
             this.error = false;
             this.sent = true;
-            this.$emit("usuario-registro", this.usuario);
-            console.log(this.usuario)
+            axios.post('http://localhost:3000/auth/register', this.usuario)
+                .then(response => {
+                    console.log(response.data);
+                    window.location.href = '/';
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
             this.resetForm();
         },
         resetForm() {
