@@ -31,9 +31,6 @@
                                 <div v-if="error && clavesNoCoinciden" class="alert alert-danger" role="alert">
                                     ¡Contraseña incorrecta!
                                 </div>
-                                <div v-if="sent" class="alert alert-success" role="alert">
-                                    ¡El usuario se ha logeado correctamente!
-                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -47,6 +44,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { obtenerUsuariosRegistrados } from '@/mocks/usuario'
 export default {
     name: "IniciarSesionForm",
@@ -87,8 +85,17 @@ export default {
             }
             this.error = false;
             this.sent = true;
-            console.log(this.usuario)
-            this.$emit("usuario-login", this.usuario);
+            axios.post('http://localhost:3000/auth/login', this.usuario)
+                .then(response => {
+                    const { usuario, token } = response.data;
+                    localStorage.setItem('token', token);
+                    console.log(usuario);
+                    console.log(response.data);
+                    alert('¡Te has logeado correctamente!')
+                })
+                .catch(error => {
+                    console.error(error);
+                });
             this.resetForm();
         },
         resetForm() {

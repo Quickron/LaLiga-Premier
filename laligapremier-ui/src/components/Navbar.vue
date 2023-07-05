@@ -11,15 +11,15 @@
             </li>
         </ul>
         <div class="flex" style="display: flex; flex-direction: row;" id="navbarNavDarkDropdown" v-else>
-            <OpcionesAdmin  v-if="usuarioAutenticado.rol === 'administrador'"></OpcionesAdmin>
+            <OpcionesAdmin v-if="usuarioAutenticado.rol === 'administrador'"></OpcionesAdmin>
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <strong class="mx-2">{{ nombreUsuario }}</strong>
+                        <strong class="mx-2">{{ usuarioAutenticado.nombre }}</strong>
                     </button>
                     <div class="dropdown-menu">
                         <router-link class="dropdown-item" to="/">Ajustar Cuenta</router-link>
-                        <a class="dropdown-item" href="/">Cerrar Sesión</a>
+                        <a class="dropdown-item" @click="cerrarSesion">Cerrar Sesión</a>
                     </div>
                 </li>
             </ul>
@@ -113,8 +113,8 @@
 <script>
 import IniciarSesionFormVue from './IniciarSesionForm.vue';
 import RegistroForm from './RegistroForm.vue';
-import { obtenerUsuarioSesion } from '@/mocks/usuario'
 import OpcionesAdmin from './OpcionesAdmin.vue';
+import axios from 'axios';
 export default {
     name: "NavBar",
     components: {
@@ -125,13 +125,30 @@ export default {
     data() {
         return {
             usuarioAutenticado: null,
-            nombreUsuario: "",
+            token: null,
         }
     },
     async mounted() {
-        this.usuarioAutenticado = obtenerUsuarioSesion;
-        this.nombreUsuario = this.usuarioAutenticado.nombre;
+        this.token = localStorage.getItem('token');
+        if (this.token != null) {
+            axios.get('http://localhost:3000/auth/getMe', {
+                headers: {
+                    'Authorization': `Bearer ${this.token}`
+                }
+            }).then(response => {
+                this.usuarioAutenticado = response.data.user;
+            })
+                .catch(error => {
+                    console.error(error);
+                });
+
+        }
     },
+    methods: {
+        cerrarSesion() {
+            localStorage.clear();
+        },
+    }
 };
 </script>
 

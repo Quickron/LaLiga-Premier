@@ -121,6 +121,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { obtenerMarcas } from '@/mocks/camiseta'
 import ItemCamisetaForm from '@/components/ItemCamisetaForm.vue'
 import ItemCamisetaTable from '@/components/ItemCamisetaTable.vue'
@@ -180,8 +181,14 @@ export default {
                 this.camiseta.itemsCamiseta.push(this.itemCamiseta);
             }
             
-            this.$emit("camiseta-registro", this.camiseta);
-            console.log(this.camiseta)
+            axios.post('http://localhost:3000/crear-camiseta', this.camiseta)
+                .then(response => {
+                    console.log(response.data);
+                    alert('¡Camiseta creada correctamente!')
+                })
+                .catch(error => {
+                    console.error(error);
+                });
             this.resetForm();
         },
         resetForm() {
@@ -201,7 +208,6 @@ export default {
                 imagenes: [],
                 itemsCamiseta: []
             }
-                // this.marcas = [];
         },
         agregarItem(item) {
             this.camiseta.itemsCamiseta = [...this.camiseta.itemsCamiseta, item];
