@@ -143,8 +143,8 @@
 </template>
 
 <script>
+import axios from 'axios';
 import TarjetaCamiseta from '@/components/TarjetaCamiseta.vue';
-import { obtenerCamisetas } from '@/mocks/camiseta'
 
 export default {
   name: 'ListarCamisetasPage',
@@ -157,7 +157,20 @@ export default {
     }
   },
   async mounted() {
-    this.camisetas = obtenerCamisetas;
+    const token = localStorage.getItem('token');
+        if (token != null) {
+            axios.get('http://localhost:3000/camisetas', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then(response => {
+                this.camisetas = response.data;
+            })
+                .catch(error => {
+                    console.error(error);
+                });
+
+        }
   },
 }
 </script>

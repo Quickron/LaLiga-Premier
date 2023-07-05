@@ -93,7 +93,7 @@ export default {
             axios.post('http://localhost:3000/auth/register', this.usuario)
                 .then(response => {
                     console.log(response.data);
-                    alert('¡Te has registrado correctamente!')
+                    window.location.href = '/';
                 })
                 .catch(error => {
                     console.error(error);

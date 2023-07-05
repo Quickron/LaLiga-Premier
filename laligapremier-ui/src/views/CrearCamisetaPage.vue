@@ -189,7 +189,6 @@ export default {
             })
                 .then(response => {
                     console.log(response.data);
-                    alert('¡Camiseta creada correctamente!')
                 })
                 .catch(error => {
                     console.error(error);
