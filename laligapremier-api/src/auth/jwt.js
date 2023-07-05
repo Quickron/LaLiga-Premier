@@ -6,10 +6,9 @@ const SECRET = environments.SECRET_KEY
 
 export function generateToken(user) {
 
-
 	const { _id, correo } = user;
 	return jsonwebtoken.sign({ id: _id, correo }, SECRET, {
-		expiresIn: "15m",
+		expiresIn: "30m",
 	})
 }
 

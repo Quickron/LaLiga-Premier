@@ -39,17 +39,25 @@ const camisetaSchema = new mongoose.Schema(
             require: true
         },
         dorsal: {
-            type: String,
+            type: Number,
             require: false
         },
         jugador: {
             type: String,
             require: false
         },
-        itemsCamista: {
+        epoca: {
+            type: String,
+            require: true
+        },
+        itemsCamiseta: {
             type: Array,
             require: true
         },
+        fecha : {
+            type : Date,
+            default: Date.now
+        }
     }
 )
 const CamisetaModel = mongoose.model('laligapremier', camisetaSchema , 'camisetas' )
