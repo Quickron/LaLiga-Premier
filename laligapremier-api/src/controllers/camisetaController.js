@@ -2,17 +2,21 @@ import CamisetaModel from "../models/camisetaModel.js";
 
 async function crearCamiseta(req, res) {
     try {
+        // Obtener los datos de la solicitud y convertirlos a mayúsculas
         const imagenesCamiseta = req.body.imagenes;
-        const nombreCamiseta = req.body.nombre;
-        const descripcionCamiseta = req.body.descripcion;
-        const equipoCamiseta = req.body.equipo;
-        const ligaCamiseta = req.body.liga;
+        const nombreCamiseta = req.body.nombre.toUpperCase();
+        const descripcionCamiseta = req.body.descripcion.toUpperCase();
+        const equipoCamiseta = req.body.equipo.toUpperCase();
+        const ligaCamiseta = req.body.liga.toUpperCase();
         const precioCamiseta = req.body.precio;
-        const temporadaCamiseta = req.body.temporada;
-        const tipoCamiseta = req.body.tipo;
-        const marcaCamiseta = req.body.marca;
+        const temporadaCamiseta = req.body.temporada
+        const tipoCamiseta = req.body.tipo.toUpperCase();
+        const marcaCamiseta = req.body.marca.toUpperCase();
+        const dorsalCamiseta = req.body.dorsal;
         const itemsCamisetaCam = req.body.itemsCamista;
+        const jugadorCamisetta = req.body.jugador.toUpperCase();
 
+        // Verificar si faltan parámetros
         if (
             imagenesCamiseta === undefined ||
             nombreCamiseta === undefined ||
@@ -27,19 +31,30 @@ async function crearCamiseta(req, res) {
         ) {
             res.status(400).send('Faltan parámetros para crear la camiseta');
             return;
-        }
+        } else {
+            // Crear la camiseta con los atributos en mayúsculas
+            const camisetaCreada = await CamisetaModel.create({
+                imagenes: imagenesCamiseta,
+                nombre: nombreCamiseta,
+                descripcion: descripcionCamiseta,
+                equipo: equipoCamiseta,
+                liga: ligaCamiseta,
+                precio: precioCamiseta,
+                temporada: temporadaCamiseta,
+                tipo: tipoCamiseta,
+                marca: marcaCamiseta,
+                jugador : jugadorCamisetta,
+                dorsal : dorsalCamiseta,
+                itemsCamista: itemsCamisetaCam
+            });
 
-        else {
-            const camisetaCreada = await CamisetaModel.create({ ...req.body });
             res.status(201).send(camisetaCreada);
-
         }
-
     } catch (err) {
         res.status(500).send(err);
-        return;
     }
 }
+
 
 async function editarCamiseta(req, res) {
     try {
@@ -69,24 +84,22 @@ async function editarCamiseta(req, res) {
             marcaCamiseta === undefined ||
             itemsCamisetaCam === undefined
         ) {
-            res.status(400).send('Faltan parámetros para crear la camiseta');
-            return;
+            return res.status(400).send('Faltan parámetros para crear la camiseta');
         }
         const camiseta = await CamisetaModel.findById(camisetaId);
 
         if (!camiseta) {
-            res.status(404).send('La camiseta no existe o no pudo ser encontrada');
-            return;
+            return res.status(404).send('La camiseta no existe o no pudo ser encontrada');
         }
         camiseta.imagenes = camisetaNueva.imagenes;
-        camiseta.nombre = camisetaNueva.nombre;
-        camiseta.descripcion = camisetaNueva.descripcion;
-        camiseta.equipo = camisetaNueva.equipo;
-        camiseta.liga = camisetaNueva.liga;
+        camiseta.nombre = camisetaNueva.nombre
+        camiseta.descripcion = camisetaNueva.descripcion
+        camiseta.equipo = camisetaNueva.equipo
+        camiseta.liga = camisetaNueva.liga
         camiseta.precio = camisetaNueva.precio;
         camiseta.temporada = camisetaNueva.temporada;
-        camiseta.tipo = camisetaNueva.tipo;
-        camiseta.marca = camisetaNueva.marca;
+        camiseta.tipo = camisetaNueva.tipo
+        camiseta.marca = camisetaNueva.marca
         camiseta.itemsCamista = camisetaNueva.itemsCamista;
 
         if (camisetaNueva.dorsal !== undefined) camiseta.dorsal = camisetaNueva.dorsal;
@@ -101,7 +114,7 @@ async function editarCamiseta(req, res) {
     }
 }
 
-async function listarCamiseta(req, res) {
+async function listarCamiseta(_req, res) {
     try {
         const camisetasBD = await CamisetaModel.find({});
         res.status(200).send(camisetasBD);
@@ -134,10 +147,38 @@ async function eliminarCamiseta(req, res) {
     }
 }
 
+async function filtrarCamisetas(req, res) {
+    try {
+        const { nombre, marca, precioMinimo, precioMaximo, equipo, epoca } = req.query
+        const filtros = {}
+
+        console.log(`nombre de la camiseta ----> ${marca}`);
+
+        if (nombre !== undefined) {
+            filtros.nombre = { $regex: new RegExp(nombre, 'i') };
+        }
+        if (marca !== undefined) filtros.nombre = { $regex: new RegExp(nombre, 'i') };
+        if (precioMinimo !== undefined) filtros.precio = { $gte: parseInt(precioMinimo) };
+        if (precioMaximo !== undefined) filtros.precio = { ...filtros.precio, $lte: parseInt(precioMaximo) };
+        if (equipo !== undefined) filtros.equipo = { $regex: new RegExp(equipo, 'i') };
+        if (epoca !== undefined) filtros.equipo = { $regex: new RegExp(equipo, 'i') };
+
+        const camisetasFiltradas = await CamisetaModel.find(filtros)
+        console.log(`camisetas ----> ${camisetasFiltradas}`);
+        return res.status(200).send(camisetasFiltradas);
+
+    }
+    catch (error) {
+        return res.status(500).send({ error: err });
+    }
+}
+
+
 
 export {
     crearCamiseta,
     editarCamiseta,
     listarCamiseta,
-    eliminarCamiseta
+    eliminarCamiseta,
+    filtrarCamisetas
 }
