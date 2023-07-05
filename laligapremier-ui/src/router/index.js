@@ -8,6 +8,8 @@ import BolsaPage from '../views/BolsaPage.vue'
 import RegistroCamisetasPage from '../views/RegistroCamisetasPage.vue'
 import RegistrarDatosRelevantesPage from '../views/RegistrarDatosRelevantesPage.vue'
 import EstadisticasPage from '../views/EstadisticasPage.vue'
+import EditarCamisetaPage from '../views/EditarCamisetaPage.vue'
+
 
 const routes = [
   {
@@ -55,6 +57,11 @@ const routes = [
     name: 'estadisticas',
     component: EstadisticasPage
   },
+  {
+    path:'/editar-camiseta/:idCamiseta',
+    name: 'editar-camiseta',
+    component : EditarCamisetaPage 
+  }
 ]
 
 const router = createRouter({

@@ -7,7 +7,12 @@
             <span>{{ camiseta.nombre }}</span>
         </td>
         <td class="align-middle">
-            <router-link :to="`/editarcamiseta/${camiseta._id}`" title="Editar"><i
+            <router-link :to="{
+                name: 'editar-camiseta',
+                params:{
+                    idCamiseta : this.camiseta._id
+                }
+            }" title="Editar"><i
                     class="bi bi-pencil-fill text-primary me-3"></i></router-link>
             <button class="btn" data-mdb-toggle="tooltip" title="Eliminar" @click="eliminarCamiseta"><i
                     class="bi bi-trash-fill text-danger"></i></button>
