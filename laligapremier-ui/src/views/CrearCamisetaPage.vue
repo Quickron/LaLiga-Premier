@@ -90,9 +90,17 @@
                         <div class="form-group row py-2">
                             <label for="file" class="col-sm-2 col-form-label">Subir Fotos (URL)</label>
                             <div class="col-sm-6">
-                                <input type="text" name="file" multiple class="form-control" v-model="camiseta.imagenes" />
+                                <div class="input-group">
+                                    <input type="text" name="file" multiple class="form-control" v-model="imagen" />
+                                    <div class="input-group-append">
+                                        <button class="btn btn-dark" @click.prevent="agregarImagen">+</button>
+                                    </div>
+                                </div>
                             </div>
+                            <div v-for="(imagen, index) in camiseta.imagenes" :key="index" class="ml-2">{{ imagen }}</div>
                         </div>
+
+
 
                         <div class="col-md-12">
                             <div v-if="error" class="alert alert-danger" role="alert">
@@ -152,6 +160,7 @@ export default {
             sent: false,
             error: false,
             marcas: [],
+            imagen: '',
         }
     },
     async mounted() {
@@ -168,6 +177,9 @@ export default {
         },
         eliminarItem(index) {
             this.camiseta.itemsCamiseta.splice(index, 1);
+        },
+        agregarImagen() {
+            this.camiseta.imagenes.push(this.imagen);
         },
         enviarForm() {
             if (this.nombreInvalido) {
