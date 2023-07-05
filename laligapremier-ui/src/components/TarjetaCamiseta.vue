@@ -12,7 +12,7 @@
                     <strong class="fs-4">${{ camiseta.precio }}</strong>
                 </div>
             </div>
-            <router-link to="detalle/id">
+            <router-link :to="`detalle/${camiseta._id}`">
                 <a class="btn btn-detalles px-2">Ver Detalles</a>
             </router-link>
         </div>
@@ -23,10 +23,7 @@
 export default {
     name: "TarjetaCamiseta",
     props: {
-        camiseta: {
-            nombre: "",
-            precio: 0,
-        }
+        camiseta: Object
     },
 }
 </script>

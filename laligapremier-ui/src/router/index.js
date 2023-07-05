@@ -24,7 +24,7 @@ const routes = [
     component: CrearCamisetaPage
   },
   {
-    path: '/detalle/id',
+    path: '/detalle/:idCamiseta',
     name: 'detalle_camiseta',
     component: DetalleCamisetaPage
   },

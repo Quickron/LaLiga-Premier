@@ -95,8 +95,7 @@
 </template>
 
 <script>
-import { obtenerCamisetaPorId } from '@/mocks/camiseta'
-import { obtenerUsuarioSesion } from '@/mocks/usuario'
+import axios from 'axios'
 import DetalleCamisetaForm from '@/components/DetalleCamisetaForm.vue'
 export default {
   name: 'DetalleCamisetaPage',
@@ -107,15 +106,18 @@ export default {
     return {
       camisetaId: "",
       camiseta: Object,
+      camiseta2: Object,
       camisetaBolsa: Object,
       itemBolsa: Object,
-      usuario: Object
+      usuarioAutenticado: Object,
+      token: null,
     }
   },
   async mounted() {
-    this.camisetaId = "2";
-    this.camiseta = obtenerCamisetaPorId(this.camisetaId);
-    this.usuario = obtenerUsuarioSesion;
+    this.token = localStorage.getItem('token');
+    this.camisetaId = this.$route.params.idCamiseta;
+    this.obtenerUsuarioSesion();
+    this.obtenerCamiseta();
   },
   computed: {
     nombreInvalido() {
@@ -129,10 +131,38 @@ export default {
     },
     rellenarItemBolsa() {
       this.itemBolsa = {
-        usuario: this.usuario,
+        usuario: this.usuarioAutenticado,
         camisetaId: this.camisetaId,
         camisetaBolsa: this.camisetaBolsa,
       }
+      console.log(this.itemBolsa)
+    },
+    obtenerCamiseta() {
+      axios.get(`http://localhost:3000/obtener-camiseta/${this.camisetaId}`, {
+                headers: {
+                    'Authorization': `Bearer ${this.token}`
+                }
+            }).then(response => {
+                this.camiseta = response.data;
+            })
+                .catch(error => {
+                    console.error(error);
+                });
+    },
+    obtenerUsuarioSesion() {
+        if (this.token != null) {
+            axios.get('http://localhost:3000/auth/getMe', {
+                headers: {
+                    'Authorization': `Bearer ${this.token}`
+                }
+            }).then(response => {
+                this.usuarioAutenticado = response.data.user;
+            })
+                .catch(error => {
+                    console.error(error);
+                });
+
+        }
     }
   }
 }

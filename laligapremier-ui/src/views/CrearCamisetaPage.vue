@@ -167,6 +167,12 @@ export default {
         },
     },
     methods: {
+        agregarItem(item) {
+            this.camiseta.itemsCamiseta = [...this.camiseta.itemsCamiseta, item];
+        },
+        eliminarItem(index) {
+            this.camiseta.itemsCamiseta.splice(index, 1);
+        },
         enviarForm() {
             if (this.nombreInvalido) {
                 this.error = true;
@@ -179,7 +185,7 @@ export default {
             if (this.itemCamiseta.publico != "" && this.itemCamiseta.talla != "" && this.itemCamiseta.stock > 0) {
                 this.camiseta.itemsCamiseta.push(this.itemCamiseta);
             }
-            console.log(this.camiseta)
+            console.log(this.camiseta.itemsCamiseta)
             const token = localStorage.getItem('token')
 
             axios.post('http://localhost:3000/crear-camiseta', this.camiseta, {
@@ -211,12 +217,6 @@ export default {
                 imagenes: [],
                 itemsCamiseta: []
             }
-        },
-        agregarItem(item) {
-            this.camiseta.itemsCamiseta = [...this.camiseta.itemsCamiseta, item];
-        },
-        eliminarItem(index) {
-            this.camiseta.itemsCamiseta.splice(index, 1);
         },
     },
 }

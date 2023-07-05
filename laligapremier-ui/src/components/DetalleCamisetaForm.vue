@@ -7,7 +7,7 @@
 
         <h4 class="precio">${{ camiseta.precio }}</h4>
 
-        <div class="tallas mt-4" v-if="stock > 0">
+        <div class="tallas mt-4" v-if="stock > 0 || publico">
             <h6 class="talla-txt">Para</h6>
 
             <label class="radio talla mx-4">
@@ -48,8 +48,8 @@
             </div>
         </div>
 
-        <div class="action d-flex justify-content-center" v-if="stock > 0 && stock >= cantidad">
-            <a class="btn btn-bolsa-camiseta" type="submit" href="/bolsa">Añadir a la bolsa</a>
+        <div class="action d-flex justify-content-center" v-if="stock > 0 && stock >= cantidad && publico != '' && talla != ''">
+            <button class="btn btn-bolsa-camiseta" type="submit" >Añadir a la bolsa</button>
         </div>
         <div class="action d-flex justify-content-center" v-else>
             <button class="btn btn-bolsa-camiseta disabled" type="submit">Añadir a la bolsa</button>
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { obtenerItemCamiseta, obtenerTallasPorCamiseta } from '@/mocks/camiseta'
+import axios from 'axios';
 export default {
     name: "DetalleCamisetaForm",
     props: {
@@ -73,21 +73,55 @@ export default {
             cantidad: 1,
             talla: "",
             publico: "",
-            stock: 0,
+            stock: 1,
             camisetaBolsa: Object,
             itemBolsa: Object,
+            objFiltro: Object,
         }
     },
     async mounted() {
-        this.tallas = obtenerTallasPorCamiseta(this.camiseta).tallas;
-        this.stock = obtenerItemCamiseta(this.camiseta).itemCamiseta.stock;
+        this.obtenerTallasCamiseta();
     },
     computed: {
         nombreInvalido() {
             return this.camiseta.nombre.length < 1;
         },
     },
+    watch: {
+        publico: {
+            handler: "actualizarStock",
+            immediate: true
+        },
+        talla: {
+            handler: "actualizarStock",
+            immediate: true
+        }
+    },
     methods: {
+        obtenerTallasCamiseta() {
+            axios.get(`http://localhost:3000/obtener-tallas/64a4fff49283a1e72ebde5a6`, {
+                headers: {
+                    'Authorization': `Bearer ${this.token}`
+                }
+            }).then(response => {
+                this.tallas = response.data;
+            })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
+        obtenerStock() {
+            axios.post(`http://localhost:3000/obtener-stock/64a4fff49283a1e72ebde5a6`, {publico: this.publico, talla: this.talla} , {
+                headers: {
+                    'Authorization': `Bearer ${this.token}`
+                }
+            }).then(response => {
+                this.stock = response.data.stock;
+            })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
         incrementar(event) {
             event.preventDefault(); // Evitar el envío del formulario
             this.cantidad++;
@@ -111,6 +145,8 @@ export default {
             this.error = false;
             this.sent = true;
 
+            this.obtenerStock();
+
             this.camisetaBolsa = {
                 imagenes: this.camiseta.imagenes,
                 nombre: this.camiseta.nombre,
@@ -126,10 +162,11 @@ export default {
                 itemsCamiseta: {
                     publico: this.publico,
                     talla: this.talla,
-                    stock: this.camiseta.itemsCamiseta.stock,
+                    stock: this.stock,
                     cantidad: this.cantidad
                 }
             }
+
             this.$emit("camiseta-bolsa", this.camisetaBolsa);
             this.resetForm();
         },
@@ -138,6 +175,13 @@ export default {
                 this.talla = "",
                 this.publico = ""
 
+        },
+        actualizarStock() {
+            if (this.publico && this.talla) {
+                this.obtenerStock();
+            } else {
+                this.stock = 1;
+            }
         }
     }
 }
