@@ -5,11 +5,11 @@
             <div class="card-body">
 
                 <form enctype="multipart/form-data" @submit.prevent="enviarForm">
-                    
+
                     <ItemCamisetaForm @agregar-item="agregarItem"></ItemCamisetaForm>
 
-                    <ItemCamisetaTable :items-camiseta="camiseta.itemsCamiseta"
-                    @eliminar-item="eliminarItem"></ItemCamisetaTable>
+                    <ItemCamisetaTable :items-camiseta="camiseta.itemsCamiseta" @eliminar-item="eliminarItem">
+                    </ItemCamisetaTable>
 
                     <div class="form-group row py-2">
                         <label class="col-sm-2 col-form-label">Club / Selección</label>
@@ -134,9 +134,6 @@ export default {
     data() {
         return {
             camiseta: {
-                sent: false,
-                error: false,
-                id: 0,
                 tipo: "",
                 equipo: "",
                 liga: "",
@@ -156,6 +153,8 @@ export default {
                 talla: "",
                 stock: 0
             },
+            sent: false,
+            error: false,
             marcas: [],
         }
     },
@@ -177,11 +176,17 @@ export default {
             this.error = false;
             this.sent = true;
 
-            if(this.itemCamiseta.publico != "" && this.itemCamiseta.talla != "" && this.itemCamiseta.stock > 0) {
+            if (this.itemCamiseta.publico != "" && this.itemCamiseta.talla != "" && this.itemCamiseta.stock > 0) {
                 this.camiseta.itemsCamiseta.push(this.itemCamiseta);
             }
-            
-            axios.post('http://localhost:3000/crear-camiseta', this.camiseta)
+            console.log(this.camiseta)
+            const token = localStorage.getItem('token')
+
+            axios.post('http://localhost:3000/crear-camiseta', this.camiseta, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
                 .then(response => {
                     console.log(response.data);
                     alert('¡Camiseta creada correctamente!')
@@ -193,7 +198,6 @@ export default {
         },
         resetForm() {
             this.camiseta = {
-                id: 0,
                 tipo: "",
                 equipo: "",
                 liga: "",
@@ -212,7 +216,7 @@ export default {
         agregarItem(item) {
             this.camiseta.itemsCamiseta = [...this.camiseta.itemsCamiseta, item];
         },
-        eliminarItem(index){
+        eliminarItem(index) {
             this.camiseta.itemsCamiseta.splice(index, 1);
         },
     },
