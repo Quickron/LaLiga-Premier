@@ -267,13 +267,6 @@ async function filtrarCamisetas(req, res) {
         if (marca !== undefined) {
             filtros.marca = { $regex: new RegExp(marca, 'i') };
         }
-        // if (precioMinimo !== undefined && precioMaximo !== undefined) {
-        //     filtros.precio = { $gte: parseInt(precioMinimo), $lte: parseInt(precioMaximo) };
-        // } else if (precioMinimo !== undefined) {
-        //     filtros.precio = { $gte: parseInt(precioMinimo) };
-        // } else if (precioMaximo !== undefined) {
-        //     filtros.precio = { $lte: parseInt(precioMaximo) };
-        // }
         if (equipo !== undefined) {
             filtros.equipo = { $regex: new RegExp(equipo, 'i') };
         }
@@ -281,10 +274,10 @@ async function filtrarCamisetas(req, res) {
             filtros.epoca = { $regex: new RegExp(epoca, 'i') };
         }
 
-
         const camisetasFiltradas = await CamisetaModel.find(filtros);
-        // const todasLasCamisetas = await CamisetaModel.find({})
+
         let camisetasPorPrecio = []
+
         if (precioMinimo !== undefined && precioMaximo !== undefined) {
             camisetasPorPrecio = camisetasFiltradas.filter(camiseta => camiseta.precio >= precioMinimo && camiseta.precio <= precioMaximo)
             return res.status(200).send(camisetasPorPrecio)
@@ -299,12 +292,6 @@ async function filtrarCamisetas(req, res) {
             return res.status(200).send(camisetasPorPrecio)
         }
 
-        // let camisetasRetorno = [...camisetasPorPrecio , ...camisetasFiltradas]
-
-
-
-        // console.log(`camisetas ----> ${camisetasFiltradas}`);
-        // return res.status(200).send(camisetasFiltradas);
         return res.status(200).send(camisetasFiltradas)
 
     } catch (error) {
@@ -312,42 +299,9 @@ async function filtrarCamisetas(req, res) {
     }
 }
 
-// async function filtrarCamisetas(req, res) {
-//     try {
-//         const { nombre, marca, precioMinimo, precioMaximo, equipo, epoca } = req.query;
-//         const filtros = {};
-
-//         console.log(`nombre de la camiseta ----> ${marca}`);
-
-//         if (nombre !== undefined) {
-//             filtros.nombre = { $regex: new RegExp(nombre, 'i') };
-//         }
-//         if (marca !== undefined) {
-//             filtros.marca = { $regex: new RegExp(marca, 'i') };
-//         }
-//         if (equipo !== undefined) {
-//             filtros.equipo = { $regex: new RegExp(equipo, 'i') };
-//         }
-//         if (epoca !== undefined) {
-//             filtros.epoca = { $regex: new RegExp(epoca, 'i') };
-//         }
-
-//         const todasLasCamisetas = await CamisetaModel.find(filtros);
-//         let camisetasFiltradas = todasLasCamisetas;
-
-//         if (precioMinimo !== undefined && precioMaximo !== undefined) {
-//             const precioMin = parseInt(precioMinimo);
-//             const precioMax = parseInt(precioMaximo);
-//             camisetasFiltradas = todasLasCamisetas.filter(camiseta => camiseta.precio >= precioMin && camiseta.precio <= precioMax);
-//         }
-
-//         console.log(`camisetas ----> ${camisetasFiltradas}`);
-//         return res.status(200).send(camisetasFiltradas);
-
-//     } catch (error) {
-//         return res.status(500).send({ error: error });
-//     }
-// }
+async function filtrarSeleccion(req , res){
+    
+}
 
 export {
     crearCamiseta,
