@@ -299,9 +299,271 @@ async function filtrarCamisetas(req, res) {
     }
 }
 
-async function filtrarSeleccion(req , res){
-    
+async function filtrarSeleccion(req, res) {
+    const { nombre, marca, precioMinimo, precioMaximo, equipo, epoca } = req.query;
+    const filtros = {};
+
+    // const camisetasSelecciones = await CamisetaModel.find({tipo:'SELECCION'})
+
+    // console.log(camisetasSelecciones);
+
+    filtros.tipo = 'SELECCION'
+
+    if (nombre !== undefined) {
+        filtros.nombre = { $regex: new RegExp(nombre, 'i') };
+    }
+    if (marca !== undefined) {
+        filtros.marca = { $regex: new RegExp(marca, 'i') };
+    }
+    if (equipo !== undefined) {
+        filtros.equipo = { $regex: new RegExp(equipo, 'i') };
+    }
+    if (epoca !== undefined) {
+        filtros.epoca = { $regex: new RegExp(epoca, 'i') };
+    }
+
+    const camisetasFiltradas = await CamisetaModel.find(filtros);
+
+    let camisetasPorPrecio = []
+
+    if (precioMinimo !== undefined && precioMaximo !== undefined) {
+        camisetasPorPrecio = camisetasFiltradas.filter(camiseta => camiseta.precio >= precioMinimo && camiseta.precio <= precioMaximo)
+        return res.status(200).send(camisetasPorPrecio)
+    }
+    else if (precioMaximo !== undefined && precioMinimo === undefined) {
+        camisetasPorPrecio = camisetasFiltradas.filter(camiseta => camiseta.precio <= precioMaximo)
+        return res.status(200).send(camisetasPorPrecio)
+
+    }
+    else if (precioMinimo !== undefined && precioMaximo === undefined) {
+        camisetasPorPrecio = camisetasFiltradas.filter(camiseta => camiseta.precio >= precioMinimo)
+        return res.status(200).send(camisetasPorPrecio)
+    }
+
+    return res.status(200).send(camisetasFiltradas)
 }
+
+async function filtrarClub(req, res) {
+    const { nombre, marca, precioMinimo, precioMaximo, equipo, epoca } = req.query;
+    const filtros = {};
+
+    filtros.tipo = 'CLUB'
+
+    if (nombre !== undefined) {
+        filtros.nombre = { $regex: new RegExp(nombre, 'i') };
+    }
+    if (marca !== undefined) {
+        filtros.marca = { $regex: new RegExp(marca, 'i') };
+    }
+    if (equipo !== undefined) {
+        filtros.equipo = { $regex: new RegExp(equipo, 'i') };
+    }
+    if (epoca !== undefined) {
+        filtros.epoca = { $regex: new RegExp(epoca, 'i') };
+    }
+
+    const camisetasFiltradas = await CamisetaModel.find(filtros);
+
+    let camisetasPorPrecio = []
+
+    if (precioMinimo !== undefined && precioMaximo !== undefined) {
+        camisetasPorPrecio = camisetasFiltradas.filter(camiseta => camiseta.precio >= precioMinimo && camiseta.precio <= precioMaximo)
+        return res.status(200).send(camisetasPorPrecio)
+    }
+    else if (precioMaximo !== undefined && precioMinimo === undefined) {
+        camisetasPorPrecio = camisetasFiltradas.filter(camiseta => camiseta.precio <= precioMaximo)
+        return res.status(200).send(camisetasPorPrecio)
+
+    }
+    else if (precioMinimo !== undefined && precioMaximo === undefined) {
+        camisetasPorPrecio = camisetasFiltradas.filter(camiseta => camiseta.precio >= precioMinimo)
+        return res.status(200).send(camisetasPorPrecio)
+    }
+
+    return res.status(200).send(camisetasFiltradas)
+}
+
+async function filtrarHombre(req, res) {
+    const { nombre, marca, precioMinimo, precioMaximo, equipo, epoca } = req.query;
+    const filtros = {};
+
+    if (nombre !== undefined) {
+        filtros.nombre = { $regex: new RegExp(nombre, 'i') };
+    }
+    if (marca !== undefined) {
+        filtros.marca = { $regex: new RegExp(marca, 'i') };
+    }
+    if (equipo !== undefined) {
+        filtros.equipo = { $regex: new RegExp(equipo, 'i') };
+    }
+    if (epoca !== undefined) {
+        filtros.epoca = { $regex: new RegExp(epoca, 'i') };
+    }
+
+    const camisetasFiltradas = await CamisetaModel.find(filtros);
+
+    const camisetasHombres = camisetasFiltradas.filter(camiseta => {
+        const itemsCamiseta = camiseta.itemsCamiseta;
+        for (let i = 0; i < itemsCamiseta.length; i++) {
+            if (itemsCamiseta[i].publico === "Hombre") {
+                return true;
+            }
+        }
+        return false;
+    });
+
+    let camisetasPorPrecio = [];
+
+    if (precioMinimo !== undefined && precioMaximo !== undefined) {
+        camisetasPorPrecio = camisetasHombres.filter(camiseta => camiseta.precio >= precioMinimo && camiseta.precio <= precioMaximo);
+        return res.status(200).send(camisetasPorPrecio);
+    }
+    else if (precioMaximo !== undefined && precioMinimo === undefined) {
+        camisetasPorPrecio = camisetasHombres.filter(camiseta => camiseta.precio <= precioMaximo);
+        return res.status(200).send(camisetasPorPrecio);
+    }
+    else if (precioMinimo !== undefined && precioMaximo === undefined) {
+        camisetasPorPrecio = camisetasHombres.filter(camiseta => camiseta.precio >= precioMinimo);
+        return res.status(200).send(camisetasPorPrecio);
+    }
+
+    return res.status(200).send(camisetasHombres);
+}
+
+async function filtrarMujer(req, res) {
+    const { nombre, marca, precioMinimo, precioMaximo, equipo, epoca } = req.query;
+    const filtros = {};
+
+    if (nombre !== undefined) {
+        filtros.nombre = { $regex: new RegExp(nombre, 'i') };
+    }
+    if (marca !== undefined) {
+        filtros.marca = { $regex: new RegExp(marca, 'i') };
+    }
+    if (equipo !== undefined) {
+        filtros.equipo = { $regex: new RegExp(equipo, 'i') };
+    }
+    if (epoca !== undefined) {
+        filtros.epoca = { $regex: new RegExp(epoca, 'i') };
+    }
+
+    const camisetasFiltradas = await CamisetaModel.find(filtros);
+
+    const camisetasMujer = camisetasFiltradas.filter(camiseta => {
+        const itemsCamiseta = camiseta.itemsCamiseta;
+        for (let i = 0; i < itemsCamiseta.length; i++) {
+            if (itemsCamiseta[i].publico === "Mujer") {
+                return true;
+            }
+        }
+        return false;
+    });
+
+    let camisetasPorPrecio = [];
+
+    if (precioMinimo !== undefined && precioMaximo !== undefined) {
+        camisetasPorPrecio = camisetasMujer.filter(camiseta => camiseta.precio >= precioMinimo && camiseta.precio <= precioMaximo);
+        return res.status(200).send(camisetasPorPrecio);
+    }
+    else if (precioMaximo !== undefined && precioMinimo === undefined) {
+        camisetasPorPrecio = camisetasMujer.filter(camiseta => camiseta.precio <= precioMaximo);
+        return res.status(200).send(camisetasPorPrecio);
+    }
+    else if (precioMinimo !== undefined && precioMaximo === undefined) {
+        camisetasPorPrecio = camisetasMujer.filter(camiseta => camiseta.precio >= precioMinimo);
+        return res.status(200).send(camisetasPorPrecio);
+    }
+
+    return res.status(200).send(camisetasMujer);
+}
+async function filtrarEpocaModerna(req, res) {
+    const { nombre, marca, precioMinimo, precioMaximo, equipo } = req.query;
+    const filtros = {};
+
+    if (nombre !== undefined) {
+        filtros.nombre = { $regex: new RegExp(nombre, 'i') };
+    }
+    if (marca !== undefined) {
+        filtros.marca = { $regex: new RegExp(marca, 'i') };
+    }
+    if (equipo !== undefined) {
+        filtros.equipo = { $regex: new RegExp(equipo, 'i') };
+    }
+
+    const camisetasFiltradas = await CamisetaModel.find(filtros);
+
+    const camisetasHombresEpocaModerna = camisetasFiltradas.filter((camiseta) => {
+        const itemsCamiseta = camiseta.itemsCamiseta;
+        for (let i = 0; i < itemsCamiseta.length; i++) {
+            if (camiseta.epoca === 'MODERNO') {
+                return true;
+            }
+        }
+        return false;
+    });
+
+    let camisetasPorPrecio = [];
+
+    if (precioMinimo !== undefined && precioMaximo !== undefined) {
+        camisetasPorPrecio = camisetasHombresEpocaModerna.filter(
+            (camiseta) => camiseta.precio >= precioMinimo && camiseta.precio <= precioMaximo
+        );
+        return res.status(200).send(camisetasPorPrecio);
+    } else if (precioMaximo !== undefined && precioMinimo === undefined) {
+        camisetasPorPrecio = camisetasHombresEpocaModerna.filter((camiseta) => camiseta.precio <= precioMaximo);
+        return res.status(200).send(camisetasPorPrecio);
+    } else if (precioMinimo !== undefined && precioMaximo === undefined) {
+        camisetasPorPrecio = camisetasHombresEpocaModerna.filter((camiseta) => camiseta.precio >= precioMinimo);
+        return res.status(200).send(camisetasPorPrecio);
+    }
+
+    return res.status(200).send(camisetasHombresEpocaModerna);
+}
+
+async function filtrarEpocaClasica(req, res) {
+    const { nombre, marca, precioMinimo, precioMaximo, equipo } = req.query;
+    const filtros = {};
+
+    if (nombre !== undefined) {
+        filtros.nombre = { $regex: new RegExp(nombre, 'i') };
+    }
+    if (marca !== undefined) {
+        filtros.marca = { $regex: new RegExp(marca, 'i') };
+    }
+    if (equipo !== undefined) {
+        filtros.equipo = { $regex: new RegExp(equipo, 'i') };
+    }
+
+    const camisetasFiltradas = await CamisetaModel.find(filtros);
+
+    const camisetasHombresEpocaModerna = camisetasFiltradas.filter((camiseta) => {
+        const itemsCamiseta = camiseta.itemsCamiseta;
+        for (let i = 0; i < itemsCamiseta.length; i++) {
+            if (camiseta.epoca === 'CLÁSICO') {
+                return true;
+            }
+        }
+        return false;
+    });
+
+    let camisetasPorPrecio = [];
+
+    if (precioMinimo !== undefined && precioMaximo !== undefined) {
+        camisetasPorPrecio = camisetasHombresEpocaModerna.filter(
+            (camiseta) => camiseta.precio >= precioMinimo && camiseta.precio <= precioMaximo
+        );
+        return res.status(200).send(camisetasPorPrecio);
+    } else if (precioMaximo !== undefined && precioMinimo === undefined) {
+        camisetasPorPrecio = camisetasHombresEpocaModerna.filter((camiseta) => camiseta.precio <= precioMaximo);
+        return res.status(200).send(camisetasPorPrecio);
+    } else if (precioMinimo !== undefined && precioMaximo === undefined) {
+        camisetasPorPrecio = camisetasHombresEpocaModerna.filter((camiseta) => camiseta.precio >= precioMinimo);
+        return res.status(200).send(camisetasPorPrecio);
+    }
+
+    return res.status(200).send(camisetasHombresEpocaModerna);
+}
+
 
 export {
     crearCamiseta,
@@ -312,5 +574,12 @@ export {
     obtenerTallasCamiseta,
     obtenerStockCamiseta,
     listarNovedades,
-    filtrarCamisetas
+    filtrarCamisetas,
+    filtrarSeleccion,
+    filtrarClub,
+    filtrarHombre,
+    filtrarMujer,
+    filtrarEpocaModerna,
+    filtrarEpocaClasica
+
 }
