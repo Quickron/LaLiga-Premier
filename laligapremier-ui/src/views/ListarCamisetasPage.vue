@@ -11,37 +11,37 @@
 
         <div class="opciones-filtro">
           <div class="form-check">
-            <input v-model="this.talla" class="form-check-input" type="radio" value="XS" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              XS
+            <label class="">
+                <input type="radio" class="btn-check" name="talla" id="xs" value="XS" v-model="this.talla">
+                <label class="btn btn-dark" for="xs">XS</label>
             </label>
           </div>
 
           <div class="form-check">
-            <input v-model="this.talla" class="form-check-input" type="radio" value="S" id="flexCheckChecked">
-            <label class="form-check-label" for="flexCheckChecked">
-              S
+            <label class="">
+                <input type="radio" class="btn-check" name="talla" id="s" value="S" v-model="this.talla">
+                <label class="btn btn-dark" for="s">S</label>
             </label>
           </div>
 
           <div class="form-check">
-            <input v-model="this.talla" class="form-check-input" type="radio" value="M" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              M
+            <label class="">
+                <input type="radio" class="btn-check" name="talla" id="m" value="M" v-model="this.talla">
+                <label class="btn btn-dark" for="m">M</label>
             </label>
           </div>
 
           <div class="form-check">
-            <input v-model="this.talla" class="form-check-input" type="radio" value="L" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              L
+            <label class="">
+                <input type="radio" class="btn-check" name="talla" id="l" value="L" v-model="this.talla">
+                <label class="btn btn-dark" for="l">L</label>
             </label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="radio" value="XL" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              XL
+            <label class="">
+                <input type="radio" class="btn-check" name="talla" id="xl" value="XL" v-model="this.talla">
+                <label class="btn btn-dark" for="xl">XL</label>
             </label>
           </div>
         </div>
@@ -53,23 +53,23 @@
 
         <div class="opciones-filtro">
           <div class="form-check">
-            <input v-model="this.marca" class="form-check-input" type="radio" value="ADIDAS" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Adidas
+            <label class="">
+                <input type="radio" class="btn-check" name="marca" id="adidas" value="ADIDAS" v-model="this.marca">
+                <label class="btn btn-dark" for="adidas">Adidas</label>
             </label>
           </div>
 
           <div class="form-check">
-            <input v-model="this.marca" class="form-check-input" type="radio" value="NIKE" id="flexCheckChecked">
-            <label class="form-check-label" for="flexCheckChecked">
-              Nike
+            <label class="">
+                <input type="radio" class="btn-check" name="marca" id="nike" value="NIKE" v-model="this.marca">
+                <label class="btn btn-dark" for="nike">Nike</label>
             </label>
           </div>
 
           <div class="form-check">
-            <input v-model="this.marca" class="form-check-input" type="radio" value="PUMA" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Puma
+            <label class="">
+                <input type="radio" class="btn-check" name="marca" id="puma" value="PUMA" v-model="this.marca">
+                <label class="btn btn-dark" for="puma">Puma</label>
             </label>
           </div>
 
@@ -82,34 +82,34 @@
 
         <div class="opciones-filtro-precio">
           <div class="form-check">
-            <input v-model="this.rangoPrecio" :value="{ precioMinimo: 20000, precioMaximo: 30000 }" class="form-check-input"
-              type="radio" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              $20.000 - $30.000
+            <label class="">
+                <input type="radio" class="btn-check" name="precio" id="2030" 
+                :value="{ precioMinimo: 20000, precioMaximo: 30000 }" v-model="this.rangoPrecio">
+                <label class="btn btn-dark" for="2030">$20.000 - $30.000</label>
             </label>
           </div>
 
           <div class="form-check">
-            <input v-model="this.rangoPrecio" :value="{ precioMinimo: 30000, precioMaximo: 40000 }" class="form-check-input"
-              type="radio" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckChecked">
-              $30.000 - $40.000
+            <label class="mt-2">
+                <input type="radio" class="btn-check" name="precio" id="3040" 
+                :value="{ precioMinimo: 30000, precioMaximo: 40000 }" v-model="this.rangoPrecio">
+                <label class="btn btn-dark" for="3040">$30.000 - $40.000</label>
             </label>
           </div>
 
           <div class="form-check">
-            <input v-model="this.rangoPrecio" :value="{ precioMinimo: 40000, precioMaximo: 50000 }" class="form-check-input"
-              type="radio" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              $40.000 - $50.000
+            <label class="mt-2">
+                <input type="radio" class="btn-check" name="precio" id="4050" 
+                :value="{ precioMinimo: 40000, precioMaximo: 50000 }" v-model="this.rangoPrecio">
+                <label class="btn btn-dark" for="4050">$40.000 - $50.000</label>
             </label>
           </div>
 
           <div class="form-check">
-            <input v-model="this.rangoPrecio" :value="{ precioMinimo: 50000, precioMaximo: 60000 }" class="form-check-input"
-              type="radio" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              $50.000 - $60.000
+            <label class="mt-2">
+                <input type="radio" class="btn-check" name="precio" id="5060" 
+                :value="{ precioMinimo: 50000, precioMaximo: 60000 }" v-model="this.rangoPrecio">
+                <label class="btn btn-dark" for="5060">$50.000 - $60.000</label>
             </label>
           </div>
         </div>
@@ -282,7 +282,6 @@ export default {
 .opciones-filtro {
   display: flex;
   justify-content: space-between;
-  margin-left: 10%;
   margin-right: 10%;
 }
 
