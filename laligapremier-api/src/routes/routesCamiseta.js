@@ -15,7 +15,7 @@ import { authRequired, hasRole } from '../middlewares.js';
 const router = Router();
 
 
-router.get('/camisetas/filtroReal' , filtro)
+router.get('/camisetas/filtro' , filtro)
 
 
 router.get('/camisetas' , listarCamiseta)
