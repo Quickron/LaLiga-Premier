@@ -180,12 +180,17 @@ export default {
 
   },
   methods: {
-    consultaAlCargarPagina(tipo) {
+    consultaAlCargarPagina(tipo,epoca,publico) {
       this.objFiltro.tipo = tipo;
+      this.objFiltro.epoca = epoca;
+      this.objFiltro.publico = publico;
+      
+
         console.log(this.objFiltro)
         axios.get('http://localhost:3000/camisetas/filtro', { params: this.objFiltro })
           .then(response => {
             this.camisetas = response.data;
+            console.log(this.camisetas)
           })
           .catch(error => {
             console.error(error);
@@ -193,23 +198,23 @@ export default {
     },
     listarTipos() {
       if (this.filtro === "selecciones") {
-        this.consultaAlCargarPagina("SELECCION");
+        this.consultaAlCargarPagina("SELECCION", "","");
       }
       if (this.filtro === "clubes") {
-        this.consultaAlCargarPagina("CLUB");
+        this.consultaAlCargarPagina("CLUB", "", "");
       }
     },
     listarPublico() {
       if (this.filtro === "hombre") {
-        this.consultaAlCargarPagina("Hombre");
+        this.consultaAlCargarPagina("", "", "Hombre");
       }
       if (this.filtro === "mujer") {
-        this.consultaAlCargarPagina("Mujer");
+        this.consultaAlCargarPagina("", "", "Mujer");
       }
     },
     listarEpocas() {
       if (this.filtro === "clasicas") {
-        this.consultaAlCargarPagina("CLASICO");
+        this.consultaAlCargarPagina("", "CLASICO","");
       }
     },
     consultaAplicarFiltros(tipo) {
