@@ -186,7 +186,6 @@ export default {
         axios.get('http://localhost:3000/camisetas/filtro', { params: this.objFiltro })
           .then(response => {
             this.camisetas = response.data;
-            this.$router.replace({ path: `/camisetas/filtros/${this.filtro}` });
           })
           .catch(error => {
             console.error(error);
