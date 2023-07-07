@@ -18,7 +18,7 @@ const routes = [
     component: LandingPage
   },
   {
-    path: '/camisetas',
+    path: '/camisetas/filtros/:filtro',
     name: 'camisetas',
     component: ListarCamisetasPage
   },
@@ -60,6 +60,11 @@ const routes = [
   {
     path:'/editar-camiseta/:idCamiseta',
     name: 'editar-camiseta',
+    component : EditarCamisetaPage 
+  },
+  {
+    path:'/',
+    name: 'filtros',
     component : EditarCamisetaPage 
   }
 ]

@@ -11,35 +11,35 @@
 
         <div class="opciones-filtro">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input v-model="this.talla" class="form-check-input" type="radio" value="XS" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
               XS
             </label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+            <input v-model="this.talla" class="form-check-input" type="radio" value="S" id="flexCheckChecked">
             <label class="form-check-label" for="flexCheckChecked">
               S
             </label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input v-model="this.talla" class="form-check-input" type="radio" value="M" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
               M
             </label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input v-model="this.talla" class="form-check-input" type="radio" value="L" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
               L
             </label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input class="form-check-input" type="radio" value="XL" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
               XL
             </label>
@@ -53,21 +53,21 @@
 
         <div class="opciones-filtro">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input v-model="this.marca" class="form-check-input" type="radio" value="ADIDAS" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
               Adidas
             </label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+            <input v-model="this.marca" class="form-check-input" type="radio" value="NIKE" id="flexCheckChecked">
             <label class="form-check-label" for="flexCheckChecked">
               Nike
             </label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input v-model="this.marca" class="form-check-input" type="radio" value="PUMA" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
               Puma
             </label>
@@ -82,28 +82,32 @@
 
         <div class="opciones-filtro-precio">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input v-model="this.rangoPrecio" :value="{ precioMinimo: 20000, precioMaximo: 30000 }" class="form-check-input"
+              type="radio" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
               $20.000 - $30.000
             </label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+            <input v-model="this.rangoPrecio" :value="{ precioMinimo: 30000, precioMaximo: 40000 }" class="form-check-input"
+              type="radio" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckChecked">
               $30.000 - $40.000
             </label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input v-model="this.rangoPrecio" :value="{ precioMinimo: 40000, precioMaximo: 50000 }" class="form-check-input"
+              type="radio" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
               $40.000 - $50.000
             </label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input v-model="this.rangoPrecio" :value="{ precioMinimo: 50000, precioMaximo: 60000 }" class="form-check-input"
+              type="radio" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
               $50.000 - $60.000
             </label>
@@ -113,8 +117,8 @@
 
       <!-- Botones -->
       <div class="botones-filtros">
-        <button class="btn btn-success me-4">Aplicar Filtros</button>
-        <button class="btn btn-danger">Eliminar Filtros</button>
+        <button @click="aplicarFiltros" class="btn btn-success me-4">Aplicar Filtros</button>
+        <button @click="eliminarFiltros" class="btn btn-danger">Eliminar Filtros</button>
       </div>
 
     </div>
@@ -153,24 +157,99 @@ export default {
   data() {
     return {
       camisetas: [],
+      filtro: '',
+      objFiltro: {
+        tipo: '',
+        publico: '',
+        epoca: '',
+        marca: '',
+        talla: '',
+        precioMaximo: null,
+        precioMinimo: null,
+      },
+      talla: '',
+      marca: '',
+      rangoPrecio: Object,
     }
   },
   async mounted() {
-    const token = localStorage.getItem('token');
-        if (token != null) {
-            axios.get('http://localhost:3000/camisetas', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            }).then(response => {
-                this.camisetas = response.data;
-            })
-                .catch(error => {
-                    console.error(error);
-                });
+    this.filtro = this.$route.params.filtro;
+    this.listarTipos();
+    this.listarPublico();
+    this.listarEpocas();
 
-        }
   },
+  methods: {
+    consultaAlCargarPagina(tipo) {
+      this.objFiltro.tipo = tipo;
+        console.log(this.objFiltro)
+        axios.get('http://localhost:3000/camisetas/filtro', { params: this.objFiltro })
+          .then(response => {
+            this.camisetas = response.data;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+    },
+    listarTipos() {
+      if (this.filtro === "selecciones") {
+        this.consultaAlCargarPagina("SELECCION");
+      }
+      if (this.filtro === "clubes") {
+        this.consultaAlCargarPagina("CLUB");
+      }
+    },
+    listarPublico() {
+      if (this.filtro === "hombre") {
+        this.consultaAlCargarPagina("Hombre");
+      }
+      if (this.filtro === "mujer") {
+        this.consultaAlCargarPagina("Mujer");
+      }
+    },
+    listarEpocas() {
+      if (this.filtro === "clasicas") {
+        this.consultaAlCargarPagina("CLASICO");
+      }
+    },
+    consultaAplicarFiltros(tipo) {
+      this.objFiltro.tipo = tipo;
+        this.objFiltro.talla = this.talla;
+        this.objFiltro.marca = this.marca;
+        this.objFiltro.precioMaximo = this.rangoPrecio.precioMaximo;
+        this.objFiltro.precioMinimo = this.rangoPrecio.precioMinimo;
+        console.log(this.objFiltro)
+        axios.get('http://localhost:3000/camisetas/filtro', { params: this.objFiltro })
+          .then(response => {
+            this.camisetas = response.data;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+    },
+    aplicarFiltros() {
+      if (this.filtro === "selecciones") {
+        this.consultaAplicarFiltros("SELECCION");
+      }
+      if (this.filtro === "clubes") {
+        this.consultaAplicarFiltros("CLUB");
+      }
+      if (this.filtro === "hombre") {
+        this.consultaAplicarFiltros("Hombre");
+      }
+      if (this.filtro === "mujer") {
+        this.consultaAplicarFiltros("Mujer");
+      }
+      if (this.filtro === "clasicas") {
+        this.consultaAplicarFiltros("CLASICO");
+      }
+    },
+    eliminarFiltros() {
+      this.listarTipos();
+      this.listarPublico();
+      this.listarEpocas();
+    },
+  }
 }
 </script>
 
@@ -200,14 +279,14 @@ export default {
   margin-bottom: 30%;
 }
 
-.opciones-filtro{
+.opciones-filtro {
   display: flex;
   justify-content: space-between;
   margin-left: 10%;
   margin-right: 10%;
 }
 
-.opciones-filtro-precio{
+.opciones-filtro-precio {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -215,7 +294,7 @@ export default {
   margin-right: 10%;
 }
 
-.opciones-filtro-club-seleccion{
+.opciones-filtro-club-seleccion {
   display: flex;
   justify-content: center;
   margin-left: 10%;

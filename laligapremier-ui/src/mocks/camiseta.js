@@ -2,7 +2,7 @@ const obtenerCamisetasNovedades = require('@/mocks/camisetas.json');
 
 const obtenerCamisetas = require('@/mocks/camisetas.json');
 
-const obtenerTallas = ["XS", "S", "M", "L", "XL", "2XL"];
+const obtenerTallas = ["XS", "S", "M", "L", "XL"];
 
 const obtenerPublico = ["Hombre", "Mujer"];
 

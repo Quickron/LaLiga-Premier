@@ -299,7 +299,7 @@ export async function filtro(req, res) {
                 camisetasFiltradas = filtrarMarca(marca, camisetasFiltradas)
             }
             
-            if(precioMaximo != undefined && precioMinimo != undefined){
+            if(precioMaximo != undefined && precioMinimo != undefined && precioMaximo > 0 && precioMinimo > 0){
                 camisetasFiltradas = camisetasFiltradas.filter(
                     camiseta => camiseta.precio <= precioMaximo && camiseta.precio >= precioMinimo
                 )
@@ -328,7 +328,7 @@ export async function filtro(req, res) {
         }
         else if (tipo === "SELECCION") {
             camisetasFiltradas = camisetas.filter(
-                camiseta => camiseta.tipo === "SELECCION"
+                camiseta => camiseta.tipo === "SELECCIÓN"
             )
             if (talla !== undefined) {
                 camisetasFiltradas = filtrarTalla(talla, camisetasFiltradas)
@@ -384,7 +384,7 @@ export async function filtro(req, res) {
     }
 
 
-
+    
     return res.status(200).send(camisetasFiltradas)
 }
 

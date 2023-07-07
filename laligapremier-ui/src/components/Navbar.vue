@@ -57,21 +57,36 @@
                     <!-- Navbar en sí -->
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mx-auto mt-lg-2">
-                            <li class="nav-item">
-                                <a class="nav-link">Selecciones</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link">Clubes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link">Hombre</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link">Mujer</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link">Clásicas</a>
-                            </li>
+                            <router-link :to="{
+                                    name: 'camisetas',
+                                    params: {
+                                        filtro: 'selecciones',
+                                    },
+                                }" class="nav-link">Selecciones</router-link>
+                            <router-link :to="{
+                                    name: 'camisetas',
+                                    params: {
+                                        filtro: 'clubes',
+                                    },
+                                }" class="nav-link">Clubes</router-link>
+                            <router-link :to="{
+                                    name: 'camisetas',
+                                    params: {
+                                        filtro: 'hombre',
+                                    },
+                                }" class="nav-link">Hombre</router-link>
+                            <router-link :to="{
+                                    name: 'camisetas',
+                                    params: {
+                                        filtro: 'mujer',
+                                    },
+                                }" class="nav-link">Mujer</router-link>
+                            <router-link :to="{
+                                    name: 'camisetas',
+                                    params: {
+                                        filtro: 'clasicas',
+                                    },
+                                }" class="nav-link">Clásicas</router-link>
                         </ul>
 
                         <!-- Parte central del navbar -->

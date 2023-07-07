@@ -12,7 +12,7 @@
                     <strong class="fs-4">${{ camiseta.precio }}</strong>
                 </div>
             </div>
-            <router-link :to="`detalle/${camiseta._id}`">
+            <router-link :to="`/detalle/${camiseta._id}`">
                 <a class="btn btn-detalles px-2">Ver Detalles</a>
             </router-link>
         </div>

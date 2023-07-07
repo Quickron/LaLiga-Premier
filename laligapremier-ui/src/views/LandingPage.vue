@@ -60,7 +60,6 @@
             <div class="card tarjeta" v-for="(camiseta, index) in camisetasNovedades" :key="index">
               <div class="iconos-tarjeta">
                 <i class="bi bi-heart mx-2 mt-1"></i>
-                <i class="bi bi-bag mx-3 mb-1"></i>
               </div>
               <TarjetaCamiseta :camiseta="camiseta" />
             </div>
