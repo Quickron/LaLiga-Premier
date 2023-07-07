@@ -8,34 +8,18 @@ import {
     obtenerTallasCamiseta,
     obtenerStockCamiseta,
     listarNovedades,
-    filtrarCamisetas,
-    filtrarSeleccion,
-    filtrarClub,
-    filtrarHombre,
-    filtrarMujer,
-    filtrarEpocaModerna,
-    filtrarEpocaClasica
+    filtro
 } from '../controllers/camisetaController.js'
 import { authRequired, hasRole } from '../middlewares.js';
 
 const router = Router();
 
 
+router.get('/camisetas/filtro' , filtro)
+
+
 router.get('/camisetas' , listarCamiseta)
 
-router.get('/camisetas/filtros' , filtrarCamisetas)
-
-router.get('/camisetas/selecciones' , filtrarSeleccion )
-
-router.get('/camisetas/clubes' ,filtrarClub )
-
-router.get('/camisetas/hombre' , filtrarHombre)
-
-router.get('/camisetas/mujer' , filtrarMujer)
-
-router.get('/camisetas/moderno' , filtrarEpocaModerna)
-
-router.get('/camisetas/clasica' , filtrarEpocaClasica)
 
 router.post('/crear-camiseta' , authRequired , hasRole("administrador") ,crearCamiseta),
 
