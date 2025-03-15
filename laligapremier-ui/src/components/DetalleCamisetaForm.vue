@@ -105,7 +105,7 @@ export default {
     },
     methods: {
         obtenerTallasCamiseta() {
-            axios.get(`http://localhost:3000/obtener-tallas/${this.idCamiseta}`, {
+            axios.get(`https://la-liga-premier.vercel.app//obtener-tallas/${this.idCamiseta}`, {
                 headers: {
                     'Authorization': `Bearer ${this.token}`
                 }
@@ -117,7 +117,7 @@ export default {
                 });
         },
         obtenerStock() {
-            axios.post(`http://localhost:3000/obtener-stock/${this.idCamiseta}`, { publico: this.publico, talla: this.talla }, {
+            axios.post(`https://la-liga-premier.vercel.app//obtener-stock/${this.idCamiseta}`, { publico: this.publico, talla: this.talla }, {
                 headers: {
                     'Authorization': `Bearer ${this.token}`
                 }
