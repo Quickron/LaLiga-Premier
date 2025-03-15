@@ -169,7 +169,7 @@ export default {
 
         const token = localStorage.getItem('token');
         if(token != null){
-            axios.get(`http://localhost:3000/obtener-camiseta/${this.camisetaId}`, {
+            axios.get(`https://la-liga-premier.vercel.app/obtener-camiseta/${this.camisetaId}`, {
                 headers : {
                     'Authorization' : `Bearer ${token}`
                 }
@@ -209,7 +209,7 @@ export default {
             console.log(this.camiseta.itemsCamiseta)
             const token = localStorage.getItem('token')
             console.log(this.idCamiseta);
-            axios.put(`http://localhost:3000/editarcamiseta/${this.camisetaId}`, this.camiseta, {
+            axios.put(`https://la-liga-premier.vercel.app/editarcamiseta/${this.camisetaId}`, this.camiseta, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
