@@ -31,7 +31,7 @@ export default {
         eliminarCamiseta() {
             const token = localStorage.getItem('token');
             if (token != null) {
-                axios.delete(`http://localhost:3000/eliminar-camiseta/${this.camiseta._id}`, {
+                axios.delete(`https://la-liga-premier.vercel.app//eliminar-camiseta/${this.camiseta._id}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
