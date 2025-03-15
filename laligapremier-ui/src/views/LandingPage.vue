@@ -90,7 +90,7 @@ export default {
   },
   methods: {
     obtenerNovedades() {
-      axios.get('http://localhost:3000/novedades')
+      axios.get('https://la-liga-premier.vercel.app/novedades')
       .then(response => {
                 this.camisetasNovedades = response.data;
             })
