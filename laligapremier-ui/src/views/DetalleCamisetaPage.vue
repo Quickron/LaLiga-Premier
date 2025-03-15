@@ -136,7 +136,7 @@ export default {
       }
       console.log(this.itemBolsa)
 
-      axios.post('http://localhost:3000/guardar-item', this.itemBolsa, {
+      axios.post('https://la-liga-premier.vercel.app/guardar-item', this.itemBolsa, {
                 headers: {
                     'Authorization': `Bearer ${this.token}`
                 }
@@ -149,7 +149,7 @@ export default {
                 });
     },
     obtenerCamiseta() {
-      axios.get(`http://localhost:3000/obtener-camiseta/${this.camisetaId}`, {
+      axios.get(`https://la-liga-premier.vercel.app/obtener-camiseta/${this.camisetaId}`, {
                 headers: {
                     'Authorization': `Bearer ${this.token}`
                 }
@@ -162,7 +162,7 @@ export default {
     },
     obtenerUsuarioSesion() {
         if (this.token != null) {
-            axios.get('http://localhost:3000/auth/getMe', {
+            axios.get('https://la-liga-premier.vercel.app/auth/getMe', {
                 headers: {
                     'Authorization': `Bearer ${this.token}`
                 }
