@@ -145,7 +145,7 @@ export default {
     async mounted() {
         this.token = localStorage.getItem('token');
         if (this.token != null) {
-            axios.get('http://localhost:3000/auth/getMe', {
+            axios.get('https://la-liga-premier.vercel.app/auth/getMe', {
                 headers: {
                     'Authorization': `Bearer ${this.token}`
                 }
