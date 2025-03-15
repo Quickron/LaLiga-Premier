@@ -202,7 +202,7 @@ export default {
             console.log(this.camiseta.itemsCamiseta)
             const token = localStorage.getItem('token')
 
-            axios.post('http://localhost:3000/crear-camiseta', this.camiseta, {
+            axios.post('https://la-liga-premier.vercel.app/crear-camiseta', this.camiseta, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
