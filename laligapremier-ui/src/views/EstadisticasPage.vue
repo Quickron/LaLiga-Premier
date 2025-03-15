@@ -29,7 +29,7 @@ export default {
         obtenerCamisetas() {
             
             if (this.token != null) {
-                axios.get('http://localhost:3000/camisetas', {
+                axios.get('https://la-liga-premier.vercel.app/camisetas', {
                     headers: {
                         'Authorization': `Bearer ${this.token}`
                     }
@@ -44,7 +44,7 @@ export default {
         },
         obtenerUsuarios() {
             if (this.token != null) {
-                axios.get('http://localhost:3000/auth/usuarios', {
+                axios.get('https://la-liga-premier.vercel.app/auth/usuarios', {
                     headers: {
                         'Authorization': `Bearer ${this.token}`
                     }
@@ -59,7 +59,7 @@ export default {
         },
         obtenerPedidos() {
             if (this.token != null) {
-                axios.get('http://localhost:3000/pedidos', {
+                axios.get('https://la-liga-premier.vercel.app/pedidos', {
                     headers: {
                         'Authorization': `Bearer ${this.token}`
                     }
@@ -74,7 +74,7 @@ export default {
         },
         calcularGanancias() {
             if (this.token != null) {
-                axios.get('http://localhost:3000/ganancias', {
+                axios.get('https://la-liga-premier.vercel.app/ganancias', {
                     headers: {
                         'Authorization': `Bearer ${this.token}`
                     }
