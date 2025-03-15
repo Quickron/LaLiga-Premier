@@ -187,7 +187,7 @@ export default {
       
 
         console.log(this.objFiltro)
-        axios.get('http://localhost:3000/camisetas/filtro', { params: this.objFiltro })
+        axios.get('https://la-liga-premier.vercel.app/camisetas/filtro', { params: this.objFiltro })
           .then(response => {
             this.camisetas = response.data;
             console.log(this.camisetas)
@@ -224,7 +224,7 @@ export default {
         this.objFiltro.precioMaximo = this.rangoPrecio.precioMaximo;
         this.objFiltro.precioMinimo = this.rangoPrecio.precioMinimo;
         console.log(this.objFiltro)
-        axios.get('http://localhost:3000/camisetas/filtro', { params: this.objFiltro })
+        axios.get('https://la-liga-premier.vercel.app/camisetas/filtro', { params: this.objFiltro })
           .then(response => {
             this.camisetas = response.data;
           })
