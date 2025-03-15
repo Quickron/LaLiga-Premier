@@ -90,7 +90,7 @@ export default {
             }
             this.error = false;
             this.sent = true;
-            axios.post('http://localhost:3000/auth/register', this.usuario)
+            axios.post('https://la-liga-premier.vercel.app/auth/register', this.usuario)
                 .then(response => {
                     console.log(response.data);
                     window.location.href = '/';
