@@ -45,7 +45,7 @@ export default {
         eliminarItemBolsa() {
             const token = localStorage.getItem('token');
             if (token != null) {
-                axios.delete(`http://localhost:3000/eliminar-item-bolsa/${this.itemBolsa._id}`, {
+                axios.delete(`https://la-liga-premier.vercel.app/eliminar-item-bolsa/${this.itemBolsa._id}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
