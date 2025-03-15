@@ -75,7 +75,7 @@ export default {
             }
             this.error = false;
             this.sent = true;
-            axios.post('http://localhost:3000/auth/login', this.usuario)
+            axios.post('https://la-liga-premier.vercel.app/auth/login', this.usuario)
                 .then(response => {
                     const { usuario, token } = response.data;
                     localStorage.setItem('token', token);
