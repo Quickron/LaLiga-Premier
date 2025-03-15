@@ -42,7 +42,7 @@ export default {
   async mounted() {
     const token = localStorage.getItem('token');
         if (token != null) {
-            axios.get('http://localhost:3000/camisetas', {
+            axios.get('https://la-liga-premier.vercel.app/camisetas', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
