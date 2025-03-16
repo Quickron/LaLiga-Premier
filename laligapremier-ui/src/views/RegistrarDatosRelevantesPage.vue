@@ -119,7 +119,7 @@ export default {
 
             const token = localStorage.getItem('token')
 
-            axios.post('http://localhost:3000/registrar-datos', this.datoRelevante, {
+            axios.post('https://la-liga-premier.vercel.app/registrar-datos', this.datoRelevante, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
